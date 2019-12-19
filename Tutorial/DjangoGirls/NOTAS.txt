@@ -3,6 +3,8 @@ Comandos:
 	- source myvenv/bin/activate: Iniciar el entorno virtual.
 	- python -m pip install --upgrade pip: Actualizar pip.
 	- pip install -r requirements.txt: Instalar Django. En el documento "requirements.txt" viene escrito "Django~=2.2.4", que indica que instale Django 2.2.4 o una versión más reciente.
+	- python manage.py migrate: Para crear una base de datos para nuestro blog.
+	- python manage.py runserver: Iniciar el servidor.
 
 Documentación:
 	- manage.py es un script que ayuda con la administración del sitio. Con él podremos iniciar un servidor web en nuestro ordenador sin necesidad de instalar nada más, entre otras cosas.
