@@ -6,6 +6,8 @@ Comandos:
 	- python manage.py migrate: Para crear una base de datos para nuestro blog.
 	- python manage.py runserver: Iniciar el servidor.
 	- python manage.py startapp miblog: Crear una aplicacion.
+	- python manage.py makemigrations miblog: Indicar cambios en nuestro modelo.
+	- python manage.py migrate miblog: Aplicar archivo de migración a nuestra base de datos.
 
 Documentación:
 	- manage.py es un script que ayuda con la administración del sitio. Con él podremos iniciar un servidor web en nuestro ordenador sin necesidad de instalar nada más, entre otras cosas.
