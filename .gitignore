@@ -1,7 +1,13 @@
 *.pyc
 *~
 */__pycache__/
-myvenv
+djangovenv
 db.sqlite3
 /static
 .DS_Store
+
+Tutorial/DjangoGirls/misitio/miblog/__pycache__/
+
+Tutorial/DjangoGirls/misitio/miblog/migrations/__pycache__/
+
+Tutorial/DjangoGirls/misitio/misitio/__pycache__/
