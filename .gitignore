@@ -1,0 +1,7 @@
+*.pyc
+*~
+*/__pycache__/
+*/jangovenv/
+db.sqlite3
+/static
+.DS_Store
