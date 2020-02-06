@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from controlSesion.forms import LoginForm
 from django.contrib.auth import authenticate, login
 
@@ -24,5 +24,4 @@ def login_page(request):
 				message = "Nombre de usuario y/o password incorrecto"
 	else:
 		form = LoginForm()
-		return render_to_response('controlSesion/login.html', {'message':message, 'form':form},
-									context_instance=RequestContext(request))
+	return render(request, 'controlSesion/login.html', {'message':message, 'form':form})
