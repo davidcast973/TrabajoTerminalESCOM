@@ -24,5 +24,5 @@ def login_page(request):
 				message = "Nombre de usuario y/o password incorrecto"
 	else:
 		form = LoginForm()
-		return render_to_response('login.html', {'message':message, 'form':form},
+		return render_to_response('controlSesion/login.html', {'message':message, 'form':form},
 									context_instance=RequestContext(request))
