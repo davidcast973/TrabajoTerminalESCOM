@@ -77,8 +77,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
         'NAME': 'ttsastre', 
-        'USER': 'root', 
-        'PASSWORD': 'root', 
+        'USER': 'susastre', 
+        'PASSWORD': 'susastre', 
         'HOST': 'localhost', 
         'PORT': '5432', 
     } 
@@ -121,4 +121,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
