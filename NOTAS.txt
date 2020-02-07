@@ -1,0 +1,18 @@
+Comandos
+
+COMANDO												DESCRIPCIÓN
+$python -m django --version							Ver si Django está instalado, así como su versión
+$django-admin startproject miSitio					Crear arbol de directorios para un proyecto
+$python manage.py runserver							Inicia el servidor de desarrollo de Django
+$python manage.py startapp miApp					Crea una nueva aplicación
+$python manage.py migrate							Ejecuta migraciones para aplicaciones en INSTALLED_APPS
+$python manage.py makemigrations miApp				Indica a Django cambios en los modelos y que los guarde como una migración
+$python mange.py sqlmigrate miApp 0001				Devuelve el sql a ejecutar en una migración
+$python manage.py shell								Ejecuta el shell interactivo de Python
+$python manage.py test myApp						Ejecuta las pruebas en test.py para una aplicación
+
+
+Definiciones
+
+TERMINO										DESCRIPCIÓN
+Migraciones 								Son como Django guarda cambios en nuestros modelos (archivos en disco)
