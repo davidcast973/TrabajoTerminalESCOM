@@ -1,7 +1,7 @@
 *.pyc
 *~
-*/__pycache__/
-*/jangovenv/
+__pycache__
+sastreenv
 db.sqlite3
 /static
 .DS_Store
