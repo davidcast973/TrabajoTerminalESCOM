@@ -31,9 +31,12 @@ REM @ECHO ON
 
 @ECHO OFF
 REM Crear la base de datos y el usuario de está base. Los borra si ya existen.
+SET /P opt= Deseas crear usuario y base de datos en postgres? (s/n)
+IF "%opt%"=="n" GOTO continue
 @ECHO ON
 psql -U postgres postgres < "..\CREATE USER.sql"
 
+:continue
 @ECHO OFF
 REM Migrar los datos de los modulos en la la base creada en el motor de base de datos.
 @ECHO ON

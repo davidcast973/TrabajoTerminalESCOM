@@ -1,4 +1,3 @@
-
 DROP DATABASE IF EXISTS ttsastre;
 DROP USER IF EXISTS susastre;
 CREATE DATABASE ttsastre;
