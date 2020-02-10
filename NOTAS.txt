@@ -46,4 +46,12 @@ Documentación:
 	- manage.py es un script que ayuda con la administración del sitio. Con él podremos iniciar un servidor web en nuestro ordenador sin necesidad de instalar nada más, entre otras cosas.
 	- El archivo settings.py contiene la configuración de tu sitio web.
 
+---------- Migrar proyecto a un nuevo PC
+
+- Poner "alias.bat" en Home para adecuar los comandos sencillos para el proyecto.
+- Actualizar pip.
+- Instalar la paqueteria necesaria que viene en el "requirements.txt".
+- Crear entorno virtual "sastreenv"
+- Hacer usuario ssastre y base de datos ttsastre para conectar y migrar los datos.
+
 **************************************************  OSCAR  **************************************************
