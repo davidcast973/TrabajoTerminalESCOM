@@ -14,20 +14,45 @@ class Usuario(models.Model):
 	telefono= models.CharField(max_length= 10)
 	curp= models.CharField(max_length= 18)
 
-	def ingresarAlSistema(self):
-		pass
+	def __str__(self):
+		return self.title
 		
 class PersonalAdministravito(Usuario):
 	"""
-		docstring for PersonalAdministravito
+		docstring for PersonalAdministravito:
 	"""
 	numEmpleado= models.IntegerField()
 	departamento= models.CharField(max_length= 50)
-	
-		
+
+	def __str__(self):
+		return self.title
+
 class Profesor(Usuario):
-	"""docstring for Profesor"""
+	"""
+		docstring for Profesor: 
+	"""
+
+	tiraMaterias= models.TextField()
+	titulo= models.FileField(upload_to=None, max_length=100)
+	cedula= models.CharField(max_length= 20)
+	numEmpleado= models.IntegerField()
 		
 class Alumno(Usuario):
-	"""docstring for Alumno"""
-		
+	"""
+		docstring for Alumno: 
+	"""
+
+	numRegistro= models.CharField(max_length= 20)
+	modalidad= models.BooleanField()
+	programa= models.CharField(max_length= 20)
+	beca= models.IntegerField()
+	ingles= models.BooleanField()
+	cedula= models.CharField(max_length= 20)
+	calfEXADEP= models.IntegerField()
+	calfGRE= models.IntegerField()
+	promedio= models.DecimalField(max_digits= 4, decimal_places= 2)
+	escuelaLic= models.CharField(max_length= 100)
+	lugarLic= models.CharField(max_length= 100)
+	carrera= models.CharField(max_length= 50)
+	titulo= models.TextField()
+	entrevista= models.CharField(max_length= 20)
