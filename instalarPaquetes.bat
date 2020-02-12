@@ -1,11 +1,12 @@
 cd SASTRE
 
 python -m venv sastreenv
-CALL sastreenv\Scripts\activate.bat
-
+sastreenv\Scripts\activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 psql -U postgres postgres < "..\CREATE USER.sql"
+django-admin.exe startproject prueba .
+python manage.py runserver
 python manage.py migrate
 
 SET /P opt= Deseas crear usuario y base de datos en postgres? (s/n)
