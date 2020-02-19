@@ -1,0 +1,17 @@
+{% extends 'bosque/baseAnimal.html' %}
+
+{% block contenidoAnimal %}
+	<div class="row">
+	    <div class="card text-center mx-auto">
+		  <div class="card-body">
+		    <h5 class="card-title">{{animal}}</h5>
+		    <p class="card-text">
+		    	Garras: {% if animal.garras %} Si {% else %} No {% endif %} <br>
+				Alas: {% if animal.alas %} Si {% else %} No {% endif %} <br>
+				Plumas: {% if animal.plumas %} Si {% else %} No {% endif %} <br>
+				Cola: {% if animal.cola %} Si {% else %} No {% endif %}
+		    </p>
+		  </div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,25 +1,16 @@
-{% extends 'bosque/baseBosque.html' %}
+{% extends 'bosque/baseAnimal.html' %}
 
-{% block contenidoBosque %}
-	    <h5 class="card-header">
-	        <nav class="nav nav-pills nav-fill">
-	            <a class="nav-item nav-link active" href="#">Animales</a>
-	            <a class="nav-item nav-link" href="{% url 'planta_list' %}">Planta</a>
-	            <a class="nav-item nav-link disabled" href="#">Link</a>
-	        </nav>
-	    </h5>
-	    <div class="card-body">
-			<div class="row">
-			{% for animal in animales %}
-			  <div class="col-sm-6">
-			    <div class="card text-center mx-auto margin10" style="width: 18rem;">
-				  <div class="card-body">
-				    <h5 class="card-title">{{animal}}</h5>
-				    <p class="card-text">{{animal}}</p>
-				  </div>
-				</div>
-			  </div>
-			{% endfor %}
-			</div>
-	    </div>
+{% block contenidoAnimal %}
+	<div class="row">
+	{% for animal in animales %}
+	  <div class="col-sm-4">
+	    <div class="card text-center mx-auto margin10">
+		  <div class="card-body">
+		    <h5 class="card-title">{{animal}}</h5>
+		    <a href="{% url 'animal_detalle' pk=animal.pk %}" class="btn btn-primary">Ir a detalle</a>
+		  </div>
+		</div>
+	  </div>
+	{% endfor %}
+	</div>
 {% endblock %}

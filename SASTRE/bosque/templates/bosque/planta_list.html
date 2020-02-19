@@ -4,18 +4,18 @@
 	    <h5 class="card-header">
 	        <nav class="nav nav-pills nav-fill">
 	            <a class="nav-item nav-link" href="{% url 'animal_list' %}">Animales</a>
-	            <a class="nav-item nav-link active" href="">Planta</a>
-	            <a class="nav-item nav-link disabled" href="#">Link</a>
+	            <a class="nav-item nav-link active" href="{% url 'planta_list' %}">Planta</a>
+	            <a class="nav-item nav-link disabled" href="">Link</a>
 	        </nav>
 	    </h5>
 	    <div class="card-body">
 			<div class="row">
 			{% for planta in plantas %}
-			  <div class="col-sm-6">
+			  <div class="col-sm-4">
 			    <div class="card text-center mx-auto margin10" style="width: 18rem;">
 				  <div class="card-body">
 				    <h5 class="card-title">{{planta}}</h5>
-				    <p class="card-text">{{planta}}</p>
+		    <a href="" class="btn btn-primary">Ir a detalle</a>
 				  </div>
 				</div>
 			  </div>
