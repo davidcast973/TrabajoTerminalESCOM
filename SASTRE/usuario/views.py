@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .forms import UsuarioForm
 from django.shortcuts import redirect
 from .models import Usuario, PersonalAdministrativo, Profesor, Alumno
+from django.contrib.auth.models import User
 
 def usuario_new(request):
     if request.method == "POST":
@@ -27,5 +28,5 @@ def usuario_edit(request, pk):
     return render(request, 'usuario/usuario_edit.html', {'form': form})
 
 def usuario_detail(request, pk):
-    usuario = get_object_or_404(Usuario, pk=pk)
-    return render(request, 'usuario/usuario_detail.html', {'post': usuario})
+	usuario = get_object_or_404(Usuario, pk=pk)
+	return render(request, 'usuario/usuario_detail.html', {'usuario': usuario})
