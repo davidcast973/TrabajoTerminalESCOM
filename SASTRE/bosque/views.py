@@ -3,6 +3,10 @@ from .models import *
 
 # Create your views here.
 
-def bosque_list(request):
+def animal_list(request):
 	animales= Animal.objects.all().order_by('nombreAnimal')
-	return render(request, 'bosque/bosque_list.html', {'animales': animales})
+	return render(request, 'bosque/animal_list.html', {'animales': animales})
+
+def planta_list(request):
+	plantas= Planta.objects.all().order_by('nombreFruto')
+	return render(request, 'bosque/planta_list.html', {'plantas': plantas})

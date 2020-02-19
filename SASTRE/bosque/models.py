@@ -17,8 +17,9 @@ class Animal(models.Model):
 class Planta(models.Model):
 	"""docstring for Animal: Esta clase describe a cada animal que se en cuentra en un determinado bosque."""
 	
+	nombrePlanta= models.CharField(max_length= 20, default= 'Manzana')
 	frutos= models.BooleanField()
-	nombreFruto= models.CharField(max_length= 20, default= 'manzana')
+	nombreFruto= models.CharField(max_length= 20, blank= True)
 
 	def __str__(self):
-		return self.nombreFruto
+		return self.nombrePlanta
