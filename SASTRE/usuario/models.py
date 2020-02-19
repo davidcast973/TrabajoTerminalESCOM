@@ -15,17 +15,17 @@ class Usuario(models.Model):
 	curp= models.CharField(max_length= 18)
 
 	def __str__(self):
-		return self.title
-		
-class PersonalAdministravito(Usuario):
+		return str(self.usuario)
+			
+class PersonalAdministrativo(Usuario):
 	"""
-		docstring for PersonalAdministravito:
+		docstring for PersonalAdministrativo:
 	"""
 	numEmpleado= models.IntegerField()
 	departamento= models.CharField(max_length= 50)
 
 	def __str__(self):
-		return self.title
+		return self.numEmpleado
 
 class Profesor(Usuario):
 	"""
