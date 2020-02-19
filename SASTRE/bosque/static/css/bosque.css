@@ -1,0 +1,23 @@
+body {
+	 background: rgb(255,255,255);
+background: radial-gradient(circle, rgba(255,255,255,1) 44%, rgba(196,225,255,1) 64%, rgba(4,93,185,1) 100%); 
+}
+
+.limiter {
+	width: 70%;
+	margin: 2.5% auto;
+}
+
+.padding10 {
+	padding: 10px;
+}
+
+.margin10 {
+	margin: 10px;
+}
+
+/*
+.card-header {
+	background: #393838;
+}
+/*

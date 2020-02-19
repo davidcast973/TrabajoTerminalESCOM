@@ -1,0 +1,32 @@
+{% load static %}
+<html>
+    <head>
+        <title>Bosque Prueba</title>
+        {# Load the tag library #}
+        {% load bootstrap4 %}
+
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+        <link rel="stylesheet" href="{% static 'css/bosque.css' %}">
+    </head>
+    <body>
+        <div class="limiter">
+            <div class="card">
+                <h5 class="card-header">
+                    <nav class="nav nav-pills nav-fill">
+                        <a class="nav-item nav-link active" href="#">Active</a>
+                        <a class="nav-item nav-link" href="#">Link</a>
+                        <a class="nav-item nav-link" href="#">Link</a>
+                    </nav>
+                </h5>
+                <div class="card-body">
+                    {% block contenidoBosque %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>    </body>
+</html>

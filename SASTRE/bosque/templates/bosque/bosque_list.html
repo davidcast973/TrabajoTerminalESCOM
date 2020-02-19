@@ -1,6 +1,16 @@
-<html>
-<body>
-    <p>Hi there!</p>
-    <p>It works!</p>
-</body>
-</html>
+{% extends 'bosque/baseBosque.html' %}
+
+{% block contenidoBosque %}
+	<div class="row">
+	{% for animal in animales %}
+	  <div class="col-sm-6">
+	    <div class="card text-center mx-auto margin10" style="width: 18rem;">
+		  <div class="card-body">
+		    <h5 class="card-title">{{animal}}</h5>
+		    <p class="card-text">{{animal}}</p>
+		  </div>
+		</div>
+	  </div>
+	{% endfor %}
+	</div>
+{% endblock %}
