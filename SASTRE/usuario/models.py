@@ -5,9 +5,10 @@ from django.db import models
 class Usuario(models.Model):
 	"""
 		docstring for usuario: Clase que describe al objeto usuario.
+		Nesesario aclarar diferencia entre cuenta y usuario
 	"""
 
-	usuario= models.ForeignKey('auth.User', on_delete= models.CASCADE)
+	nombreUsuario= models.ForeignKey('auth.User', on_delete= models.CASCADE)
 	edad= models.IntegerField()
 	direccion= models.CharField(max_length= 200)
 	lada= models.CharField(max_length= 4)
@@ -15,17 +16,17 @@ class Usuario(models.Model):
 	curp= models.CharField(max_length= 18)
 
 	def __str__(self):
-		return self.title
-		
-class PersonalAdministravito(Usuario):
+		return str(self.nombreUsuario)
+			
+class PersonalAdministrativo(Usuario):
 	"""
-		docstring for PersonalAdministravito:
+		docstring for PersonalAdministrativo:
 	"""
 	numEmpleado= models.IntegerField()
 	departamento= models.CharField(max_length= 50)
 
 	def __str__(self):
-		return self.title
+		return self.numEmpleado
 
 class Profesor(Usuario):
 	"""
