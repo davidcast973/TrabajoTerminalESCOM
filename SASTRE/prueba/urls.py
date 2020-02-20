@@ -20,3 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('bosque.urls')),
 ]
+
+admin.site.site_header = 'Administrador del sistema'
