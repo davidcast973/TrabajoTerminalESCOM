@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  {# Cargamos la librería #}
+  {% load bootstrap4 %}
+  {# CSS Bootstrap #}
+  {% bootstrap_css %}
+</head>
+<body>
+
+  {% if form.errors %}
+  <p>Tu usuario y contraseña son incorrectos intenta de nuevo, por favor</p>
+  {% endif %}
+
+  {% if next %}
+      {% if user.is_authenticated %}
+      <p>Tu cuenta no tiene acceso a esta pagina. Para continuear, inicia sesion con una cuenta con acceso.</p>
+      {% else %}
+      <p>Inicia sesion para ver esta pagina.</p>
+      {% endif %}
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+
+  <div>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+  </div>
+  <div>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+  </div>
+
+  <div>
+    <input type="submit" value="Login" class="btn btn-outline-primary"/>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </div>
+  </form>
+
+  {# Password_reset#}
+  <p><a href="{% url 'password_reset' %}">Olvide mi contraseña</a></p>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sesion cerrada</title>
+	{# Cargamos la librería #}
+	{% load bootstrap4 %}
+	{# CSS Bootstrap #}
+	{% bootstrap_css %}
+</head>
+<body>
+	<p>Sesion cerrada!</p>
+	<a href="{% url 'login'%}">Haz click aqui para iniciar sesion de nuevo</a>
+</body>
+</html>
