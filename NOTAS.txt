@@ -42,6 +42,10 @@ DATABASES = {
 ---------- Instalar Bootsrap 4
 pip install django-bootstrap4 -> (pip install -r requirements.txt)
 
+Poner en Settings.py:
+	TEMPLATES -> DIRS esto: os.path.join(BASE_DIR, 'templates')
+	INSTALLED_APPS -> esto: 'bootstrap4',
+
 Documentación:
 	- manage.py es un script que ayuda con la administración del sitio. Con él podremos iniciar un servidor web en nuestro ordenador sin necesidad de instalar nada más, entre otras cosas.
 	- El archivo settings.py contiene la configuración de tu sitio web.
