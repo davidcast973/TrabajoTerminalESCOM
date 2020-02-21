@@ -31,8 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
-	'controlSesion.apps.ControlsesionConfig',
-    'django.contrib.admin',
+	'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -127,5 +126,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/controlSesion'
+LOGIN_REDIRECT_URL = '/usuario/nuevo/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
