@@ -1,0 +1,32 @@
+<html> 
+    <head> 
+        <title>
+            {% block title %}
+                SASTRE
+            {% endblock %}
+        </title> 
+        {# Load the tag library #} 
+        {% load bootstrap4 %} 
+ 
+        {# Load CSS and JavaScript #} 
+        {% bootstrap_css %} 
+        {% bootstrap_javascript jquery='full' %} 
+ 
+        {# Display django.contrib.messages as Bootstrap alerts #} 
+        {% bootstrap_messages %} 
+        
+        {% load static %} 
+        {% block static %}
+            <link rel="stylesheet" href="{% static 'css/basesastre.css' %}"> 
+        {% endblock %}
+    </head> 
+    <body> 
+        <div class="limiter"> 
+                    {% block body %}
+            <div class="card"> 
+            </div> 
+                    {% endblock %} 
+        </div>   
+    </body> 
+</html>
+
