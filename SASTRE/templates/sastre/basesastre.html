@@ -1,6 +1,10 @@
 <html> 
     <head> 
-        <title>Bosque Prueba</title> 
+        <title>
+            {% block title %}
+                SASTRE
+            {% endblock %}
+        </title> 
         {# Load the tag library #} 
         {% load bootstrap4 %} 
  
@@ -12,23 +16,16 @@
         {% bootstrap_messages %} 
         
         {% load static %} 
-        <link rel="stylesheet" href="{% static 'css/basesastre.css' %}"> 
+        {% block static %}
+            <link rel="stylesheet" href="{% static 'css/basesastre.css' %}"> 
+        {% endblock %}
     </head> 
     <body> 
         <div class="limiter"> 
+                    {% block body %}
             <div class="card"> 
-                <h5 class="card-header"> 
-                    <nav class="nav nav-pills nav-fill"> 
-                        <a class="nav-item nav-link active" href="#">Active</a> 
-                        <a class="nav-item nav-link" href="#">Link</a> 
-                        <a class="nav-item nav-link" href="#">Link</a> 
-                    </nav> 
-                </h5> 
-                <div class="card-body">
-                    {% block sistemaSastre %} 
-                    {% endblock %} 
-                </div> 
             </div> 
+                    {% endblock %} 
         </div>   
     </body> 
 </html>
