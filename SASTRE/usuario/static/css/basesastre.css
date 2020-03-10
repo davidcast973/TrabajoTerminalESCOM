@@ -1,11 +1,12 @@
 body {
-	background: rgb(255,255,255); 
-	background: radial-gradient(circle, rgba(255,255,255,1) 44%, rgba(196,225,255,1) 64%, rgba(4,93,185,1) 100%);  
+	background: #dee1db;
 } 
  
 .limiter { 
 	width: 85%; 
-	margin: 2.5% auto; 
+	height: 100%;
+	margin: auto; 
+	background: #FFF;
 } 
  
 .padding10 { 
@@ -14,7 +15,21 @@ body {
  
 .margin10 { 
 	margin: 10px; 
-} 
+}
+
+.guindaColor{
+	color: black; !important;
+	background-color: #682444;
+}
+
+.whiteText{
+	color:#ffffff;
+}
+
+.btn-outline-success{
+	border-color: #FFF;
+	color: #FFF;
+}
  
 /* 
 .card-header { 

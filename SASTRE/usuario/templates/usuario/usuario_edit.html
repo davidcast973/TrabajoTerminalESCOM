@@ -6,7 +6,7 @@
 {% endblock %}
 
 
-{% block cardBody %}
+{% block body %}
     <h2>Nuevo Usuario</h2>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
