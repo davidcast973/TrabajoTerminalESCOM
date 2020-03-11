@@ -1,11 +1,9 @@
 {% extends 'usuario/baseUsuario.html' %}
 
-
 {% block title %}
     Usuario Edit
 {% endblock %}
-
-
+	
 {% block body %}
     <h2>Nuevo Usuario</h2>
     <form method="POST" class="post-form">{% csrf_token %}
