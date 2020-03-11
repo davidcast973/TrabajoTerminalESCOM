@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS ttsastre;
 DROP USER IF EXISTS susastre;
-CREATE DATABASE prueba;
+CREATE DATABASE ttsastre;
 CREATE USER susastre WITH PASSWORD 'susastre';
-GRANT ALL PRIVILEGES ON DATABASE "prueba" to susastre;
+GRANT ALL PRIVILEGES ON DATABASE "ttsastre" to susastre;

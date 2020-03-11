@@ -1,6 +1,6 @@
-{#% extends 'usuario/baseUsuario.html' %#}
+{% extends 'usuario/baseUsuario.html' %}
 
-{% block cardBody %}
+{% block Body %}
     <div class="post">
         <!--<a class="btn btn-default" href="{#% url 'usuario_edit' pk=usuario.pk %#}"><span class="glyphicon glyphicon-pencil"></span></a>-->
         <h2>{{ usuario.nombreUsuario.email }}</h2>

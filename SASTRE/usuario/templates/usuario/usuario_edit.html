@@ -1,14 +1,10 @@
 {% extends 'usuario/baseUsuario.html' %}
 
-
 {% block title %}
     Usuario Edit
 {% endblock %}
-
-
-{% block cardBody %}
-    <h1>EDAD {{ user.edad }}</h1>
-    
+	
+{% block body %}
     <h2>Nuevo Usuario</h2>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
