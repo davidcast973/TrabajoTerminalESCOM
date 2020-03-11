@@ -6,7 +6,7 @@
             {% endblock %}
         </title> 
         {# Load the tag library #} 
-        {% load bootstrap4 %} 
+        {% load bootstrap4 %}
  
         {# Load CSS and JavaScript #} 
         {% bootstrap_css %} 
@@ -15,17 +15,17 @@
         {# Display django.contrib.messages as Bootstrap alerts #} 
         {% bootstrap_messages %} 
         
-        {% load static %} 
         {% block static %}
+            {% load static %} 
             <link rel="stylesheet" href="{% static 'css/basesastre.css' %}"> 
         {% endblock %}
     </head> 
     <body> 
         <div class="limiter"> 
-                    {% block body %}
             <div class="card"> 
-            </div> 
+                    {% block body %}
                     {% endblock %} 
+            </div> 
         </div>   
     </body> 
 </html>

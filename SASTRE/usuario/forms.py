@@ -1,12 +1,25 @@
-from django.forms import *
+from django import forms
+from .models import *
 
-from .models import Usuario, Profesor, Alumno, PersonalAdministrativo
+NACIONALIDAD = [(x.nombrePermiso,x.nombrePermiso) for x in Permisos.objects.all()]
 
-class UsuarioForm(ModelForm):
+NACIONALIDADD = [
+	('mexicano','mexicano'),
+	('aleman','aleman'),
+	('frances','frances'),
+	('chileno','chileno'),
+	('español','español'),
+]
 
+class UsuarioForm(forms.ModelForm):
+
+    fechaNacimiento= forms.DateField(widget=forms.SelectDateWidget())
+    nacionalidad = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        choices=NACIONALIDAD,
+    )
     class Meta:
         model = Usuario
         fields = ('nombreUsuario', 'edad', 'direccion', 'lada', 'telefono', 'curp')
-        widgets = {
-        	'nombreUsuario': TextInput(attrs={'class': 'form-control'})
-        }
+        

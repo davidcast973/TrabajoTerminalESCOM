@@ -5,15 +5,15 @@ body {
  
 .limiter { 
 	width: 85%; 
-	margin: 2.5% auto; 
+	margin: auto; 
 } 
  
-.padding10 { 
-	padding: 10px; 
+.padding20 { 
+	padding-top: 20px; 
 } 
  
-.margin10 { 
-	margin: 10px; 
+.margin20down { 
+	margin: auto auto 20px auto; 
 } 
  
 /* 

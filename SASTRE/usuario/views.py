@@ -30,3 +30,6 @@ def usuario_edit(request, pk):
 def usuario_detail(request, pk):
 	usuario = get_object_or_404(Usuario, pk=pk)
 	return render(request, 'usuario/usuario_detail.html', {'usuario': usuario})
+
+def crudInicio(request):
+    return render(request, 'crud/crudInicio.html')

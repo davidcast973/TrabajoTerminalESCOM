@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', auth_views.LoginView.as_view(template_name='registration/login.html')),
     #Add Django site authentication urls (for login, logout, password management)
-    path('cuneta/', include('django.contrib.auth.urls')),
+    path('cuenta/', include('django.contrib.auth.urls')),
     path('usuario/', include('usuario.urls')),
 ]

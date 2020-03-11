@@ -7,11 +7,15 @@
 
 
 {% block cardBody %}
+    <h1>EDAD {{ user.edad }}</h1>
+    
     <h2>Nuevo Usuario</h2>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Guardar</button>
     </form>
+
+
 
     {# Logout #}
 	{% if user.is_authenticated %}
