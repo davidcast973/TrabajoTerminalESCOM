@@ -9,8 +9,8 @@ body {
 	background: #FFF;
 } 
  
-.padding10 { 
-	padding: 10px; 
+.padding20 { 
+	padding-top: 20px; 
 } 
  
 .margin10 { 
@@ -30,6 +30,9 @@ body {
 	border-color: #FFF;
 	color: #FFF;
 }
+.margin20down { 
+	margin: auto auto 20px auto; 
+} 
  
 /* 
 .card-header { 

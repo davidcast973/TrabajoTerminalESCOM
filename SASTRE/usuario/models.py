@@ -26,7 +26,7 @@ class PersonalAdministrativo(Usuario):
 	departamento= models.CharField(max_length= 50)
 
 	def __str__(self):
-		return self.numEmpleado
+		return str(self.nombreUsuario)
 
 class Profesor(Usuario):
 	"""
@@ -37,6 +37,10 @@ class Profesor(Usuario):
 	titulo= models.FileField(upload_to=None, max_length=100)
 	cedula= models.CharField(max_length= 20)
 	numEmpleado= models.IntegerField()
+
+	def __str__(self):
+		return str(self.nombreUsuario)
+
 		
 class Alumno(Usuario):
 	"""
@@ -57,3 +61,16 @@ class Alumno(Usuario):
 	carrera= models.CharField(max_length= 50)
 	titulo= models.TextField()
 	entrevista= models.CharField(max_length= 20)
+
+	def __str__(self):
+		return str(self.nombreUsuario)
+
+class Permisos(models.Model):
+	"""docstring for ClassName"""
+	nombrePermiso = models.CharField(max_length=30)
+	descripcion = models.TextField()
+	charAllllint = models.CharField(max_length=10, blank=True, null=True)
+	numeroBlank = models.IntegerField(blank=True, null=True)
+
+	def __str__(self):
+		return self.nombrePermiso

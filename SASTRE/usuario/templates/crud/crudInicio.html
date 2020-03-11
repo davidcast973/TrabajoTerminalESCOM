@@ -1,0 +1,76 @@
+{% extends 'crud/baseCrud.html' %}
+{% load fontawesome %}
+
+{% block cardBody %}
+    <div class="card-deck margin20down">
+        <div class="card padding20" data-toggle="collapse" href="#crudGrid" role="button" aria-expanded="false" aria-controls="crudGrid">
+            <img class="card-img-top" src="../../static/icons/user-tie-solid.svg" height="50" width="50">
+            <div class="card-body text-center">
+                <h5 class="card-title text-center">Personal Administrativo</h5>
+            </div>
+        </div>
+        <div class="card padding20" data-toggle="collapse" href="#crudGrid" role="button" aria-expanded="false" aria-controls="crudGrid">
+            <img class="card-img-top" src="../../static/icons/book-reader-solid.svg" height="50" width="50">
+            <div class="card-body">
+              <h5 class="card-title text-center">Profesor</h5>
+            </div>
+        </div>
+        <div class="card padding20" data-toggle="collapse" href="#crudGrid" role="button" aria-expanded="false" aria-controls="crudGrid">
+            <img class="card-img-top" src="../../static/icons/user-graduate-solid.svg" height="50" width="50">
+            <div class="card-body">
+              <h5 class="card-title text-center">Alumno</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapse" id="crudGrid">
+        <div class="card-deck">
+            <div class="card padding20" data-toggle="modal" data-target="#crudFormModal">
+                <img class="card-img-top" src="../../static/icons/plus-circle-solid.svg" height="50" width="50">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">Crear</h5>
+                </div>
+            </div>
+            <div class="card padding20">
+                <img class="card-img-top" src="../../static/icons/eye-solid.svg" height="50" width="50">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Consultar</h5>
+                </div>
+            </div>
+            <div class="card padding20">
+                <img class="card-img-top" src="../../static/icons/edit-solid.svg" height="50" width="50">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Editar</h5>
+                </div>
+            </div>
+            <div class="card padding20">
+                <img class="card-img-top" src="../../static/icons/trash-alt-solid.svg" height="50" width="50">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Borrar</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="crudFormModal" tabindex="-1" role="dialog" aria-labelledby="crudFormModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear Personal Administrativo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            {#% include 'usuario/usuario_edit.html' %#}
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Salvar cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
