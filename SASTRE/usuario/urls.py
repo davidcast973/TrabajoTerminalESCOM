@@ -6,4 +6,5 @@ urlpatterns = [
     path('nuevo/', views.usuario_new, name='usuario_new'),
     path('<int:pk>/edicion/', views.usuario_edit, name='usuario_edit'),
     path('crud/', views.crudInicio, name='crudInicio'),
+    path('bienvenida/', views.bienvenida, name='bienvenida'),
 ]

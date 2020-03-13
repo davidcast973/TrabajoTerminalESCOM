@@ -24,14 +24,14 @@
     </head> 
     <body>
         <nav class="navbar navbar-expand-lg navbar-light guindaColor">
-            <a class="navbar-brand text-light" href="#">SASTRE</a>
+            <a class="navbar-brand text-light" href="{% url 'bienvenida' %}">SASTRE</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link text-light" href="#">Inicio<span class="sr-only">(current)</span></a>
+                        <a class="nav-link text-light" href="{% url 'bienvenida' %}">Inicio<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,7 +41,7 @@
                             <a class="dropdown-item" href="#">Opción 1</a>
                             <a class="dropdown-item" href="#">Opción 2</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
                         </div>
                     </li>
                 </ul>
@@ -51,9 +51,28 @@
                 </form>
             </div>
         </nav>
-        <div class="limiter"> 
-            {% block body %}
-            {% endblock %} 
+        <div class="contentBody">
+            <div class="content">
+                <div class="text-center" style="margin: auto;">
+                    {% block login %}
+                        {% block notificaciones %}
+                            {% if not user.is_authenticated %}
+                                <div class="alert alert-warning" role="alert">
+                                    Tu cuenta no tiene acceso a esta pagina. Para continuear, inicia sesion con una cuenta con acceso. Favor de ingresar.
+                                </div>
+                                <div class="row">
+                                    <div class="col-3" style="margin: auto;">
+                                        <img src="{% static 'icons/lock-solid.svg' %}">
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% block body %}
+                                {% endblock %} 
+                            {% endif %}
+                        {% endblock %}
+                    {% endblock %}
+                </div>
+            </div>
         </div>   
     </body> 
 </html>

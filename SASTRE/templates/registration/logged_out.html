@@ -1,6 +1,11 @@
 {% extends 'sastre/baseSastre.html' %}
 
-{% block body %} 
-	<p>Sesion cerrada!</p>
-	<a href="{% url 'login'%}">Haz click aqui para iniciar sesion de nuevo</a>
-{% endblock %} 
+{% block title %}
+    Logged Out
+{% endblock %}
+
+{% block notificaciones %} 
+	<div class="alert alert-success" role="alert">
+		¡Sesion cerrada correctamente!
+	</div>
+{% endblock %}

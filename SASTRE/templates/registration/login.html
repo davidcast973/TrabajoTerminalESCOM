@@ -4,59 +4,54 @@
     Login
 {% endblock %}
 
-{% block body %} 
-    {% if form.errors %}
-        <p>Tu usuario y contraseña son incorrectos intenta de nuevo, por favor</p>
-    {% endif %}
+{% block login %} 
+        <!--
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
 
-    {% if next %}
-        {% if user.is_authenticated %}
-            <p>Tu cuenta no tiene acceso a esta pagina. Para continuear, inicia sesion con una cuenta con acceso.</p>
-        {% else %}
-            <p>Inicia sesion para ver esta pagina.</p>
-        {% endif %}
-    {% endif %}
-<!--
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
+                <div>
+                    <td>{{ form.username.label_tag }}</td>
+                    <td>{{ form.username }}</td>
+                </div>
+                <div>
+                    <td>{{ form.password.label_tag }}</td>
+                    <td>{{ form.password }}</td>
+                </div>
 
-        <div>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-        </div>
-        <div>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-        </div>
+                <div>
+                    <input type="submit" value="Login" class="btn btn-outline-primary"/>
+                </div>
+            </form>
+        -->
 
-        <div>
-            <input type="submit" value="Login" class="btn btn-outline-primary"/>
-        </div>
-    </form>
--->
+        <div style="width: 18rem; margin: auto; padding: 100px 0 100px;">
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    Tu usuario o contraseña son incorrectos intenta de nuevo, por favor.
+                </div>
+            {% endif %}
 
-    <div class="mx-auto" style="width: 200px;">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <form method="post" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">{{ form.username.label_tag }}</label>
-                        {{ form.username }}
-                    </div>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
                         <div class="form-group">
-                        <label for="exampleInputPassword1">{{ form.password.label_tag }}</label>
-                        {{form.password}}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                            <label for="exampleInputEmail1">{{ form.username.label_tag }}</label>
+                            {{ form.username }}
+                        </div>
+                            <div class="form-group">
+                            <label for="exampleInputPassword1">{{ form.password.label_tag }}</label>
+                            {{ form.password }}
+                        </div>
+                        <button type="submit" class="btn btn-guinda">Submit</button>
+                    </form>
+                </div>
+            </div>
+            
+            {# Password_reset#}
+            <div class="mx-auto" style="margin: 10px;">
+                <a href="{% url 'password_reset' %}">Olvide mi contraseña</a>
             </div>
         </div>
-    </div>
-
-
-    {# Password_reset#}
-    <div class="mx-auto" style="width: 200px;">
-    <p><a href="{% url 'password_reset' %}">Olvide mi contraseña</a></p>
-</div>
 {% endblock %} 

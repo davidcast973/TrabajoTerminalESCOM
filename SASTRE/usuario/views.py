@@ -4,6 +4,9 @@ from django.shortcuts import redirect
 from .models import Usuario, PersonalAdministrativo, Profesor, Alumno
 from django.contrib.auth.models import User
 
+def bienvenida(request):
+    return render(request, 'bienvenida.html')
+
 def usuario_new(request):
     if request.method == "POST":
         form = UsuarioForm(request.POST)
