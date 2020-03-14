@@ -87,14 +87,15 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form method="POST" class="post-form">{% csrf_token %}
           <div class="modal-body">
-            {#% include 'usuario/usuario_edit.html' %#}
-            ...
+              {{ formPA.as_p }}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Salvar cambios</button>
+            <button type="submit" class="btn btn-primary" name="save_pa" value="SavePA">Salvar cambios</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -109,20 +110,21 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form method="POST" class="post-form form-group">{% csrf_token %}
           <div class="modal-body">
-            {#% include 'usuario/usuario_edit.html' %#}
-            ...
+              {{ formProf.as_p }}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Salvar cambios</button>
+            <button type="submit" class="btn btn-primary" name="save_profesor" value="SaveProfesor">Salvar cambios</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
 
     <!-- Modal Crear Alumno -->
-    <div class="modal fade" id="crearAlumnomodal" tabindex="-1" role="dialog" aria-labelledby="crearAlumnomodalLabel" aria-hidden="true">
+    <div class="modal fade" id="crearAlumnoModal" tabindex="-1" role="dialog" aria-labelledby="crearAlumnoModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -131,15 +133,18 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form method="POST" class="post-form">{% csrf_token %}
           <div class="modal-body">
-            {#% include 'usuario/usuario_edit.html' %#}
-            ...
+              {{ formAlum.as_p }}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Salvar cambios</button>
+            <button type="submit" class="btn btn-primary" name="save_alumno" value="SaveAlumno">Salvar cambios</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
+
+    <p>{{mensaje}}</p>
 {% endblock %}

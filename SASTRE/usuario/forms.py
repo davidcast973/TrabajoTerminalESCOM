@@ -13,13 +13,38 @@ from .models import *
 
 class UsuarioForm(forms.ModelForm):
 
-    fechaNacimiento= forms.DateField(widget=forms.SelectDateWidget())
-    nacionalidad = forms.MultipleChoiceField(
-        required=False,
-        widget=forms.CheckboxSelectMultiple,
-        # choices=NACIONALIDAD,
-    )
-    class Meta:
-        model = Usuario
-        fields = ('nombreUsuario', 'edad', 'direccion', 'lada', 'telefono', 'curp')
-        
+	#fechaNacimiento = forms.DateField(widget=forms.SelectDateWidget())
+	class Meta:
+		model = Usuario
+		fields = '__all__'
+		#exclude = ['fechaNacimiento']
+		widgets = {
+            'fechaNacimiento': forms.DateInput(attrs={'class':'datepicker'}),
+        }
+
+class PersonalAdminForm(forms.ModelForm):
+
+	#fechaNacimiento = forms.DateField(widget=forms.SelectDateWidget())
+	class Meta:
+		model = PersonalAdministrativo
+		fields = '__all__'
+		#exclude = ['fechaNacimiento']
+		widgets = {
+            'fechaNacimiento': forms.DateInput(attrs={'class':'datepicker'}),
+        }
+
+class ProfesorForm(forms.ModelForm):
+
+	fechaNacimiento = forms.DateField(widget=forms.SelectDateWidget())
+	class Meta:
+		model = Profesor
+		fields = '__all__'
+		exclude = ['fechaNacimiento']
+
+class AlumnoForm(forms.ModelForm):
+
+	fechaNacimiento = forms.DateField(widget=forms.SelectDateWidget())
+	class Meta:
+		model = Alumno
+		fields = '__all__'
+		exclude = ['fechaNacimiento']

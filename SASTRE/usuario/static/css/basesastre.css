@@ -1,13 +1,24 @@
+html {
+	height: 100%;
+}
+
 body {
 	background: #dee1db;
 } 
  
-.limiter { 
-	width: 85%; 
-	height: 100%;
-	margin: auto; 
+.contentBody {
+	margin: auto;
+}
+ 
+.content {
 	background: #FFF;
-} 
+	width: 85%;
+	margin: auto;
+}
+
+.bordecito {
+	border-color: red;
+}
  
 .padding20 { 
 	padding-top: 20px; 
@@ -21,6 +32,29 @@ body {
 	color: black; !important;
 	background-color: #682444;
 }
+
+/* Botón propio -------------------------------------------------- */
+
+/* Redefine los estilos de .btn */
+/* Modificar el texto y el color de fondo en los tres estados
+   principales del botón: default, hover y active. */
+.btn-guinda {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #682444;
+}
+
+/* Estilos del estado :hover del botón */
+/* Uno de los estilos más sencillos y eficaces para el estado :hover
+   consiste en subir hacia arriba ligeramente la imagen de fondo del
+   botón, pero puedes definir otros estilos adicionales si quieres. */
+.btn-guinda:hover {
+  color: 682444;
+  background-color: #fff;
+  border-color: #682444;
+  background-position: 0 -15px;
+}
+/* --------------------------------------------------------------- */
 
 .whiteText{
 	color:#ffffff;
