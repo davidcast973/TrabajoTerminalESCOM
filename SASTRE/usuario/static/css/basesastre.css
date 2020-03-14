@@ -33,7 +33,7 @@ body {
 	background-color: #682444;
 }
 
-/* Botón propio -------------------------------------------------- */
+/* ======================= Botón propio ======================= */
 
 /* Redefine los estilos de .btn */
 /* Modificar el texto y el color de fondo en los tres estados
@@ -54,7 +54,7 @@ body {
   border-color: #682444;
   background-position: 0 -15px;
 }
-/* --------------------------------------------------------------- */
+/* ============================================================ */
 
 .whiteText{
 	color:#ffffff;
@@ -66,10 +66,20 @@ body {
 }
 .margin20down { 
 	margin: auto auto 20px auto; 
-} 
- 
-/* 
-.card-header { 
-	background: #393838; 
-} 
-/*
+}
+
+/* ======================= Fuentes ======================= */
+
+@font-face {
+	font-family: 'Audiowide';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Audiowide-Regular'),
+		url(../fonts/Audiowide-Regular.ttf) format('truetype');
+}
+
+.fontFamily {
+	font-family: "Audiowide";
+}
+
+/* ======================================================= */
