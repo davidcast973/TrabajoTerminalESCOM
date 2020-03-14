@@ -2,58 +2,83 @@
 {% load fontawesome %}
 
 {% block cardBody %}
-    <div class="card-deck margin20down">
-        <div class="card padding20" data-toggle="collapse" href="#crudGrid" role="button" aria-expanded="false" aria-controls="crudGrid">
-            <img class="card-img-top" src="../../static/icons/user-tie-solid.svg" height="50" width="50">
+    <div class="card-deck mb-3">
+        <div class="card pt-4">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-8 align-self-center">
+                  <img class="card-img-top" src="../../static/icons/user-tie-solid.svg" height="150" width="150">
+                </div>
+                <div class="col-4 align-self-center">
+                  <div class="row align-items-center mr-5">
+                    <img class="card-img-top" src="../../static/icons/plus-circle-solid.svg" height="30" width="30" data-toggle="modal" data-target="#crearPAModal">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/eye-solid.svg" height="30" width="30">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/edit-solid.svg" height="30" width="30">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/trash-alt-solid.svg" height="30" width="30">
+                  </div>
+                </div>
+              </div>
             <div class="card-body text-center">
-                <h5 class="card-title text-center">Personal Administrativo</h5>
+                <h5 class="card-title text-center"><b>Personal Administrativo</b></h5>
             </div>
         </div>
-        <div class="card padding20" data-toggle="collapse" href="#crudGrid" role="button" aria-expanded="false" aria-controls="crudGrid">
-            <img class="card-img-top" src="../../static/icons/book-reader-solid.svg" height="50" width="50">
-            <div class="card-body">
-              <h5 class="card-title text-center">Profesor</h5>
+        <div class="card pt-4">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-8 align-self-center">
+                  <img class="card-img-top" src="../../static/icons/book-reader-solid.svg" height="150" width="150">
+                </div>
+                <div class="col-4 align-self-center">
+                  <div class="row align-items-center mr-5">
+                    <img class="card-img-top" src="../../static/icons/plus-circle-solid.svg" height="30" width="30" data-toggle="modal" data-target="#crearProfesorModal">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/eye-solid.svg" height="30" width="30">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/edit-solid.svg" height="30" width="30">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/trash-alt-solid.svg" height="30" width="30">
+                  </div>
+                </div>
+              </div>
+            <div class="card-body text-center">
+                <h5 class="card-title text-center"><b>Profesor</b></h5>
             </div>
         </div>
-        <div class="card padding20" data-toggle="collapse" href="#crudGrid" role="button" aria-expanded="false" aria-controls="crudGrid">
-            <img class="card-img-top" src="../../static/icons/user-graduate-solid.svg" height="50" width="50">
-            <div class="card-body">
-              <h5 class="card-title text-center">Alumno</h5>
+        <div class="card pt-4">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-8 align-self-center">
+                  <img class="card-img-top" src="../../static/icons/user-graduate-solid.svg" height="150" width="150">
+                </div>
+                <div class="col-4 align-self-center">
+                  <div class="row align-items-center mr-5">
+                    <img class="card-img-top" src="../../static/icons/plus-circle-solid.svg" height="30" width="30" data-toggle="modal" data-target="#crearAlumnoModal">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/eye-solid.svg" height="30" width="30">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/edit-solid.svg" height="30" width="30">
+                  </div>
+                  <div class="row align-items-center mt-4 mr-5">
+                    <img class="card-img-top" src="../../static/icons/trash-alt-solid.svg" height="30" width="30">
+                  </div>
+                </div>
+              </div>
+            <div class="card-body text-center">
+                <h5 class="card-title text-center"><b>Alumno</b></h5>
             </div>
         </div>
     </div>
 
-    <div class="collapse" id="crudGrid">
-        <div class="card-deck">
-            <div class="card padding20" data-toggle="modal" data-target="#crudFormModal">
-                <img class="card-img-top" src="../../static/icons/plus-circle-solid.svg" height="50" width="50">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-center">Crear</h5>
-                </div>
-            </div>
-            <div class="card padding20">
-                <img class="card-img-top" src="../../static/icons/eye-solid.svg" height="50" width="50">
-                <div class="card-body">
-                  <h5 class="card-title text-center">Consultar</h5>
-                </div>
-            </div>
-            <div class="card padding20">
-                <img class="card-img-top" src="../../static/icons/edit-solid.svg" height="50" width="50">
-                <div class="card-body">
-                  <h5 class="card-title text-center">Editar</h5>
-                </div>
-            </div>
-            <div class="card padding20">
-                <img class="card-img-top" src="../../static/icons/trash-alt-solid.svg" height="50" width="50">
-                <div class="card-body">
-                  <h5 class="card-title text-center">Borrar</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="crudFormModal" tabindex="-1" role="dialog" aria-labelledby="crudFormModalLabel" aria-hidden="true">
+    <!-- Modal Crear PA -->
+    <div class="modal fade" id="crearPAModal" tabindex="-1" role="dialog" aria-labelledby="crearPAModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -62,15 +87,64 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form method="POST" class="post-form">{% csrf_token %}
           <div class="modal-body">
-            {#% include 'usuario/usuario_edit.html' %#}
-            ...
+              {{ formPA.as_p }}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Salvar cambios</button>
+            <button type="submit" class="btn btn-primary" name="save_pa" value="SavePA">Salvar cambios</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
+
+    <!-- Modal Crear Profesor -->
+    <div class="modal fade" id="crearProfesorModal" tabindex="-1" role="dialog" aria-labelledby="crearProfesorModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear Profesor</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" class="post-form form-group">{% csrf_token %}
+          <div class="modal-body">
+              {{ formProf.as_p }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="save_profesor" value="SaveProfesor">Salvar cambios</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Crear Alumno -->
+    <div class="modal fade" id="crearAlumnoModal" tabindex="-1" role="dialog" aria-labelledby="crearAlumnoModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Crear Alumno</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" class="post-form">{% csrf_token %}
+          <div class="modal-body">
+              {{ formAlum.as_p }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="save_alumno" value="SaveAlumno">Salvar cambios</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <p>{{mensaje}}</p>
 {% endblock %}
