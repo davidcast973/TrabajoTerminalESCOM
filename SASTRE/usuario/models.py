@@ -7,15 +7,15 @@ class Usuario(models.Model):
 		docstring for usuario: Clase que describe al objeto usuario.
 		Nesesario aclarar diferencia entre cuenta y usuario
 	"""
-	ALEMANIA = 'AL'
-	BRASIL = 'BR'
-	CANADA = 'CA'
-	DINAMARCA = 'DI'
-	ECUADOR = 'EC'
-	MEXICO = 'MX'
-	PAIS_CHOICES = [
-		(ALEMANIA, 'Alemania'),
-		(BRASIL, 'Brasil'),
+	PAIS_OPCION= dict(
+		AL= 'Alemania',
+		BR= 'Brasil',
+		CA= 'Canada',
+		DI= 'Dinamarca',
+		EC= 'Ecuador',
+		MX= 'Mexico',
+	)
+	GENERO_OPCION= dict(F= 'Femenino', M= 'Masculio',)
 		(CANADA, 'Canada'),
 		(DINAMARCA, 'Dinamarca'),
 		(ECUADOR, 'Ecuador'),
