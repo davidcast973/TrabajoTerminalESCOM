@@ -128,4 +128,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/usuario/bienvenida'
+LOGOUT_REDIRECT_URL = '/cuenta/login'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

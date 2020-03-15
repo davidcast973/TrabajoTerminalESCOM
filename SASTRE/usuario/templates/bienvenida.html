@@ -6,6 +6,8 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-5"><h1>BIENVENID@</h1></div>
+		<div class="col-8">
+			<h1>Bienvenid{% if usuario.genero == 'F' %}a{% else %}o{% endif %} {{usuario.nombreUsuario.first_name}} {{usuario.nombreUsuario.last_name}}</h1>
+		</div>
 	</div>
 {% endblock %}

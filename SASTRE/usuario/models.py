@@ -7,20 +7,15 @@ class Usuario(models.Model):
 		docstring for usuario: Clase que describe al objeto usuario.
 		Nesesario aclarar diferencia entre cuenta y usuario
 	"""
-	ALEMANIA = 'AL'
-	BRASIL = 'BR'
-	CANADA = 'CA'
-	DINAMARCA = 'DI'
-	ECUADOR = 'EC'
-	MEXICO = 'MX'
-	PAIS_CHOICES = [
-		(ALEMANIA, 'Alemania'),
-		(BRASIL, 'Brasil'),
-		(CANADA, 'Canada'),
-		(DINAMARCA, 'Dinamarca'),
-		(ECUADOR, 'Ecuador'),
-		(MEXICO, 'Mexico'),
-	]
+	PAIS_OPCION= dict(
+		AL= 'Alemania',
+		BR= 'Brasil',
+		CA= 'Canada',
+		DI= 'Dinamarca',
+		EC= 'Ecuador',
+		MX= 'Mexico',
+	)
+	GENERO_OPCION= dict(F= 'Femenino', M= 'Masculio',)
 
 	nombreUsuario= models.ForeignKey('auth.User', on_delete= models.CASCADE)
 	edad= models.IntegerField()
@@ -28,11 +23,15 @@ class Usuario(models.Model):
 	lada= models.CharField(max_length= 4)
 	telefono= models.CharField(max_length= 10)
 	curp= models.CharField(max_length= 18)
-	fechaNacimiento = models.DateField()
-	paisNacimiento = models.CharField(
+	fechaNacimiento= models.DateField()
+	paisNacimiento= models.CharField(
 		max_length=2,
-		choices=PAIS_CHOICES,
-		default=MEXICO,
+		choices=list(PAIS_OPCION.items()),
+		default='MX',
+	)
+	genero= models.CharField(
+		max_length=1,
+		choices=list(GENERO_OPCION.items()),
 	)
 
 	def __str__(self):

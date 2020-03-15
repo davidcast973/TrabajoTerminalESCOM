@@ -5,7 +5,8 @@ from .models import Usuario, PersonalAdministrativo, Profesor, Alumno
 from django.contrib.auth.models import User
 
 def bienvenida(request):
-    return render(request, 'bienvenida.html')
+    usuario= Usuario.objects.get(nombreUsuario= request.user)
+    return render(request, 'bienvenida.html', {'usuario': usuario})
 
 def usuario_new(request):
     if request.method == "POST":

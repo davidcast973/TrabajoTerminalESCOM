@@ -30,8 +30,6 @@
                     Tu usuario o contraseña son incorrectos intenta de nuevo, por favor.
                 </div>
             {% endif %}
-
-
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <form method="post" action="{% url 'login' %}">
@@ -44,7 +42,7 @@
                             <label for="exampleInputPassword1">{{ form.password.label_tag }}</label>
                             {{ form.password }}
                         </div>
-                        <button type="submit" class="btn btn-guinda">Submit</button>
+                        <button type="submit" class="btn btn-guinda btn-lg">Ingresar</button>
                     </form>
                 </div>
             </div>

@@ -4,15 +4,15 @@ REM Ir a carpeta SASTRE
 cd SASTRE
 
 @ECHO OFF
+REM Copiar los comandos al Home del usuario.
+@ECHO ON
+ROBOCOPY ..\ %USERPROFILE% alias.bat
+
+@ECHO OFF
 REM Crear el entorno virtual que GIT ignorara.
 @ECHO ON
 python -m venv sastreenv
 CALL sastreenv\Scripts\activate.bat
-
-@ECHO OFF
-REM Copiar los comandos al Home del usuario.
-@ECHO ON
-ROBOCOPY ..\ %USERPROFILE% alias.bat
 
 @ECHO OFF
 REM Actualizar y mejorar el pip que este instalado.
