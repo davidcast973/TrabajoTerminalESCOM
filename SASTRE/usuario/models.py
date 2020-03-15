@@ -16,11 +16,6 @@ class Usuario(models.Model):
 		MX= 'Mexico',
 	)
 	GENERO_OPCION= dict(F= 'Femenino', M= 'Masculio',)
-		(CANADA, 'Canada'),
-		(DINAMARCA, 'Dinamarca'),
-		(ECUADOR, 'Ecuador'),
-		(MEXICO, 'Mexico'),
-	]
 
 	nombreUsuario= models.ForeignKey('auth.User', on_delete= models.CASCADE)
 	edad= models.IntegerField()
@@ -28,11 +23,15 @@ class Usuario(models.Model):
 	lada= models.CharField(max_length= 4)
 	telefono= models.CharField(max_length= 10)
 	curp= models.CharField(max_length= 18)
-	fechaNacimiento = models.DateField()
-	paisNacimiento = models.CharField(
+	fechaNacimiento= models.DateField()
+	paisNacimiento= models.CharField(
 		max_length=2,
-		choices=PAIS_CHOICES,
-		default=MEXICO,
+		choices=list(PAIS_OPCION.items()),
+		default='MX',
+	)
+	genero= models.CharField(
+		max_length=1,
+		choices=list(GENERO_OPCION.items()),
 	)
 
 	def __str__(self):
