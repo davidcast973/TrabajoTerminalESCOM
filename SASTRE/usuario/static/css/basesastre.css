@@ -28,7 +28,19 @@ body {
 	margin: 10px; 
 }
 
-.guindaColor{
+.whiteText{
+	color:#ffffff;
+}
+
+.btn-outline-success{
+	border-color: #FFF;
+	color: #FFF;
+}
+.margin20down { 
+	margin: auto auto 20px auto; 
+}
+
+.navbarGuinda{
 	color: black; !important;
 	background-color: #682444;
 }
@@ -56,29 +68,16 @@ body {
 }
 /* ============================================================ */
 
-.whiteText{
-	color:#ffffff;
-}
-
-.btn-outline-success{
-	border-color: #FFF;
-	color: #FFF;
-}
-.margin20down { 
-	margin: auto auto 20px auto; 
-}
-
 /* ======================= Fuentes ======================= */
 
 @font-face {
 	font-family: 'Audiowide';
 	font-style: normal;
-	font-weight: 400;
 	src: local('Audiowide-Regular'),
 		url(../fonts/Audiowide-Regular.ttf) format('truetype');
 }
 
-.fontFamily {
+.fontAudiowide {
 	font-family: "Audiowide";
 }
 
