@@ -13,25 +13,17 @@ from .models import *
 
 class UsuarioForm(forms.ModelForm):
 
-	#fechaNacimiento = forms.DateField(widget=forms.SelectDateWidget())
+	fechaNacimiento = forms.DateField(widget=forms.SelectDateWidget())
 	class Meta:
 		model = Usuario
 		fields = '__all__'
-		#exclude = ['fechaNacimiento']
-		widgets = {
-            'fechaNacimiento': forms.DateInput(attrs={'class':'datepicker'}),
-        }
 
 class PersonalAdminForm(forms.ModelForm):
 
-	#fechaNacimiento = forms.DateField(widget=forms.SelectDateWidget())
+	fechaNacimiento = forms.DateField(widget=forms.SelectDateWidget())
 	class Meta:
 		model = PersonalAdministrativo
 		fields = '__all__'
-		#exclude = ['fechaNacimiento']
-		widgets = {
-            'fechaNacimiento': forms.DateInput(attrs={'class':'datepicker'}),
-        }
 
 class ProfesorForm(forms.ModelForm):
 
@@ -39,7 +31,6 @@ class ProfesorForm(forms.ModelForm):
 	class Meta:
 		model = Profesor
 		fields = '__all__'
-		exclude = ['fechaNacimiento']
 
 class AlumnoForm(forms.ModelForm):
 
@@ -47,4 +38,3 @@ class AlumnoForm(forms.ModelForm):
 	class Meta:
 		model = Alumno
 		fields = '__all__'
-		exclude = ['fechaNacimiento']

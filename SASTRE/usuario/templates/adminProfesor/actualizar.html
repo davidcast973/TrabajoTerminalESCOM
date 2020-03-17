@@ -1,0 +1,79 @@
+{% extends 'sastre/baseSastre.html' %}
+
+{% block title %}
+    Administrar Profesores
+{% endblock %}
+{% load widget_tweaks %}
+{% block body %}
+	<h3 class="py-4 font-weight-bold">Edición de Profesores</h3>
+    <div class="card-body">
+        {% block cardBody %}
+        <form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<!-- {{ form.as_p }} -->
+			<div class="form-row">
+            <div class="form-group col-8">
+              <label for="nombreUsuario" class="font-weight-bold">Usuario</label>
+              {{ form.nombreUsuario|add_class:"form-control" }}
+            </div>
+            <div class="form-group col-4">
+              <label for="edad" class="font-weight-bold">Edad</label>
+              {{ form.edad|add_class:"form-control" }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-8">
+              <label for="direccion" class="font-weight-bold">Direccion</label>
+              {{ form.direccion|add_class:"form-control" }} 
+            </div>
+            <div class="form-group col-4">
+              <label for="paisNacimiento" class="font-weight-bold">Pais de Nacimiento</label>
+              {{ form.paisNacimiento|add_class:"form-control mb-3" }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-2">
+              <label for="lada" class="font-weight-bold">Lada</label>
+              {{ form.lada|add_class:"form-control" }}
+            </div>
+            <div class="form-group col-10">
+              <label for="telefono" class="font-weight-bold">Telefono</label>
+              {{ form.telefono|add_class:"form-control mb-3" }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label for="fechaNacimiento" class="font-weight-bold">Fecha de Nacimiento</label>
+              {{ form.fechaNacimiento|add_class:"form-control mb-3" }}
+            </div>
+            <div class="form-group col-3">
+              <label for="genero" class="font-weight-bold">Genero</label>
+              {{ form.genero|add_class:"form-control mb-3" }}
+            </div>
+            <div class="form-group col-5">
+              <label for="curp" class="font-weight-bold">Curp</label>
+              {{ form.curp|add_class:"form-control mb-3" }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-6">
+              <label for="identificador" class="font-weight-bold">Identificador</label>
+              {{ form.identificador|add_class:"form-control mb-3" }}
+            </div>
+            <div class="form-group col-6">
+              <label for="cedula" class="font-weight-bold">Cedula</label>
+              {{ form.cedula|add_class:"form-control mb-3" }}
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="materias" class="font-weight-bold">Materias</label>
+              {{ form.tiraMaterias|add_class:"form-control mb-3" }}
+            </div>
+          </div>
+			<button type="submit" class="btn btn-guinda">Aceptar</button>
+			<a href="../" type="submit" class="btn btn-guinda">Volver</a>
+		</form>
+        {% endblock %}
+	</div>
+{% endblock %}

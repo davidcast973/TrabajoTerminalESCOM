@@ -2,3 +2,4 @@ Django~=2.2.4
 psycopg2
 django-bootstrap4
 django-fontawesome
+django-widget-tweaks
