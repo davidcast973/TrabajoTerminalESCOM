@@ -8,12 +8,12 @@ class Usuario(models.Model):
 		Nesesario aclarar diferencia entre cuenta y usuario
 	"""
 	PAIS_OPCION= dict(
-		AL= 'Alemania',
-		BR= 'Brasil',
-		CA= 'Canada',
-		DI= 'Dinamarca',
-		EC= 'Ecuador',
-		MX= 'Mexico',
+		ALEMANIA= 'Alemania',
+		BRASIL= 'Brasil',
+		CANADA= 'Canada',
+		DINAMARCA= 'Dinamarca',
+		ECUADOR= 'Ecuador',
+		MEXICO= 'Mexico',
 	)
 	GENERO_OPCION= dict(F= 'Femenino', M= 'Masculio',)
 
@@ -25,14 +25,15 @@ class Usuario(models.Model):
 	curp= models.CharField(max_length= 18)
 	fechaNacimiento= models.DateField()
 	paisNacimiento= models.CharField(
-		max_length=2,
+		max_length=20,
 		choices=list(PAIS_OPCION.items()),
-		default='MX',
+		default='MEXICO',
 	)
 	genero= models.CharField(
 		max_length=1,
 		choices=list(GENERO_OPCION.items()),
 	)
+	identificador= models.CharField(max_length= 10)
 
 	def __str__(self):
 		return str(self.nombreUsuario)
@@ -41,7 +42,6 @@ class PersonalAdministrativo(Usuario):
 	"""
 		docstring for PersonalAdministrativo:
 	"""
-	numEmpleado= models.IntegerField()
 	departamento= models.CharField(max_length= 50)
 
 	def __str__(self):
@@ -53,9 +53,8 @@ class Profesor(Usuario):
 	"""
 
 	tiraMaterias= models.TextField()
-	titulo= models.FileField(upload_to=None, max_length=100)
+	#titulo= models.FileField(upload_to='uploads/', max_length=100)
 	cedula= models.CharField(max_length= 20)
-	numEmpleado= models.IntegerField()
 
 	def __str__(self):
 		return str(self.nombreUsuario)
@@ -65,11 +64,21 @@ class Alumno(Usuario):
 	"""
 		docstring for Alumno: 
 	"""
+	BECA_OPCION = [
+		('INSTITUCIONAL_ESTUDIO', 'Institucional Estudio'),
+		('INSTITUCIONAL_TESIS', 'Institucional Tesis'),
+		('TRANSPORTE', 'Transporte'),
+		('BEIFI', 'BEIFI'),
+		('EXCELENCIA', 'Excelencia'),
+	]
 
-	numRegistro= models.CharField(max_length= 20)
 	modalidad= models.BooleanField()
-	programa= models.CharField(max_length= 20)
-	beca= models.IntegerField()
+	programa= models.CharField(max_length= 50)
+	beca = models.CharField(
+		max_length=20,
+		choices=BECA_OPCION,
+		default='1',
+	)
 	ingles= models.BooleanField()
 	cedula= models.CharField(max_length= 20)
 	calfEXADEP= models.IntegerField()
@@ -78,7 +87,7 @@ class Alumno(Usuario):
 	escuelaLic= models.CharField(max_length= 100)
 	lugarLic= models.CharField(max_length= 100)
 	carrera= models.CharField(max_length= 50)
-	titulo= models.TextField()
+	#titulo= models.TextField()
 	entrevista= models.CharField(max_length= 20)
 
 	def __str__(self):

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'usuario.apps.UsuarioConfig',
     'fontawesome',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
