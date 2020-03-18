@@ -20,7 +20,7 @@ def bienvenida(request):
     return render(request, 'bienvenida.html', {'usuario': usuario})
 
 def bienvenida(request):
-    usuario= Usuario.objects.get(nombreUsuario= request.user)
+    usuario= PersonalAdministrativo.objects.get(nombreUsuario= request.user)
     return render(request, 'bienvenida.html', {'usuario': usuario})
 
 def usuario_new(request):
