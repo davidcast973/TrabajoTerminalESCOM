@@ -6,10 +6,7 @@ from django.contrib import admin
 from usuario.views import *
 
 urlpatterns = [
-	path('<int:pk>/', views.usuario_detail, name='usuario_detail'),
-    path('nuevo/', views.usuario_new, name='usuario_new'),
-    path('<int:pk>/edicion/', views.usuario_edit, name='usuario_edit'),
-    path('crud/', views.crudInicio, name='crudInicio'),
+	path('crud/', views.crudInicio, name='crudInicio'),
     path('bienvenida/', views.bienvenida, name='bienvenida'),
 
     # La ruta 'crudPA' en donde listamos todos los registros de la Base de Datos

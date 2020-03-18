@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'usuario.apps.UsuarioConfig',
     'fontawesome',
     'widget_tweaks',
+    'inscripcionTesis',
 ]
 
 MIDDLEWARE = [

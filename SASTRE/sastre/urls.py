@@ -24,6 +24,7 @@ urlpatterns = [
     #Add Django site authentication urls (for login, logout, password management)
     path('cuenta/', include('django.contrib.auth.urls')),
     path('usuario/', include('usuario.urls')),
+    path('inscripcionTesis/', include('inscripcionTesis.urls')),
 ]
 
 admin.site.site_header = 'Administrador del sistema SASTRE'
