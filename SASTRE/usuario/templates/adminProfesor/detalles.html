@@ -45,7 +45,9 @@
 					<p><span class="font-weight-bold">Identificador:</span> {{object.identificador}}</p>
         		</div>
         		<div class="col-4">
-                    <p><span class="font-weight-bold">Materias:</span> {{object.tiraMaterias}}</p>
+                    {% for materia in object.materias.all %}
+                        <p><span class="font-weight-bold">Materia: </span> {{materia}}</p>
+                    {% endfor %}
                 </div>
         		<div class="col-4">
 					<p><span class="font-weight-bold">Cedula:</span> {{object.cedula}}</p>
