@@ -1,0 +1,16 @@
+{% extends 'bosque/baseFauna.html' %}
+
+{% block contenidoFauna %}
+	<div class="row">
+		{% for fauna in faunas %}
+		  <div class="col-sm-4">
+		    <div class="card text-center mx-auto margin10">
+			  <div class="card-body">
+			    <h5 class="card-title">{{fauna}}</h5>
+			    <a href="{% url 'fauna_detalle' pk=fauna.pk %}" class="btn btn-primary">Ir a detalle</a>
+			  </div>
+			</div>
+		  </div>
+		{% endfor %}
+	</div>
+{% endblock %}

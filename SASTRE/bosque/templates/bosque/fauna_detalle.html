@@ -1,0 +1,32 @@
+{% extends 'bosque/baseFauna.html' %}
+
+{% block contenidoFauna %}
+	<div class="row">
+		<div class="col-12">
+		    <div class="card text-center mx-auto">
+			  <div class="card-body">
+			    <h5 class="card-title">{{fauna}}</h5>
+			    <p class="card-text">
+			    	<div class="row">
+				    	{% for animal in fauna.animales.all %}
+							<div class="col-3 my-3">
+							    <div class="card text-center mx-auto">
+								  <div class="card-body">
+								    <h5 class="card-title">{{animal}}</h5>
+								    <p class="card-text">
+								    	Garras: {% if animal.garras %} Si {% else %} No {% endif %} <br>
+										Alas: {% if animal.alas %} Si {% else %} No {% endif %} <br>
+										Plumas: {% if animal.plumas %} Si {% else %} No {% endif %} <br>
+										Cola: {% if animal.cola %} Si {% else %} No {% endif %}
+								    </p>
+								  </div>
+								</div>
+							</div>
+				    	{% endfor %}
+			    	</div>
+			    </p>
+			  </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

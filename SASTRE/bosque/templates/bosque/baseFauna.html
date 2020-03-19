@@ -3,13 +3,13 @@
 {% block contenidoBosque %}
     <h5 class="card-header">
         <nav class="nav nav-pills nav-fill">
-            <a class="nav-item nav-link active" href="{% url 'animal_list' %}">Animales</a>
+            <a class="nav-item nav-link" href="{% url 'animal_list' %}">Animales</a>
             <a class="nav-item nav-link" href="{% url 'planta_list' %}">Planta</a>
-            <a class="nav-item nav-link" href="{% url 'faunas_list' %}">Faunas</a>
+            <a class="nav-item nav-link active" href="{% url 'faunas_list' %}">Faunas</a>
         </nav>
     </h5>
     <div class="card-body">
-    	{% block contenidoAnimal %}
+    	{% block contenidoFauna %}
     	{% endblock %}
     </div>
 {% endblock %}

@@ -1,16 +1,15 @@
 {% extends 'bosque/baseAnimal.html' %}
-
 {% block contenidoAnimal %}
 	<div class="row">
-	{% for animal in animales %}
-	  <div class="col-sm-4">
-	    <div class="card text-center mx-auto margin10">
-		  <div class="card-body">
-		    <h5 class="card-title">{{animal}}</h5>
-		    <a href="{% url 'animal_detalle' pk=animal.pk %}" class="btn btn-primary">Ir a detalle</a>
-		  </div>
-		</div>
-	  </div>
-	{% endfor %}
+		{% for animal in animales %}
+			<div class="col-sm-4">
+				<div class="card text-center mx-auto margin10">
+					<div class="card-body">
+						<h5 class="card-title">{{animal}}</h5>
+						<a href="{% url 'animal_detalle' pk=animal.pk %}" class="btn btn-primary">Ir a detalle</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
 	</div>
 {% endblock %}
