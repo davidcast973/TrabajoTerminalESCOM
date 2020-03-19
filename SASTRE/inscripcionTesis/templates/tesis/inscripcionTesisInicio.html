@@ -1,0 +1,83 @@
+{% extends 'tesis/baseInscripcionTesis.html' %}
+
+{% block cardBody %}
+  <form>
+    <div class="col-auto">
+      <label for="inlineFormInputGroup">Título de tesis</label>
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Título propuesto para la tesis">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><a href="#">Buscar</a></div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <form class="mt-5 mx-3">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputDirector">Directores Sugeridos</label>
+        <fieldset disabled>
+          <select id="inputDirector" class="form-control">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </fieldset>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputDirector">Comite Tutorial</label>
+        <fieldset disabled>
+          <select id="inputComTut" class="form-control">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </fieldset>
+      </div>
+    </div>
+  </form>
+  
+  <h3 class="mt-4 mx-3">Directores</h3>
+  
+  <div class="row container ml-3">
+    <div class="input-group my-3">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">1</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Director 1" aria-label="Director 1" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">2</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Director 2" aria-label="Director 2" aria-describedby="basic-addon2">
+    </div>
+  </div>
+
+  <h3 class="mt-4 mx-3">Comite Tutorial</h3>
+
+  <div class="row container mx-3">
+    <div class="input-group my-3">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">1</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Integrante 1" aria-label="Integrante 1" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">2</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Integrante 2" aria-label="Integrante 2" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">3</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Integrante 3" aria-label="Integrante 3" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">4</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Integrante 4" aria-label="Integrante 4" aria-describedby="basic-addon2">
+    </div>
+  </div>
+{% endblock %}
