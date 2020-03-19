@@ -6,13 +6,6 @@
 
 {% block body %}
 	<div class="row">
-		<div class="col-12">
-			{% if usuario.numEmpleado %}
-				{{usuario.numEmpleado}}
-			{% endif %}
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-8 my-4">
 			<h1>Bienvenid{% if usuario.genero == 'F' %}a{% else %}o{% endif %} {{usuario.nombreUsuario.first_name}}</h1>
 		</div>

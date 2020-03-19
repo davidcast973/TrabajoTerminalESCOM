@@ -6,8 +6,8 @@ from django.contrib import admin
 from usuario.views import *
 
 urlpatterns = [
-	path('crud/', views.crudInicio, name='crudInicio'),
     path('bienvenida/', views.bienvenida, name='bienvenida'),
+	path('crud/', views.crudInicio, name='crudInicio'),
 
     # La ruta 'crudPA' en donde listamos todos los registros de la Base de Datos
     path('adminPA/', PAListado.as_view(template_name = "adminPA/index.html"), name='crudPA'),

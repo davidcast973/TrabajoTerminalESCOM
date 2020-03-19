@@ -25,6 +25,7 @@ urlpatterns = [
     path('cuenta/', include('django.contrib.auth.urls')),
     path('usuario/', include('usuario.urls')),
     path('inscripcionTesis/', include('inscripcionTesis.urls')),
+    path('evaluaciones/', include('evaluaciones.urls')),
 ]
 
 admin.site.site_header = 'Administrador del sistema SASTRE'

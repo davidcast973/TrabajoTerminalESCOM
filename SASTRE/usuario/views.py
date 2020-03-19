@@ -41,7 +41,7 @@ class PACrear(SuccessMessageMixin, CreateView):
     model = PersonalAdministrativo
     form = PersonalAdministrativo
     fields = "__all__"
-    success_message = 'Personal Administrativo Creado Correctamente !' # Mostramos este Mensaje luego de crear un personal administrativo     
+    success_message = '¡Personal Administrativo creado correctamente!' # Mostramos este Mensaje luego de crear un personal administrativo     
  
     # Redireccionamos a la página principal luego de crear un registro
     def get_success_url(self):
@@ -51,7 +51,7 @@ class PAActualizar(SuccessMessageMixin, UpdateView):
     model = PersonalAdministrativo
     form = PersonalAdministrativo
     fields = "__all__" 
-    success_message = 'Personal Administrativo Actualizado Correctamente !' # Mostramos este Mensaje luego de Editar un Personal Administrativo 
+    success_message = '!Personal Administrativo actualizado correctamente!' # Mostramos este Mensaje luego de Editar un Personal Administrativo 
  
     # Redireccionamos a la página principal luego de actualizar un registro o Personal Administrativo
     def get_success_url(self):               
@@ -64,7 +64,7 @@ class PAEliminar(SuccessMessageMixin, DeleteView):
  
     # Redireccionamos a la página principal luego de eliminar un registro o Personal Administrativo
     def get_success_url(self): 
-        success_message = 'Personal Administrativo Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Personal Administrativo 
+        success_message = '!Personal Administrativo eliminado correctamente!' # Mostramos este Mensaje luego de Editar un Personal Administrativo 
         messages.success (self.request, (success_message))       
         return reverse('crudPA') # Redireccionamos a la vista principal 'crudPA'
 
@@ -79,7 +79,7 @@ class ProfesorCrear(SuccessMessageMixin, CreateView):
     model = Profesor
     form = Profesor
     fields = "__all__"
-    success_message = 'Profesor Creado Correctamente !' # Mostramos este Mensaje luego de crear un profesor
+    success_message = '!Profesor creado correctamente!' # Mostramos este Mensaje luego de crear un profesor
  
     # Redireccionamos a la página principal luego de crear un registro
     def get_success_url(self):
@@ -89,7 +89,7 @@ class ProfesorActualizar(SuccessMessageMixin, UpdateView):
     model = Profesor
     form = Profesor
     fields = "__all__" 
-    success_message = 'Profesor Actualizado Correctamente !' # Mostramos este Mensaje luego de Editar un Profesor 
+    success_message = '!Profesor actualizado correctamente!' # Mostramos este Mensaje luego de Editar un Profesor 
  
     # Redireccionamos a la página principal luego de actualizar un registro o Profesor
     def get_success_url(self):               
@@ -102,7 +102,7 @@ class ProfesorEliminar(SuccessMessageMixin, DeleteView):
  
     # Redireccionamos a la página principal luego de eliminar un registro o Profesor
     def get_success_url(self): 
-        success_message = 'Profesor Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Profesor 
+        success_message = '!Profesor eliminado correctamente!' # Mostramos este Mensaje luego de Editar un Profesor 
         messages.success (self.request, (success_message))       
         return reverse('crudProfesor') # Redireccionamos a la vista principal 'crudProfesor'
 
@@ -117,7 +117,7 @@ class AlumnoCrear(SuccessMessageMixin, CreateView):
     model = Alumno
     form = Alumno
     fields = "__all__"
-    success_message = 'Alumno Creado Correctamente !' # Mostramos este Mensaje luego de crear un Alumno     
+    success_message = '!Alumno creado correctamente!' # Mostramos este Mensaje luego de crear un Alumno     
  
     # Redireccionamos a la página principal luego de crear un registro
     def get_success_url(self):
@@ -127,7 +127,7 @@ class AlumnoActualizar(SuccessMessageMixin, UpdateView):
     model = Alumno
     form = Alumno
     fields = "__all__" 
-    success_message = 'Alumno Actualizado Correctamente !' # Mostramos este Mensaje luego de Editar un Alumno 
+    success_message = '!Alumno actualizado correctamente!' # Mostramos este Mensaje luego de Editar un Alumno 
  
     # Redireccionamos a la página principal luego de actualizar un registro o Alumno
     def get_success_url(self):               
@@ -140,6 +140,6 @@ class AlumnoEliminar(SuccessMessageMixin, DeleteView):
  
     # Redireccionamos a la página principal luego de eliminar un registro o Alumno
     def get_success_url(self): 
-        success_message = 'Alumno Eliminado Correctamente !' # Mostramos este Mensaje luego de Editar un Alumno 
+        success_message = '!Alumno eliminado correctamente!' # Mostramos este Mensaje luego de Editar un Alumno 
         messages.success (self.request, (success_message))       
         return reverse('crudAlumno') # Redireccionamos a la vista principal 'crudAlumno'

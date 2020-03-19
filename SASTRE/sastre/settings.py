@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'fontawesome',
     'widget_tweaks',
     'inscripcionTesis',
+    'evaluaciones',
 ]
 
 MIDDLEWARE = [
