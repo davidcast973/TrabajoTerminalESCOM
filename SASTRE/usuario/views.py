@@ -14,15 +14,14 @@ from django.urls import reverse
 from django.contrib.messages.views import SuccessMessageMixin  
 # Habilitamos los formularios en Django
 from django import forms
+from django.contrib.auth.decorators import login_required
 
-def bienvenida(request):
-    usuario= Usuario.objects.get(nombreUsuario= request.user)
-    return render(request, 'bienvenida.html', {'usuario': usuario})
-
+@login_required(login_url='/cuenta/login/')
 def bienvenida(request):
     usuario= PersonalAdministrativo.objects.get(nombreUsuario= request.user)
     return render(request, 'bienvenida.html', {'usuario': usuario})
 
+@login_required(login_url='/cuenta/login/')
 def crudInicio(request):
     mensaje = "Prueba"
     formPA = PersonalAdminForm()
