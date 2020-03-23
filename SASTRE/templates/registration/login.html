@@ -1,8 +1,10 @@
 {% extends 'sastre/baseSastre.html' %}
 
 {% block title %}
-    Login
+    Inicio de sesión
 {% endblock %}
+
+{% load widget_tweaks %}
 
 {% block login %} 
         <!--
@@ -36,11 +38,11 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="exampleInputEmail1">{{ form.username.label_tag }}</label>
-                            {{ form.username }}
+                            {{ form.username | add_class:"form-control" }}
                         </div>
                             <div class="form-group">
                             <label for="exampleInputPassword1">{{ form.password.label_tag }}</label>
-                            {{ form.password }}
+                            {{ form.password | add_class:"form-control" }}
                         </div>
                         <button type="submit" class="btn btn-guinda">Ingresar</button>
                     </form>
@@ -49,7 +51,7 @@
             
             {# Password_reset#}
             <div class="mx-auto" style="margin: 10px;">
-                <a href="{% url 'password_reset' %}">Olvide mi contraseña</a>
+                <a href="{% url 'password_reset' %}">Olvidé mi contraseña</a>
             </div>
         </div>
 {% endblock %} 
