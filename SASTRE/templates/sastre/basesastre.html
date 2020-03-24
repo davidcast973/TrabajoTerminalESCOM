@@ -23,41 +23,52 @@
         {% endblock %}
     </head> 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light guindaColor">
-            <a class="navbar-brand text-light fontFamily" href="{% if user.is_authenticated %} {% url 'bienvenida' %} {% else %} {% url 'login' %} {% endif %}">SASTRE</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link text-light" href="{% if user.is_authenticated %} {% url 'bienvenida' %} {% else %} {% url 'login' %} {% endif %}">Inicio<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Cuenta
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Opción 1</a>
-                            <a class="dropdown-item" href="#">Opción 2</a>
-                            {% if user.is_authenticated %}
+        <nav class="navbar navbar-expand-lg navbar-light navbarGuinda">
+            {% if user.is_authenticated %}
+                <a class="navbar-brand text-light fontAudiowide" href="{% url 'bienvenida' %}">SASTRE</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link text-light" href="{% url 'bienvenida' %}">Inicio<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link text-light" href="{% url 'crudInicio' %}">Administrar Perfiles<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link text-light" href="{% url 'inscripcionTesisInicio' %}">Inscribir Tesis<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link text-light" href="{% url 'materiasCursadas' %}">Evaluación de profesores<span class="sr-only">(current)</span></a>
+                        </li>
+                        <!--li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuenta</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Ver trayectoria escolar</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
-                            {% endif %}
-                        </div>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-light" href="{% if user.is_authenticated %} {% url 'crudInicio' %} {% else %} {% url 'login' %} {% endif %}">Administrar Perfiles<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-light" href="{% if user.is_authenticated %} {% url 'inscripcionTesisInicio' %} {% else %} {% url 'login' %} {% endif %}">Inscipción de tesis<span class="sr-only">(current)</span></a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
+                            </div>
+                        </li-->
+                        <li class="nav-item active">
+                            <a class="nav-link text-light" href="">Trayectoria Escolar<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link text-light" href="{% url 'logout' %}">Cerrar Sesión<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
+                </div>
+            {% else %}
+                <a class="navbar-brand text-light fontAudiowide mx-auto" style="font-size: 40px;" href="{% url 'login' %}">SASTRE</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            {% endif %}
         </nav>
         <div class="contentBody">
             <div class="content">
@@ -65,13 +76,11 @@
                     {% block login %} <!-- Este bloque es para que la pagina de login lo sobreescriba -->
                         {% block notificaciones %} <!-- Este bloque es para mostrar en la parte de arriba del espacio de contenido las notificaciones de cualquier tipo -->
                             {% if not user.is_authenticated %}
-                                <div class="alert alert-warning" role="alert">
-                                    Tu cuenta no tiene acceso a esta pagina. Para continuar, inicia sesion con una cuenta con acceso. Favor de ingresar.
-                                </div>
-                                <div class="row">
-                                    {% block forceLogin %}
-                                        Iniciar sesión
-                                    {% endblock %}
+                                <div style="width: 18rem; margin: auto; padding: 100px 0 100px;">
+                                    <div class="alert alert-warning" role="alert">
+                                        Tu cuenta no tiene acceso a esta pagina. Para continuar, inicia sesion con una cuenta con acceso. Favor de ingresar.
+                                    </div>
+                                    <a type="button" class="btn btn-guinda" href="{% url 'login' %}">Iniciar Sesión</a>
                                 </div>
                             {% else %}
                                 {% block body %}

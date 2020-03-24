@@ -1,4 +1,5 @@
 from django.db import models
+from evaluaciones.models import Materia
 
 # Create your models here.
 
@@ -52,7 +53,7 @@ class Profesor(Usuario):
 		docstring for Profesor: 
 	"""
 
-	tiraMaterias= models.TextField()
+	materias= models.ManyToManyField(Materia)
 	#titulo= models.FileField(upload_to='uploads/', max_length=100)
 	cedula= models.CharField(max_length= 20)
 

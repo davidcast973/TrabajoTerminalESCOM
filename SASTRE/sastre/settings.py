@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'fontawesome',
     'widget_tweaks',
     'inscripcionTesis',
+    'evaluaciones',
 ]
 
 MIDDLEWARE = [
@@ -130,5 +131,14 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/usuario/bienvenida'
-LOGOUT_REDIRECT_URL = '/cuenta/login'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOGOUT_REDIRECT_URL = 'login'
+
+# Apartado de email
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'sastre.escom@gmail.com'
+EMAIL_HOST_PASSWORD = 'TTS4$TR3'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
