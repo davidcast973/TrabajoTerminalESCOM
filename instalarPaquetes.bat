@@ -1,12 +1,12 @@
 @ECHO OFF
+REM Copiar los comandos al Home del usuario.
+@ECHO ON
+ROBOCOPY . %USERPROFILE% alias.bat
+
+@ECHO OFF
 REM Ir a carpeta SASTRE
 @ECHO ON
 cd SASTRE
-
-@ECHO OFF
-REM Copiar los comandos al Home del usuario.
-@ECHO ON
-ROBOCOPY ..\ %USERPROFILE% alias.bat
 
 @ECHO OFF
 REM Crear el entorno virtual que GIT ignorara.
@@ -22,7 +22,9 @@ python -m pip install --upgrade pip
 @ECHO OFF
 REM Instalar las paqueterias necesarias que vienen descritas en requirements.txt.
 @ECHO ON
-pip install -r requirements.txt
+pip list
+pip install -U setuptools
+pip install -U -r requirements.txt
 
 REM @ECHO OFF
 REM REM Sirve para poder usar los comando y migrar despues la BD.
