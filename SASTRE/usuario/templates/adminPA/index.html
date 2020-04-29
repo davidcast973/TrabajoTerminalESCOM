@@ -35,7 +35,7 @@
 				<!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'PersonalAdministrativo' y los listamos -->
 				{% for PerAdm in object_list %}
 				<tr>
-					<td>{{ PerAdm.nombreUsuario.first_name }} {{ PerAdm.nombreUsuario.last_name }}</td>
+					<td>{{ PerAdm.nombre }} {{ PerAdm.apellido }}</td>
 					<td>{{ PerAdm.identificador }}</td>
 					<td>{{ PerAdm.departamento }}</td>
 					<td>

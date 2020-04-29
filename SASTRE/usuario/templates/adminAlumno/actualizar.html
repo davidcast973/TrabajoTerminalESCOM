@@ -7,20 +7,30 @@
 {% load widget_tweaks %}
 
 {% block body %}
-    <h3 class="py-4 font-weight-bold">Edición de Personal Administrativo</h3>
+    <h3 class="py-4 font-weight-bold">Edición de Alumnos</h3>
     <div class="card-body">
         {% block cardBody %}
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- {{ form.as_p }} -->
                 <div class="form-row">
-                    <div class="form-group col-8">
-                        <label for="nombreUsuario" class="font-weight-bold">Usuario</label>
-                        {{ form.nombreUsuario | add_class:"form-control" }}
+                    <div class="form-group col-6">
+                        <label for="username" class="font-weight-bold">Matricula</label>
+                        {{ form.username | add_class:"form-control"| attr:"readonly:True" }}
                     </div>
-                    <div class="form-group col-4">
-                        <label for="edad" class="font-weight-bold">Edad</label>
-                        {{ form.edad | add_class:"form-control" }}
+                    <div class="form-group col-6">
+                        <label for="password" class="font-weight-bold">Nueva Contraseña</label>
+                        {{ form.password | add_class:"form-control"}}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="nombre" class="font-weight-bold">Nombre(s)</label>
+                        {{ form.nombre | add_class:"form-control" }}
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="apellido" class="font-weight-bold">Apellido</label>
+                        {{ form.apellido | add_class:"form-control" }}
                     </div>
                 </div>
                 <div class="form-row">

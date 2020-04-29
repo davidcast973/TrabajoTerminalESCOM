@@ -9,13 +9,21 @@
     <div class="card-body text-left mx-5">
         {% block cardBody %}
         	<div class="row">
-        		<div class="col-8">
-        			<p><span class="font-weight-bold">Nombre:</span> {{object.nombreUsuario.first_name}} {{object.nombreUsuario.last_name}}</p>
-        		</div>
-        		<div class="col-4">
-        			<p><span class="font-weight-bold">Edad:</span> {{object.edad}}</p>
-        		</div>
-        	</div>
+                <div class="col-8">
+                    <p><span class="font-weight-bold">No. Empleado:</span> {{object.username}}</p>
+                </div>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Correo Electrónico:</span> {{object.email}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <p><span class="font-weight-bold">Nombre:</span> {{object.nombre}} {{object.apellido}}</p>
+                </div>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Edad:</span> {{object.edad}}</p>
+                </div>
+            </div>
         	<div class="row">
         		<div class="col-8">
 					<p><span class="font-weight-bold">Direccion:</span> {{object.direccion}}</p>

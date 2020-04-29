@@ -33,7 +33,7 @@
 				<!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'Profesor' y los listamos -->
 				{% for Prof in object_list %}
 				<tr>
-					<td>{{ Prof.nombreUsuario.first_name }} {{ Prof.nombreUsuario.last_name }}</td>
+					<td>{{ Prof.nombre }} {{ Prof.apellido }}</td>
 					<td>{{ Prof.identificador }}</td>
 					<td>
 			 			<!-- Usaremos un formulario que realizará la tarea de eliminar un registro desde la misma tabla HTML -->

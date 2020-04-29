@@ -41,7 +41,18 @@ class PACrear(SuccessMessageMixin, CreateView):
     form = PersonalAdministrativo
     fields = "__all__"
     success_message = '¡Personal Administrativo creado correctamente!' # Mostramos este Mensaje luego de crear un personal administrativo     
- 
+    
+    
+    def form_valid(self, form):
+        user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+                email=form.cleaned_data['email']
+        )
+        user.last_name = form.cleaned_data['nombre']
+        user.first_name = form.cleaned_data['apellido']
+        user.save()
+        return super().form_valid(form)
     # Redireccionamos a la página principal luego de crear un registro
     def get_success_url(self):
         return reverse('crudPA') # Redireccionamos a la vista principal 'crudPA' 
@@ -51,7 +62,14 @@ class PAActualizar(SuccessMessageMixin, UpdateView):
     form = PersonalAdministrativo
     fields = "__all__" 
     success_message = '!Personal Administrativo actualizado correctamente!' # Mostramos este Mensaje luego de Editar un Personal Administrativo 
- 
+    
+    def form_valid(self, form):
+        u = User.objects.get(username=form.cleaned_data['username'])
+        u.set_password(form.cleaned_data['password'])
+        u.last_name = form.cleaned_data['nombre']
+        u.first_name = form.cleaned_data['apellido']
+        u.save()
+        return super().form_valid(form)
     # Redireccionamos a la página principal luego de actualizar un registro o Personal Administrativo
     def get_success_url(self):               
         return reverse('crudPA') # Redireccionamos a la vista principal 'crudPA' 
@@ -79,7 +97,17 @@ class ProfesorCrear(SuccessMessageMixin, CreateView):
     form = Profesor
     fields = "__all__"
     success_message = '!Profesor creado correctamente!' # Mostramos este Mensaje luego de crear un profesor
- 
+    
+    def form_valid(self, form):
+        user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+                email=form.cleaned_data['email']
+        )
+        user.last_name = form.cleaned_data['nombre']
+        user.first_name = form.cleaned_data['apellido']
+        user.save()
+        return super().form_valid(form)
     # Redireccionamos a la página principal luego de crear un registro
     def get_success_url(self):
         return reverse('crudProfesor') # Redireccionamos a la vista principal 'crudProfesor' 
@@ -89,7 +117,14 @@ class ProfesorActualizar(SuccessMessageMixin, UpdateView):
     form = Profesor
     fields = "__all__" 
     success_message = '!Profesor actualizado correctamente!' # Mostramos este Mensaje luego de Editar un Profesor 
- 
+
+    def form_valid(self, form):
+        uProf = User.objects.get(username=form.cleaned_data['username'])
+        uProf.set_password(form.cleaned_data['password'])
+        uProf.last_name = form.cleaned_data['nombre']
+        uProf.first_name = form.cleaned_data['apellido']
+        uProf.save()
+        return super().form_valid(form)
     # Redireccionamos a la página principal luego de actualizar un registro o Profesor
     def get_success_url(self):               
         return reverse('crudProfesor') # Redireccionamos a la vista principal 'crudProfesor' 
@@ -117,7 +152,17 @@ class AlumnoCrear(SuccessMessageMixin, CreateView):
     form = Alumno
     fields = "__all__"
     success_message = '!Alumno creado correctamente!' # Mostramos este Mensaje luego de crear un Alumno     
- 
+    
+    def form_valid(self, form):
+        user = User.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+                email=form.cleaned_data['email']
+        )
+        user.last_name = form.cleaned_data['nombre']
+        user.first_name = form.cleaned_data['apellido']
+        user.save()
+        return super().form_valid(form)
     # Redireccionamos a la página principal luego de crear un registro
     def get_success_url(self):
         return reverse('crudAlumno') # Redireccionamos a la vista principal 'crudAlumno' 
@@ -127,7 +172,14 @@ class AlumnoActualizar(SuccessMessageMixin, UpdateView):
     form = Alumno
     fields = "__all__" 
     success_message = '!Alumno actualizado correctamente!' # Mostramos este Mensaje luego de Editar un Alumno 
- 
+
+    def form_valid(self, form):
+        u = User.objects.get(username=form.cleaned_data['username'])
+        u.set_password(form.cleaned_data['password'])
+        u.last_name = form.cleaned_data['nombre']
+        u.first_name = form.cleaned_data['apellido']
+        u.save()
+        return super().form_valid(form)
     # Redireccionamos a la página principal luego de actualizar un registro o Alumno
     def get_success_url(self):               
         return reverse('crudAlumno') # Redireccionamos a la vista principal 'crudAlumno' 
