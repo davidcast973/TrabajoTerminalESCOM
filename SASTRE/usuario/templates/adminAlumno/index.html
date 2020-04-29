@@ -34,7 +34,7 @@
 				<!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'Alumno' y los listamos -->
 				{% for Alum in object_list %}
 				<tr>
-					<td>{{ Alum.nombreUsuario.first_name }} {{ Alum.nombreUsuario.last_name }}</td>
+					<td>{{ Alum.nombre }} {{ Alum.apellido }}</td>
 					<td>{{ Alum.identificador }}</td>
 					<td>{{ Alum.carrera }}</td>
 					<td>

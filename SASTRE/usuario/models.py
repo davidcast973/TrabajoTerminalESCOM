@@ -18,7 +18,12 @@ class Usuario(models.Model):
 	)
 	GENERO_OPCION= dict(F= 'Femenino', M= 'Masculio',)
 
-	nombreUsuario= models.ForeignKey('auth.User', on_delete= models.CASCADE)
+	#nombreUsuario= models.ForeignKey('auth.User', on_delete= models.CASCADE, null=True)
+	username = models.CharField(max_length= 10)
+	password = models.CharField(max_length= 100)
+	email = models.CharField(max_length = 100)
+	nombre = models.CharField(max_length= 200)
+	apellido = models.CharField(max_length= 200)
 	edad= models.IntegerField()
 	direccion= models.CharField(max_length= 200)
 	lada= models.CharField(max_length= 4)
@@ -37,7 +42,7 @@ class Usuario(models.Model):
 	identificador= models.CharField(max_length= 10)
 
 	def __str__(self):
-		return str(self.nombreUsuario)
+		return str(self.username)
 			
 class PersonalAdministrativo(Usuario):
 	"""
@@ -46,7 +51,7 @@ class PersonalAdministrativo(Usuario):
 	departamento= models.CharField(max_length= 50)
 
 	def __str__(self):
-		return str(self.nombreUsuario)
+		return str(self.username)
 
 class Profesor(Usuario):
 	"""
@@ -58,8 +63,7 @@ class Profesor(Usuario):
 	cedula= models.CharField(max_length= 20)
 
 	def __str__(self):
-		return str(self.nombreUsuario)
-
+		return str(self.username)
 		
 class Alumno(Usuario):
 	"""
@@ -92,7 +96,7 @@ class Alumno(Usuario):
 	entrevista= models.CharField(max_length= 20)
 
 	def __str__(self):
-		return str(self.nombreUsuario)
+		return str(self.username)
 
 class Permisos(models.Model):
 	"""docstring for ClassName"""

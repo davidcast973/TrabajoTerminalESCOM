@@ -14,10 +14,32 @@
                 {% csrf_token %}
                 <!-- {{ form.as_p }} -->
                 <div class="form-row">
-                    <div class="form-group col-8">
-                        <label for="nombreUsuario" class="font-weight-bold">Usuario</label>
-                        {{ form.nombreUsuario | add_class:"form-control" }}
+                    <div class="form-group col-6">
+                        <label for="username" class="font-weight-bold">No. Empleado</label>
+                        {{ form.username | add_class:"form-control" }}
                     </div>
+                    <div class="form-group col-6">
+                        <label for="password" class="font-weight-bold">Contraseña</label>
+                        {{ form.password | add_class:"form-control" }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="nombre" class="font-weight-bold">Nombre(s)</label>
+                        {{ form.nombre | add_class:"form-control" }}
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="apellido" class="font-weight-bold">Apellido</label>
+                        {{ form.apellido | add_class:"form-control" }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-4">
+                        <label for="email" class="font-weight-bold">Correo Electrónico</label>
+                        {{ form.email | add_class:"form-control" }}
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-4">
                         <label for="edad" class="font-weight-bold">Edad</label>
                         {{ form.edad | add_class:"form-control" }}
