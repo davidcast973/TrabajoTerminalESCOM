@@ -24,6 +24,12 @@ class Pregunta(models.Model):
 	def __str__(self):
 		return str(self.textoPregunta)
 
+class CuestionarioManager(models.Manager):
+    def create_cuestionario(self, usuario, bandera, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12):
+        cuestionario = self.create(usuario=usuario, bandera=bandera, r1=r1, r2=r2, r3=r3, r4=r4, r5=r5, r6=r6, r7=r7, r8=r8, r9=r9, r10=r10, r11=r11, r12=r12)
+        # do something with the cuestionario
+        return cuestionario
+
 class Cuestionario(models.Model):
 	"""
 		Un modelo que guardarálos cuestionarios disponibles
@@ -32,51 +38,40 @@ class Cuestionario(models.Model):
 	usuario= models.ForeignKey('auth.User', on_delete= models.CASCADE, null=True)
 	bandera = models.BooleanField()
 	r1= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r2= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r3= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r4= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r5= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r6= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r7= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r8= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r9= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r10= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r11= models.CharField(
-		max_length=1,
-		choices=list(RESPUESTA_OPCION.items()),
+		max_length=2
 	)
 	r12= models.TextField()
-	
+	objects = CuestionarioManager()
 
 	def __str__(self):
-		return str(self.titulo)
+		return str(self.bandera)

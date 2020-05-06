@@ -9,12 +9,19 @@ from string import punctuation
 import os
 from django.conf import settings
 from .models import *
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 @login_required(login_url='/cuenta/login/')
 def evaluarProfesor(request):
 	preguntas = Pregunta.objects.all()
+	user = request.user
+	if (Cuestionario.objects.filter(usuario=user, bandera=True).count()) == 0:
+		return render(request, 'evaluarProfesor.html', {'preguntas': preguntas})
+	else:
+		mensaje = "Usted ya ha evaluado a este profesor"
+		return render(request, 'evaluarProfesor.html', {'mensaje': mensaje})
 	return render(request, 'evaluarProfesor.html', {'preguntas': preguntas})
 
 @login_required(login_url='/cuenta/login/')
@@ -107,3 +114,28 @@ def tokenize(text):
 		stems = ['']
 
 	return stems
+
+@login_required(login_url='/cuenta/login/')
+def guardarEvaluacion(request):
+	respuestas = [ r for r in request.POST.values() ]
+	user = request.user
+	bandera = 1
+	r1=respuestas[1]
+	r2=respuestas[2]
+	r3=respuestas[3]
+	r4=respuestas[4]
+	r5=respuestas[5]
+	r6=respuestas[6]
+	r7=respuestas[7]
+	r8=respuestas[8]
+	r9=respuestas[9]
+	r10=respuestas[10]
+	r11=respuestas[11]
+	r12=respuestas[12]
+	if (Cuestionario.objects.filter(usuario=user, bandera=True).count()) == 0:
+		cuestionario = Cuestionario.objects.create_cuestionario(user, bandera, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)
+		cuestionario.save()
+	else:
+		mensaje = "Usted ya ha evaluado a este profesor"
+		return render(request, 'evaluarProfesor.html', {'respuestas': respuestas, 'mensaje':mensaje})
+	return render(request, 'evaluarProfesor.html', {'respuestas': respuestas})
