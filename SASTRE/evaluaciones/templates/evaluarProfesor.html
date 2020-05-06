@@ -2,34 +2,40 @@
 {% block bodyEvaluaciones %}
 	<div class="card">
 		<div class="card-body">
-			<form>
-				<h5>Contesta cuidadosamente el siguiente cuestionario</h5><br>
+			<form method="post" action="{% url 'guardarEvaluacion' %}">
+				{% if mensaje %}
+					<h4>{{mensaje}}</h4>
+				{% else %}
+					<h4>Ha realizado correctamente la evaluación del profesor</h4>
+				{% endif %}
 
 				{% if preguntas %}
+	                {% csrf_token %}
+					<h5>Contesta cuidadosamente el siguiente cuestionario</h5><br>
 					{% for pregunta in preguntas %}
 						<div class="row">
 							{{forloop.counter}}.	{{pregunta}}
 						</div><br>
 						{% if forloop.counter == 12%}
 							<div class="form-group">
-								<textarea class="form-control" id="textArea12" rows="3"></textarea>
+								<textarea class="form-control" id="textArea12" name="{{forloop.counter}}" rows="3"></textarea>
 							</div>
 						{% else %}
 							<div class="row">
 								<div class="col-sm">
-									<input type="radio" id="opcion1Preg{{forloop.counter}}" name="radio-stacked" required>
+									<input type="radio" id="opcion1Preg{{forloop.counter}}" name="{{forloop.counter}}" value="1" required>
 								</div>
 								<div class="col-sm">
-									<input type="radio" id="opcion2Preg{{forloop.counter}}" name="radio-stacked" required>
+									<input type="radio" id="opcion2Preg{{forloop.counter}}" name="{{forloop.counter}}" value="2" required>
 								</div>
 								<div class="col-sm">
-									<input type="radio" id="opcion3Preg{{forloop.counter}}" name="radio-stacked" required>
+									<input type="radio" id="opcion3Preg{{forloop.counter}}" name="{{forloop.counter}}" value="3" required>
 								</div>
 								<div class="col-sm">
-									<input type="radio" id="opcion4Preg{{forloop.counter}}" name="radio-stacked" required>
+									<input type="radio" id="opcion4Preg{{forloop.counter}}" name="{{forloop.counter}}" value="4" required>
 								</div>
 								<div class="col-sm">
-									<input type="radio" id="opcion5Preg{{forloop.counter}}" name="radio-stacked" required>
+									<input type="radio" id="opcion5Preg{{forloop.counter}}" name="{{forloop.counter}}" value="5" required>
 								</div>
 							</div>
 							<div class="row">
@@ -51,12 +57,12 @@
 							</div><br>
 						{% endif %}
 					{% endfor %}
+					<div>
+						<br>
+						<button type="submit" class="btn btn-guinda">Terminar evaluación</button><br><br>
+					</div>
 				{% endif %}
 			</form>
 		</div>
-	</div>
-	<div>
-		<br>
-		<a href="{% url 'etiquetadoTexto' %}" class="btn btn-guinda">Terminar evalución</a><br><br>
 	</div>
 {% endblock %}
