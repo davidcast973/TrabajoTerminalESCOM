@@ -1,22 +1,22 @@
 from django.db import models
 from evaluaciones.models import Materia
 
-# Create your models here.
+PAIS_OPCION= dict(
+	ALEMANIA= 'Alemania',
+	BRASIL= 'Brasil',
+	CANADA= 'Canada',
+	DINAMARCA= 'Dinamarca',
+	ECUADOR= 'Ecuador',
+	MEXICO= 'Mexico',
+)
+
+GENERO_OPCION= dict(F= 'Femenino', M= 'Masculio',)
 
 class Usuario(models.Model):
 	"""
 		docstring for usuario: Clase que describe al objeto usuario.
 		Nesesario aclarar diferencia entre cuenta y usuario
 	"""
-	PAIS_OPCION= dict(
-		ALEMANIA= 'Alemania',
-		BRASIL= 'Brasil',
-		CANADA= 'Canada',
-		DINAMARCA= 'Dinamarca',
-		ECUADOR= 'Ecuador',
-		MEXICO= 'Mexico',
-	)
-	GENERO_OPCION= dict(F= 'Femenino', M= 'Masculio',)
 
 	#nombreUsuario= models.ForeignKey('auth.User', on_delete= models.CASCADE, null=True)
 	username = models.CharField(max_length= 10)
