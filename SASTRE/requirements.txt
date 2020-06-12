@@ -4,3 +4,4 @@ django-bootstrap4
 django-widget-tweaks
 gensim
 nltk
+matplotlib

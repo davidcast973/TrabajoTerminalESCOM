@@ -1,0 +1,13 @@
+{% extends 'baseEvaluaciones.html' %}
+{% block bodyEvaluaciones %}
+	<div class="card">
+		<div class="card-body">
+			<h2>Resultado de la evaluación</h2>
+			{{cuestionarios}}<br>
+			{{respuestas1}}<br><br>
+			<img src="../static/img/grafica1.png">
+			{% load static %}
+			<img src="{% static "img/grafica1.png" %}" alt="My image">
+		</div>
+	</div>
+{% endblock %}

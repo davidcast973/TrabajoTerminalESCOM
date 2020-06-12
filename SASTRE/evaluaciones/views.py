@@ -10,19 +10,42 @@ import os
 from django.conf import settings
 from .models import *
 from django.contrib.auth.models import User
+from usuario.models import Alumno, Profesor
+from ofertaEducativa.models import SituacionEscolar, UnidadAprendizaje
+from evaluaciones.models import Cuestionario
+from django.core.exceptions import ObjectDoesNotExist
+#Librerias para graficar
+import matplotlib.pyplot as plt
 
 # Create your views here.
+
+@login_required(login_url='/cuenta/login/')
+def evaluacionProfesorInicio(request):
+	user = request.user
+	if (Alumno.objects.filter(username= user).count()) > 0:		#Verifica si es un alumno
+		situacionEscolar = SituacionEscolar.objects.filter(usuario=user, evaluacionProfesor=False)
+		if (SituacionEscolar.objects.filter(usuario=user, evaluacionProfesor=False).count()) > 0:
+			return render(request, 'listadoMaterias.html', {'situacionEscolar': situacionEscolar})
+		else:
+			mensaje = "Ya has evaluado a todos tus profesores"
+		return render(request, 'listadoMaterias.html', {'mensaje': mensaje})
+	else:
+		mensaje = "Lo sentimos este módulo esta disponible solo para alumnos"
+		return render(request, 'listadoMaterias.html', {'mensaje': mensaje})
+	return render(request, 'listadoMaterias.html', {'mensaje': ['Se presento un error']})
 
 @login_required(login_url='/cuenta/login/')
 def evaluarProfesor(request):
 	preguntas = Pregunta.objects.all()
 	user = request.user
-	if (Cuestionario.objects.filter(usuario=user, bandera=True).count()) == 0:
-		return render(request, 'evaluarProfesor.html', {'preguntas': preguntas})
+	if (Alumno.objects.filter(username= user).count()) > 0:		#Verifica si es un alumno
+		sitEscId = request.POST['profesorUDAId']
+		situacionEscolar = SituacionEscolar.objects.filter(usuario=user, pk=sitEscId)
+		return render(request, 'evaluarProfesor.html', {'preguntas': preguntas, 'situacionEscolar': situacionEscolar})
 	else:
-		mensaje = "Usted ya ha evaluado a este profesor"
+		mensaje = "Lo sentimos este módulo esta disponible solo para alumnos"
 		return render(request, 'evaluarProfesor.html', {'mensaje': mensaje})
-	return render(request, 'evaluarProfesor.html', {'preguntas': preguntas})
+	return render(request, 'evaluarProfesor.html', {'mensaje': ["Se presento un error"]})
 
 @login_required(login_url='/cuenta/login/')
 def materiasCursadas(request):
@@ -117,25 +140,60 @@ def tokenize(text):
 
 @login_required(login_url='/cuenta/login/')
 def guardarEvaluacion(request):
+	materiaEvaluada = SituacionEscolar.objects.get(pk=request.POST['materiaInscritaId'])
+	materiaEvaluada.evaluacionProfesor = True
+	materiaEvaluada.save()
 	respuestas = [ r for r in request.POST.values() ]
 	user = request.user
+	UA = UnidadAprendizaje.objects.get(pk=request.POST['UA'])
+	profesorUDA = Profesor.objects.get(pk=request.POST['profesorUDA'])
 	bandera = 1
-	r1=respuestas[1]
-	r2=respuestas[2]
-	r3=respuestas[3]
-	r4=respuestas[4]
-	r5=respuestas[5]
-	r6=respuestas[6]
-	r7=respuestas[7]
-	r8=respuestas[8]
-	r9=respuestas[9]
-	r10=respuestas[10]
-	r11=respuestas[11]
-	r12=respuestas[12]
-	if (Cuestionario.objects.filter(usuario=user, bandera=True).count()) == 0:
-		cuestionario = Cuestionario.objects.create_cuestionario(user, bandera, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)
-		cuestionario.save()
+	r1=respuestas[4]
+	r2=respuestas[5]
+	r3=respuestas[6]
+	r4=respuestas[7]
+	r5=respuestas[8]
+	r6=respuestas[9]
+	r7=respuestas[10]
+	r8=respuestas[11]
+	r9=respuestas[12]
+	r10=respuestas[13]
+	r11=respuestas[14]
+	r12=respuestas[15]
+	cuestionario = Cuestionario.objects.create_cuestionario(user, UA, profesorUDA, bandera, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)
+	cuestionario.save()
+	situacionEscolar = SituacionEscolar.objects.filter(usuario=user, evaluacionProfesor=False)
+	return render(request, 'listadoMaterias.html', {'situacionEscolar': situacionEscolar})
+
+@login_required(login_url='/cuenta/login/')
+def resultadoEvaluacionesInicio(request):
+	user = request.user
+	if (Profesor.objects.filter(username= user).count()) > 0:		#Verifica si es un profesor
+		profesorId = Profesor.objects.get(username=user)
+		materias = Cuestionario.objects.filter(profesorUDA=profesorId).distinct('UA')
+		return render(request, 'resultadoEvaluaciones.html', {'materias': materias})
 	else:
-		mensaje = "Usted ya ha evaluado a este profesor"
-		return render(request, 'evaluarProfesor.html', {'respuestas': respuestas, 'mensaje':mensaje})
-	return render(request, 'evaluarProfesor.html', {'respuestas': respuestas})
+		mensaje = "Lo sentimos este módulo esta disponible solo para profesores"
+		return render(request, 'resultadoEvaluaciones.html', {'mensaje': mensaje})
+	return render(request, 'resultadoEvaluaciones.html', {'materias': materias})
+
+@login_required(login_url='/cuenta/login/')
+def evaluacionDetalle(request):
+	user = request.user
+	if (Profesor.objects.filter(username= user).count()) > 0:		#Verifica si es un profesor
+		profesorId = Profesor.objects.get(username=user)
+		cuestionarios = Cuestionario.objects.filter(profesorUDA=profesorId, UA=request.POST['UAId'])
+		valoracion = ["Totalmente en desacuerdo","En desacuerdo","Más o menos de acuerdo","De acuerdo","Totalmente de acuerdo"]
+		respuestas = []
+		respuestas.append(Cuestionario.objects.filter(profesorUDA=profesorId, UA=request.POST['UAId'], r1=1).count())
+		respuestas.append(Cuestionario.objects.filter(profesorUDA=profesorId, UA=request.POST['UAId'], r1=2).count())
+		respuestas.append(Cuestionario.objects.filter(profesorUDA=profesorId, UA=request.POST['UAId'], r1=3).count())
+		respuestas.append(Cuestionario.objects.filter(profesorUDA=profesorId, UA=request.POST['UAId'], r1=4).count())
+		respuestas.append(Cuestionario.objects.filter(profesorUDA=profesorId, UA=request.POST['UAId'], r1=5).count())
+		plt.pie(respuestas, labels=valoracion)
+		plt.savefig('evaluaciones/static/img/grafica1.png')
+		return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios, "respuestas1": respuestas})
+	else:
+		mensaje = "Lo sentimos este módulo esta disponible solo para profesores"
+		return render(request, 'detalleEvaluacion.html', {'mensaje': mensaje})
+	return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios})

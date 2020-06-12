@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'inscripcionTesis',
     'evaluaciones',
+    'ofertaEducativa',
+    'matplotlib',
 ]
 
 MIDDLEWARE = [

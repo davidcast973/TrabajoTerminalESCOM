@@ -2,12 +2,15 @@
 {% block bodyEvaluaciones %}
 	<div class="card">
 		<div class="card-body">
+			{% if mensaje %}
+				<h4>{{mensaje}}</h4>
+			{% else %}
 			<form method="post" action="{% url 'guardarEvaluacion' %}">
-				{% if mensaje %}
-					<h4>{{mensaje}}</h4>
-				{% else %}
-					<h4>Ha realizado correctamente la evaluación del profesor</h4>
-				{% endif %}
+				{% for materiaInscrita in situacionEscolar %}
+					<input type="hidden" id="UA" name="UA" value="{{materiaInscrita.UA.id}}">
+					<input type="hidden" id="profesorUDA" name="profesorUDA" value="{{materiaInscrita.profesorUDA.id}}">
+					<input type="hidden" id="materiaInscritaId" name="materiaInscritaId" value="{{materiaInscrita.id}}">
+				{% endfor %}
 
 				{% if preguntas %}
 	                {% csrf_token %}
@@ -40,19 +43,19 @@
 							</div>
 							<div class="row">
 								<div class="col-sm">
-									<p>1</p>
+									<p>Totalmente en desacuerdo</p>
 								</div>
 								<div class="col-sm">
-									<p>2</p>
+									<p>En desacuerdo</p>
 								</div>
 								<div class="col-sm">
-									<p>3</p>
+									<p>Más o menos de acuerdo</p>
 								</div>
 								<div class="col-sm">
-									<p>4</p>
+									<p>De acuerdo</p>
 								</div>
 								<div class="col-sm">
-									<p>5</p>
+									<p>Totalmente de acuerdo</p>
 								</div>
 							</div><br>
 						{% endif %}
@@ -63,6 +66,7 @@
 					</div>
 				{% endif %}
 			</form>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
