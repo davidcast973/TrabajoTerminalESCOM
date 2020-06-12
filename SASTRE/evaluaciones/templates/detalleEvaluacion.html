@@ -3,11 +3,151 @@
 	<div class="card">
 		<div class="card-body">
 			<h2>Resultado de la evaluación</h2>
-			{{cuestionarios}}<br>
-			{{respuestas1}}<br><br>
-			<img src="../static/img/grafica1.png">
-			{% load static %}
-			<img src="{% static "img/grafica1.png" %}" alt="My image">
+			<div class="card-deck">
+			{% for pregunta in preguntas %}
+				{% if forloop.counter == 1%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica1.png" %}" alt="Gráfico 1">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% elif forloop.counter == 2%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica2.png" %}" alt="Gráfico 2">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% elif forloop.counter == 3%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica3.png" %}" alt="Gráfico 3">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+			</div>
+
+			<div class="card-deck">
+			{% for pregunta in preguntas %}
+				{% if forloop.counter == 4%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica4.png" %}" alt="Gráfico 4">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% elif forloop.counter == 5%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica5.png" %}" alt="Gráfico 5">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% elif forloop.counter == 6%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica6.png" %}" alt="Gráfico 6">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+			</div>
+
+			<div class="card-deck">
+			{% for pregunta in preguntas %}
+				{% if forloop.counter == 7%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica7.png" %}" alt="Gráfico 7">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% elif forloop.counter == 8%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica8.png" %}" alt="Gráfico 8">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% elif forloop.counter == 9%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica9.png" %}" alt="Gráfico 9">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+			</div>
+
+			<div class="card-deck">
+			{% for pregunta in preguntas %}
+				{% if forloop.counter == 10%}
+				<div class="card">
+					<img class="card-img-top" src="{% static "img/grafica10.png" %}" alt="Gráfico 10">
+					{% load static %}
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% elif forloop.counter == 11%}
+				<div class="card">
+					{% load static %}
+					<img class="card-img-top" src="{% static "img/grafica11.png" %}" alt="Gráfico 11">
+					<div class="card-body">
+						<p class="card-text">{{pregunta}}</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">Last updated 3 mins ago</small>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+			</div>
+
 		</div>
 	</div>
 {% endblock %}
