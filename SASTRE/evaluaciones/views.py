@@ -1,21 +1,27 @@
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import render
 import nltk
 nltk.download('punkt')
+nltk.download('wordnet')
+#Descaga Open Multilingual WordNet
+nltk.download('omw')
 from nltk.corpus import stopwords
+from nltk.corpus import wordnet
 from nltk import word_tokenize
-from nltk.stem import SnowballStemmer
+import spacy
 from string import punctuation
+import re
 import os
-from django.conf import settings
 from .models import *
-from django.contrib.auth.models import User
 from usuario.models import Alumno, Profesor
 from ofertaEducativa.models import SituacionEscolar, UnidadAprendizaje
 from evaluaciones.models import Cuestionario
-from django.core.exceptions import ObjectDoesNotExist
 #Librerias para graficar
 import matplotlib.pyplot as plt
+import numpy as np
 
 import os.path as path
 # Create your views here.
@@ -97,11 +103,77 @@ def evaluacionDetalle(request):
 	if (Profesor.objects.filter(username= user).count()) > 0:		#Verifica si es un profesor
 		profesorId = Profesor.objects.get(username=user)
 		cuestionarios = Cuestionario.objects.filter(profesorUDA=profesorId, UA=request.POST['UAId'])
+		tokensNormalizados = normalizarTexto(cuestionarios)
+		noTokens = len(tokensNormalizados)
+		#Analisis con diccionario SEL
+		if not (path.exists("evaluaciones/static/img/graficaSEL.png")):
+			etiquetasXEmocion = [0,0,0,0,0,0]
+			noEtiquetasSEL = 0
+			sentimientos = ["Alegria","Enojo","Miedo","Repulsion","Tristesa","Sorpresa"]
+			etiquetasSEL = etiquetarTokens(tokensNormalizados,1)
+			for etiqueta in etiquetasSEL:
+				if etiqueta != "None":
+					noEtiquetasSEL += 1
+				if etiqueta[0] == "Alegría\n":
+					etiquetasXEmocion[0] += 1
+				if etiqueta[0] == "Enojo\n":
+					etiquetasXEmocion[1] += 1
+				if etiqueta[0] == "Miedo\n":
+					etiquetasXEmocion[2] += 1
+				if etiqueta[0] == "Repulsión\n":
+					etiquetasXEmocion[3] += 1
+				if etiqueta[0] == "Tristeza\n":
+					etiquetasXEmocion[4] += 1
+				if etiqueta[0] == "Sorpresa\n":
+					etiquetasXEmocion[5] += 1
+			plt.pie(etiquetasXEmocion, labels=sentimientos, autopct="%0.1f %%")
+			plt.savefig('evaluaciones/static/img/graficaSEL.png')
+			plt.close()
+
+		#Analisis con diccionario FullStrenght
+		if not (path.exists("evaluaciones/static/img/graficaFULL.png")):
+			noEtiquetasFull = 0
+			etiquetasFullXPolaridad = [0,0]
+			etiquetasFull = etiquetarTokens(tokensNormalizados,2)
+			for etiqueta in etiquetasFull:
+				if etiqueta != "None":
+					noEtiquetasFull += 1
+				if etiqueta == "pos\n":
+					etiquetasFullXPolaridad[0] += 1
+				if etiqueta == "neg\n":
+					etiquetasFullXPolaridad[1] += 1
+			x = np.array(["Positiva"])
+			y = np.array([etiquetasFullXPolaridad[0]])
+			x2 = np.array(["Negativa"])
+			y2 = np.array([etiquetasFullXPolaridad[1]])
+			plt.bar(x,y,align="center")
+			plt.bar(x2,y2,color="r", align="center")
+			plt.legend("Positivas", "Negativas")
+			plt.savefig('evaluaciones/static/img/graficaFULL.png')
+			plt.close()
+
+		#Analisis con diccionario Medium Strenght
+		if not (path.exists("evaluaciones/static/img/graficaMED.png")):
+			noEtiquetasMed = 0
+			polaridad = ["Positiva", "Negativa"]
+			etiquetasMedXPolaridad = [0,0]
+			etiquetasMed = etiquetarTokens(tokensNormalizados,3)
+			for etiqueta in etiquetasMed:
+				if etiqueta != "None":
+					noEtiquetasMed += 1
+				if etiqueta == "pos\n":
+					etiquetasMedXPolaridad[0] += 1
+				if etiqueta == "neg\n":
+					etiquetasMedXPolaridad[1] += 1
+			plt.pie(etiquetasMedXPolaridad, labels=polaridad, autopct="%0.1f %%")
+			plt.savefig('evaluaciones/static/img/graficaMED.png')
+			plt.close()
+
 		preguntas = Pregunta.objects.all()
 		valoracion = ["Totalmente en desacuerdo","En desacuerdo","Más o menos de acuerdo","De acuerdo","Totalmente de acuerdo"]
 		respuestas = []
-		# La siguiente condicion se realiza para no estar generando graficas en cada consulta y mejorar el tiempo de carga
-		# suponiendo que se fije un periodo de tiempo para evaluar a los maestro, una vez terminado ese periodo, el sistema generará
+		# Las siguientes condiciones se realiza para no estar generando graficas en cada consulta y mejorar el tiempo de carga
+		# suponiendo que se fije un periodo de tiempo para evaluar a los maestros, una vez terminado ese periodo, el sistema generará
 		# las gráficas solo una vez.
 		if not (path.exists("evaluaciones/static/img/grafica1.png")):
 			#Grafica respuesta uno
@@ -224,95 +296,108 @@ def evaluacionDetalle(request):
 			plt.savefig('evaluaciones/static/img/grafica11.png')
 			plt.close()
 			respuestas = []
-		return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios, 'preguntas': preguntas})
+		return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios, 'preguntas': preguntas, 'tokensNormalizados':tokensNormalizados, 'noTokens': noTokens})
 	else:
 		mensaje = "Lo sentimos este módulo esta disponible solo para profesores"
 		return render(request, 'detalleEvaluacion.html', {'mensaje': mensaje})
 	return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios})
 
-@login_required(login_url='/cuenta/login/')
-def etiquetadoTexto(request):
-	mensaje = "Prueba"
+#Esta función procesa el texto y lo normaliza para su posterior uso
+def normalizarTexto(cuestionarios):
 	#lista de stopwors a utilizar
 	spanish_stopwords  = stopwords.words('spanish')
-
-	#Stemmer en español
-	stemmer = SnowballStemmer('spanish')
-
 	#Para remover la puntuacion
 	non_words = list(punctuation)
 	#Agregamos puntuacion usada en el idioma español
 	non_words.extend(['¿','¡'])
 	non_words.extend(map(str,range(10)))
-
-	palabrasEtiquetadas = 0
-	palabrasTotal = 0
-	diccionario = {}
-	palabrasEtiquetadas = 0
-
-	#Se abre el diccionario de sentimeintos y se guarda
-	with open(os.path.join(settings.BASE_DIR, 'evaluaciones/static/dictionaries/SEL.txt'),'r') as diccionarioSentimientos:
-		mensaje = "Prueba: Se logro leer el diccionario"
-		for palabra in diccionarioSentimientos:
-			diccionario.update({palabra.split("	")[0] : palabra.split("	")[2]})
-
-	#Se abren los archivos de texto con las opiniones
-	for i in range(1,2):
-		textoEtiquetado = {}
-		archivo = "WebScraping/opiniones" + str(i) + ".txt"
-		txtEtiquetado = "txtEtiquetado" + str(i) + ".txt"
-		with open(archivo,'r') as f:
-			for linea in f:
-				print (len(linea))
-				tokens = word_tokenize(linea)
-				print (tokens)
-				#for palabra in linea.split():
-					#palabrasTotal +=1
-					#if (diccionario.get(palabra) != None):
-						#palabrasEtiquetadas += 1
-						#print (palabra)
-						#textoEtiquetado.update({palabra : diccionario.get(palabra)})
-		#print(txtEtiquetado)
-		#f=open(txtEtiquetado,"w+")
-		#f.write(str(textoEtiquetado))
-		#f.close()
-
-
-	#print ("Palabras diferentes =", len(palabrasDiferentesTxt))
-	#print (palabrasDiferentesTxt)
-	#print (diccionario.get('xd'))
-	#print ("Textos etiquetados",i)
-	#print ("Se etiquetaron",palabrasEtiquetadas,"palabras de", palabrasTotal,"palabras en los textos, un total de",(palabrasEtiquetadas*100)/palabrasTotal,"%")
-	#print (textoEtiquetado)
-	return render(request, 'evaluarProfesor.html', {'mensaje': mensaje})
-
-#Funcion para eliminar stopwords
-def quitar_stopwords(tokens):
-	tokens_filtrados = [token for token in tokens if token not in spanish_stopwords]
-	return tokens_filtrados
-
-#Funcion para reducir una palabra a su raiz
-def stem_tokens(tokens, stemmer):
-	stemmed = []
-	for item in tokens:
-		stemmed.append(stemmer.stem(item))
-	return stemmed
-
-#Funcion para generar tokens a partir del texto
-def tokenize(text):
-	#Remover la puntuación
-	text = ''.join([c for c in text if c not in non_words])
-	#Remover caracteres repetidos
-	text = re.sub(r'(.)\1+', r'\1\1', text)
+	#Guardamos las opiniones
+	opiniones = ""
+	
+	for cuestionario in cuestionarios:
+		#Convertir a minusculas
+		opiniones += str(cuestionario.r12).lower()
+		opiniones += " "
+	#Remover la puntuación y caracteres especiales
+	text = ''.join([c for c in opiniones if c not in non_words])
 	#Generar tokens
 	tokens = word_tokenize(text)
+	#Removemos stopwords
+	tokensFiltrados = [token for token in tokens if token not in spanish_stopwords]
+	#Corregimos palabras sintactica y sematicamente
+	tokensCorregidos = removerCaracteresRepetidos(tokensFiltrados)
+	cadenaTokens = " ".join(tokensCorregidos)
+	#Lematizamos los tokens
+	tokensLematizados = lematizar(cadenaTokens)
 
-	#Stemming
-	try:
-		stems = stem_tokens(tokens, stemmer)
-	except Exception as e:
-		print(e)
-		print(text)
-		stems = ['']
+	return tokensLematizados
 
-	return stems
+#Esta función corrige palabras sintactica y semanticamente considerando su significado
+def removerCaracteresRepetidos(tokens):
+	patronRepetido = re.compile(r'(\w*)(\w)\2(\w*)')
+	sustitucion = r'\1\2\3'
+	
+	def reemplazar(palabraAntigua):
+		if wordnet.synsets(palabraAntigua,lang="spa"):
+			return palabraAntigua
+		nuevaPalabra = patronRepetido.sub(sustitucion, palabraAntigua)
+		return reemplazar(nuevaPalabra) if nuevaPalabra != palabraAntigua else nuevaPalabra
+	
+	tokensCorregidos = [reemplazar(palabra) for palabra in tokens]
+	return tokensCorregidos
+
+#Esta función lematiza los tokens
+def lematizar(texto):
+	nlp = spacy.load('es') 
+	doc = nlp(texto)
+	return [palabra.lemma_ for palabra in doc]
+
+def etiquetarTokens(tokens, dic):
+	diccionarioSEL = {}
+	diccionarioFull = {}
+	diccionarioMedium = {}
+
+	def etiquetarSEL(token):
+		#Se abre el diccionario SEL de sentimeintos y se guarda
+		with open('evaluaciones/static/dictionaries/SEL.txt','r') as diccionarioSentimientos:
+			for palabra in diccionarioSentimientos:
+				if (diccionarioSEL.get(palabra.split("	")[0]) != None):
+					if (diccionarioSEL.get(palabra.split("	")[0])[1] < float(palabra.split("	")[1])):
+						diccionarioSEL.update({palabra.split("	")[0] : [palabra.split("	")[2], float(palabra.split("	")[1])]})
+				else:
+					diccionarioSEL.update({palabra.split("	")[0] : [palabra.split("	")[2], float(palabra.split("	")[1])]})
+
+		if (diccionarioSEL.get(token) != None):
+			return diccionarioSEL.get(token)
+		else:
+			return "None"
+
+	def etiquetarFull(token):
+		#Se abre el diccionario fullStrengthLexicon de sentimeintos y se guarda
+		with open('evaluaciones/static/dictionaries/fullStrengthLexicon.txt','r') as diccionarioFullS:
+			for palabra in diccionarioFullS:
+				diccionarioFull.update({palabra.split("	")[0] : palabra.split("	")[2]})
+
+		if (diccionarioFull.get(token) != None):
+			return diccionarioFull.get(token)
+		else:
+			return "None"
+
+	def etiquetarMedium(token):
+		#Se abre el diccionario mediumStrengthLexicon de sentimeintos y se guarda
+		with open('evaluaciones/static/dictionaries/mediumStrengthLexicon.txt','r') as diccionarioM:
+			for palabra in diccionarioM:
+				diccionarioMedium.update({palabra.split("	")[0] : palabra.split("	")[2]})
+
+		if (diccionarioMedium.get(token) != None):
+			return diccionarioMedium.get(token)
+		else:
+			return "None"
+
+	if dic == 1:
+		etiquetasTokens = [etiquetarSEL(token) for token in tokens]
+	elif dic == 2:
+		etiquetasTokens = [etiquetarFull(token) for token in tokens]
+	else:
+		etiquetasTokens = [etiquetarMedium(token) for token in tokens]
+	return etiquetasTokens

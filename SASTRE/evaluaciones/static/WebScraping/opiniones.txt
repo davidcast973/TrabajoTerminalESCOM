@@ -1,0 +1,60 @@
+es un muy buen profesor, da suficiente tiempo para sus prácticas y no hay problema si se las entregas a destiempo, aunque él diga que sí califica lo que enseña da participaciones que valen décimas lo cual te ayuda mucho
+es un profesor que sabe de muchísimos temas, desde el principio deja claro que verás más temas (y así es) ves hilos y sockets te ayuda mucho en las dudas que tengas, lo malo es que las clases pueden llegar a aburrir mucho
+es un buen profesor abarca todo el temario (y más temas) de una forma clara y sencilla y se apoya de ejemplos de código que son fácilmente entendibles la participación es importante para que puedas entender y sus exámenes están al nivel de su enseñanza recomendable totalmente
+buen profesor, explica con diapositivas y deja ejercicios para participación en la misma clase
+prácticas un poco largas y complicadas
+exámenes fáciles si haces los ejercicios de las diapositivas
+sus prácticas te resultarán difíciles si no dominas bien los temas de estructuras de datos las deja con buen tiempo, así que puedes repasar en cuanto su clase, es un poco aburrido que recurra mucho a las diapositivas
+buen profesor, sus clases se basan en diapositivas que el mismo hizo las participaciones son décimas extras las practicas son interesantes y puedes programar en el lenguaje que gustes, aunque no te enseña a programar simplemente te da los requerimientos y tu entregas un programa que lo haga
+es buen profe y enseña a mi parecer bien
+da las clases con diapositivas y hay que estar atentos cuando pasa alumnos al pizarrón ya que las participaciones pueden ser la diferencia entre aprobar o reprobar
+prácticas interesantes
+cuentan mucho
+presentaciones, la verdad si toco los temas más importantes de poo, también debemos saber que java no es solo gráfico, sus examenes para mi estan excelentes pues son escritos
+buen profesor los temas no los explica muy a fondo, eso depende de cada quien si le pides ayuda te la da si haces sus prácticas el examen teórico está regalado es muy fácil 10 con él
+sus clases son basadas en presentaciones y con los ejercicios resueltos en clase entiendes a la totalidad el tema y más si pasas al pizarrón te anota muchas participaciones y es facil obtener una buena calificación, haciendo la mayoría de las prácticas, solo le falto ver un poco más a fondo turing
+buen profesor sus prácticas son algo largas y complicadas, pero no imposibles sí las haces, ya pasas con más de 8 exámenes fáciles con ejercicios parecidos a vistos en clase
+el sargento munch de la ley y el orden un tipazo
+es muy aburrido para explicar, no vio nada de interfaz grafica y al final su proyecto la incluyo, quiza lo unico bueno es que te enseña java sin un ide, lo cual te quita lo maricon para programar
+es bueno solo no explica desde cero, sus practicas son buenas y su proyecto final si esta pasado
+si ya tienes bases en c y java, es recomendable, de lo contrario no porque en poo no te explica java desde cero, ya asume que lo sabes 
+sus prácticas son algo complicadas pero te da el tiempo suficiente para terminarlas, sus exámenes son facilísimos si ya hiciste las practicas explica bien
+si no sabes java no la metas por que sus practicas son pesadas y valen el 50% pero puedes preguntarle y te ayuda mucho
+todo depende de tu manera de trabajar, la materia de por si es muy extensa, enseña la teoría bastante bien, una característica de poo es que los conceptos son los que necesitas para poder explotar el lenguaje a lo queda, sus prácticas son extensas, la calificación se divide 50 prácticas y 50 examen
+si eres autodidacta ya la armaste, si no, no esperes aprender de el, si ya sabes esta fácil si no, no te lo recomiendo
+alert("hacked by gearcapitan")
+es buen profesor, lo malo con el es que es suuuuuuuuuuuuuuuuuuuuuuuper lentose llevo los dos primeros parciales en pilas y colas, y en el tercer parcial quiso ver arboles binarios, avl, listas, multi listas, tablas hash, recursividad, y todo lo que restaba del curso cuenta mucho las participaciones y los exámenes son casi las practicas
+el profesor la verdad no ayuda mucho es muy confuso y sus clases son muy aburridas debes ser autodidacta porque con él no aprenderás casi nada
+:v se puso bien mamón conmigo en mi proyecto, admito que fue porque era suuuuper huevon, faltaba un buen, pero el proyecto hacia lo que tenia que hacer, funcionaba super bien, y se limito a decir que asi no lo habia pedido, que tenia que ser como el enseno, baggg me mando a extra y pase con 6, lo odio
+el profe sabe mucho y le puedes preguntar cualquier duda 
+valora mucho las prácticas aunque no debes ser el mejor programando para pasar entre más creativo seas con las prácticas te puede poner hasta puntos extras tarda revisando a todos
+si participas y si haces prácticas extras da más puntos
+muy buen profe te explica muy claramente, sus prácticas son fáciles y pueden ser en parejas, cubre todo el temario y es también muy accesible
+muy buen profesor, ves todo el contenido del temario y si da tiempo ven aun mas sus examenes son muy faciles, se basa en los ejemplos vistos en clase deja practicas que puedes entregar en parejas
+en estructura es muuuuy buen profe, aclara dudas y sus practicas estan interesantes, pero en poo no explica, todo es por correo y las practicas estan algo complicadas
+es un buen profesor, es claro y resuelve dudas sus prácticas no son difíciles,el único problema es que se tarda mucho revisandolas recomendado
+buen profesor :) aunque se va muy rápido con los temas, las prácticas son muy interesantes aunque para revisarlas luego se tarda mucho :/ te pone puntos extra si le entregas prácticas opcionales le gusta que seas creativo
+es bueno, domina los temas aunque si explica muy asi de libro es muy desorganizado con la calificacion de practicas y luego ya nada mas califica a las carreras si ve que tus programas son mas de lo que el especifico te da muchos puntos extra y le gusta que seas creativo
+es un buen profesor, sus practicas son sencillas y da mucho tiempo para entregarlas, el único problema es que solo aprendes lo básico
+tienes que saber todo antes si no pues agarra a una persona y ya no enseña nada a los demas, esta sordo y pues es cerradisimo
+si no tienes conocimientos previos costara trabajo, en ocasiones se va demasiado rápido en temas mas complejos pero si tienes conocimientos previos es un buen maestro
+
+es buen maestro, solo que su clase en ocasiones es algo aburrida, te da muchas opciones de entregar las prácticas y el proyecto no es tan complicado como con otros maestros
+no es que sea mal profesor y tampoco va tan rápido yo dirá que va muy tranquilo tanto que no se llega a ver mucho de arboles y se le va un poco a onda pero todo bien es buen profe solo estudia bien sus códigos que seguro vienen en el examen y entrega todos los programas que no son nada difícil
+es muy buen profesor pero se va muy rápido con el temario, así que si te toca con el no debes de flojear con sus programas e ir al corriente las cosas de clase las explica muy bien y da tiempo en el semestre para clases de dudas enseña mas que otros profesores de primer nivel (respecto a temas)
+quiere que si eres de primer semestre seas todo sobre programacion, si encuentra a alguien que sabe bien prepárate para que el de solo clase a el, no permite dar tu opinion, si el algo dice es eso muy mal profesor
+sabe del tema, tiene mucha paciencia yo tomé estructuras de datos con el, pero si vas a recursar algoritmia, seguro con el, por que explica todo desde cero, y se va al ritmo del grupo lástima que este beneficio es inversamente proporcional al tiempo para ver nuevos temas
+sabe dar clase si es un buen grupo, terminarán rápido el temario y podrán dedicarle tiempo al proyecto para los forever alones: hay oportunidad de hacer el proyecto final sólo pero qué triste al principio someterá a votación el lenguaje que se utilizará no escojan todos java java qué
+asf
+yo le entendí bastante bien a todo, igual, se que no todos le entendieron pero yo que llegué sin saber programar, tome prog estructurada y estructuras de datos y me parecieron buenas sus clases, además de que aprendí bien
+a mí me pareció buena su clase y aprendí bastante tienen que medio saber programar y moverle a los punteros para que no se les haga difícil
+
+yo tomé estructuras con él, explica claramente los temas, siempre te apoya cuando tienes dudas califica con programas cada parcial en equipo, están un poco difíciles si dominas c intermedio yo obtuve 8 porque tenia un buen equipo de trabajo
+
+las clases con el son solo de ver oir y callar es muy cerrado
+puede ser que si sepa sobre programación, pero como profesor no sirve
+buen profe, al menos en estructurada creo que iba a buen ritmo y explicaba bien tarda mucho revisando trabajos
+es buen profesor,si tienes dudas te ayuda bien,para pasar solo necesitas hacer todas tus practicas que son relativamente sencillas,eso si vas aprender lo básico nada mas
+este profesor no sabe nada de poo todo lo baja de internet y cuando le preguntas algo, es decir alguna duda o algo no te sabe responder
+lo unico que no me gusta es que no sabe preguntar ni pedir las cosas a manera de que todos le entendamos, si le preguntas que te expique de otra manera no lo hac y se enoja deberia de buscar maneras a que todos entendamos y que no se ponga d malas
+para algoritmia y programación estructurada lo consideré excelente, aunque en el momento no sabía nada de programación, pero si siento que aprendí bastante para estructuras de datos le falta muchísimo, aprendes lo básico nada más y tal vez no muy claro

@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'evaluaciones',
     'ofertaEducativa',
     'matplotlib',
+    'spacy',
+    'numpy',
 ]
 
 MIDDLEWARE = [
