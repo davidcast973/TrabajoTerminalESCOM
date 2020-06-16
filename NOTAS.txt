@@ -58,6 +58,15 @@ Documentación:
 - Crear entorno virtual "sastreenv"
 - Hacer usuario ssastre y base de datos ttsastre para conectar y migrar los datos.
 
+---------- Migrar proyecto a un nuevo PC
+
+model = gensim.models.KeyedVectors.load_word2vec_format('sbw_vectors.bin', binary=True)
+	Ej.	model['persona']
+
+from sklearn.metrics.pairwise import cosine_similarity as cs
+
+	Ej.	cs([model['videjuego'],model['juego']+model['video']])[0][1]
+
 **************************************************  OSCAR  **************************************************
 
 Comandos
