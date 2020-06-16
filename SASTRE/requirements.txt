@@ -6,3 +6,4 @@ gensim
 nltk
 matplotlib
 spacy
+scikit-learn
