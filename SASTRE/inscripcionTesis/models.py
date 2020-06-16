@@ -9,10 +9,12 @@ class Tesis(models.Model):
 			* Los nombres de los involucrados: alumno, directores y miembros del comite tutorial 
 	"""
 
-	nombreTesis= models.CharField(max_length= 100)
-	alumno= models.ForeignKey(Alumno, on_delete= models.CASCADE, null=True)
-	nombreTesis= models.CharField(max_length= 100)
-	directores= models.ManyToManyField(Profesor)
+	idTesis= models.AutoField(primary_key=True)
+	nombreTesis= models.CharField("Titulo de la tesis",max_length= 500, default= "")
+	alumno= models.CharField("Nombre del alumno autor",max_length= 100, default= "")
+	abstrac= models.CharField("Abstrac de la tesis",max_length=5000, default= "")
+	director1= models.CharField("Ingresar nombre de director 1", max_length=50, default= "")
+	director2= models.CharField("Ingresar nombre de director 2", max_length=50, default= "")
 
 	def __str__(self):
 		return str(self.nombreTesis)

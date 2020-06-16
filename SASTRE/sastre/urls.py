@@ -22,7 +22,7 @@ urlpatterns = [
     path('', LoginView.as_view(template_name='registration/login.html')),
     path('admin/', admin.site.urls),
     path('usuario/', include('usuario.urls')),
-    path('inscripcionTesis/', include('inscripcionTesis.urls')),
+    path('tesis/', include('inscripcionTesis.urls')),
     path('evaluaciones/', include('evaluaciones.urls')),
 
     # Add Django site authentication urls (for login, logout, password management)

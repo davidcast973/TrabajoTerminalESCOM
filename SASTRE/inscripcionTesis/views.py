@@ -13,3 +13,11 @@ class inscripcionTesisInicio(View):
 
 	def post(self, request, *args, **kwargs):
 		return render(request, self.template_name)
+
+class vertesis(View):
+	template_name = "tesis/vertesis.html"
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name)
+
+	def post(self, request, *args, **kwargs):
+		return render(request, self.template_name)
