@@ -7,3 +7,6 @@ db.sqlite3
 .DS_Store
 .idea
 /.idea
+SASTRE/embeddings-l-model.bin
+
+SASTRE/sbw_vectors.bin
