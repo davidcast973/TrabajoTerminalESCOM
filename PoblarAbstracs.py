@@ -1,5 +1,17 @@
+"""
+Hay que descargar primero los Stopwords antes de seleccionar el idioma español con:
+   nltk.download('stopwords')
+"""
+
+from nltk.corpus import stopwords
+from nltk import word_tokenize
 from inscripcionTesis.models import Tesis as T
 import pickle as p
+
+#AQUI SE NECESITA PRIMERO LA DESCARGA
+spanish_stopwords= stopwords.words('spanish')
+
+
 
 file= open('../Resumenes.pickle','rb')
 resumenes= p.load(file)
