@@ -58,7 +58,7 @@ Documentación:
 - Crear entorno virtual "sastreenv"
 - Hacer usuario ssastre y base de datos ttsastre para conectar y migrar los datos.
 
----------- Migrar proyecto a un nuevo PC
+---------- Utilizar Word2Vec
 
 model = gensim.models.KeyedVectors.load_word2vec_format('sbw_vectors.bin', binary=True)
 	Ej.	model['persona']
