@@ -64,6 +64,8 @@ import gensim
 model = gensim.models.KeyedVectors.load_word2vec_format('sbw_vectors.bin', binary=True)
 	Ej.	model['persona']
 
+---------- Utilizar similitud coseno
+
 from sklearn.metrics.pairwise import cosine_similarity as cs
 
 	Ej.	cs([model['videjuego'],model['juego']+model['video']])[0][1]
