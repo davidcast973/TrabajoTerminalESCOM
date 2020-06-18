@@ -7,5 +7,5 @@ from inscripcionTesis.views import *
 
 urlpatterns = [
     path('inscripcionTesis', inscripcionTesisInicio.as_view(), name='inscripcionTesisInicio'),
-    path('vizualizarTesis', vertesis.as_view(), name='vertesis'),
+    path('vizualizarTesis', views.vertesis, name='vertesis'),
 ]
