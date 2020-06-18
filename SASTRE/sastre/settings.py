@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'usuario.apps.UsuarioConfig',
-    'fontawesome',
     'widget_tweaks',
     'inscripcionTesis',
     'evaluaciones',
