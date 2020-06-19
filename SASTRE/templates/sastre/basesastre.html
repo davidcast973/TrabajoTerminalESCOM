@@ -34,18 +34,26 @@
                         <li class="nav-item active">
                             <a class="nav-link text-light" href="{% url 'bienvenida' %}">Inicio<span class="sr-only">(current)</span></a>
                         </li>
+                        {% if tipoUsuario == 3 %}
                         <li class="nav-item active">
                             <a class="nav-link text-light" href="{% url 'crudInicio' %}">Administrar Perfiles<span class="sr-only">(current)</span></a>
                         </li>
+                        {% endif %}
+                        {% if tipoUsuario == 1 %}
                         <li class="nav-item active">
                             <a class="nav-link text-light" href="{% url 'inscripcionTesisInicio' %}">Inscribir Tesis<span class="sr-only">(current)</span></a>
                         </li>
+                        {% endif %}
+                        {% if tipoUsuario == 1 %}
                         <li class="nav-item active">
                             <a class="nav-link text-light" href="{% url 'evaluacionProfesorInicio' %}">Evaluación de profesores<span class="sr-only">(current)</span></a>
                         </li>
+                        {% endif %}
+                        {% if tipoUsuario == 2 %}
                         <li class="nav-item active">
                             <a class="nav-link text-light" href="{% url 'resultadoEvaluacionesInicio' %}">Resultado de evaluaciones<span class="sr-only">(current)</span></a>
                         </li>
+                        {% endif %}
                         <!--li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuenta</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -54,9 +62,11 @@
                                 <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
                             </div>
                         </li-->
+                        {% if tipoUsuario == 1 %}
                         <li class="nav-item active">
                             <a class="nav-link text-light" href="">Trayectoria Escolar<span class="sr-only">(current)</span></a>
                         </li>
+                        {% endif %}
                         <li class="nav-item active">
                             <a class="nav-link text-light" href="{% url 'logout' %}">Cerrar Sesión<span class="sr-only">(current)</span></a>
                         </li>
