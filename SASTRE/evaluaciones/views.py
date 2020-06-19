@@ -29,29 +29,43 @@ import os.path as path
 @login_required(login_url='/cuenta/login/')
 def evaluacionProfesorInicio(request):
 	user = request.user
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
 	if (Alumno.objects.filter(username= user).count()) > 0:		#Verifica si es un alumno
 		situacionEscolar = SituacionEscolar.objects.filter(usuario=user, evaluacionProfesor=False)
 		if (SituacionEscolar.objects.filter(usuario=user, evaluacionProfesor=False).count()) > 0:
-			return render(request, 'listadoMaterias.html', {'situacionEscolar': situacionEscolar})
+			return render(request, 'listadoMaterias.html', {'situacionEscolar': situacionEscolar, 'tipoUsuario': bandera})
 		else:
 			mensaje = "Ya has evaluado a todos tus profesores"
-		return render(request, 'listadoMaterias.html', {'mensaje': mensaje})
+		return render(request, 'listadoMaterias.html', {'mensaje': mensaje, 'tipoUsuario': bandera})
 	else:
 		mensaje = "Lo sentimos este módulo esta disponible solo para alumnos"
 		return render(request, 'listadoMaterias.html', {'mensaje': mensaje})
-	return render(request, 'listadoMaterias.html', {'mensaje': ['Se presento un error']})
+	return render(request, 'listadoMaterias.html', {'mensaje': ['Se presento un error'], 'tipoUsuario': bandera})
 
 @login_required(login_url='/cuenta/login/')
 def evaluarProfesor(request):
 	preguntas = Pregunta.objects.all()
 	user = request.user
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
 	if (Alumno.objects.filter(username= user).count()) > 0:		#Verifica si es un alumno
 		sitEscId = request.POST['profesorUDAId']
 		situacionEscolar = SituacionEscolar.objects.filter(usuario=user, pk=sitEscId)
-		return render(request, 'evaluarProfesor.html', {'preguntas': preguntas, 'situacionEscolar': situacionEscolar})
+		return render(request, 'evaluarProfesor.html', {'preguntas': preguntas, 'situacionEscolar': situacionEscolar, 'tipoUsuario': bandera})
 	else:
 		mensaje = "Lo sentimos este módulo esta disponible solo para alumnos"
-		return render(request, 'evaluarProfesor.html', {'mensaje': mensaje})
+		return render(request, 'evaluarProfesor.html', {'mensaje': mensaje, 'tipoUsuario': bandera})
 	return render(request, 'evaluarProfesor.html', {'mensaje': ["Se presento un error"]})
 
 @login_required(login_url='/cuenta/login/')
@@ -60,6 +74,13 @@ def materiasCursadas(request):
 
 @login_required(login_url='/cuenta/login/')
 def guardarEvaluacion(request):
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
 	materiaEvaluada = SituacionEscolar.objects.get(pk=request.POST['materiaInscritaId'])
 	materiaEvaluada.evaluacionProfesor = True
 	materiaEvaluada.save()
@@ -83,23 +104,37 @@ def guardarEvaluacion(request):
 	cuestionario = Cuestionario.objects.create_cuestionario(user, UA, profesorUDA, bandera, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)
 	cuestionario.save()
 	situacionEscolar = SituacionEscolar.objects.filter(usuario=user, evaluacionProfesor=False)
-	return render(request, 'listadoMaterias.html', {'situacionEscolar': situacionEscolar})
+	return render(request, 'listadoMaterias.html', {'situacionEscolar': situacionEscolar, 'tipoUsuario': bandera})
 
 @login_required(login_url='/cuenta/login/')
 def resultadoEvaluacionesInicio(request):
 	user = request.user
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
 	if (Profesor.objects.filter(username= user).count()) > 0:		#Verifica si es un profesor
 		profesorId = Profesor.objects.get(username=user)
 		materias = Cuestionario.objects.filter(profesorUDA=profesorId).distinct('UA')
-		return render(request, 'resultadoEvaluaciones.html', {'materias': materias})
+		return render(request, 'resultadoEvaluaciones.html', {'materias': materias, 'tipoUsuario': bandera})
 	else:
 		mensaje = "Lo sentimos este módulo esta disponible solo para profesores"
-		return render(request, 'resultadoEvaluaciones.html', {'mensaje': mensaje})
-	return render(request, 'resultadoEvaluaciones.html', {'materias': materias})
+		return render(request, 'resultadoEvaluaciones.html', {'mensaje': mensaje, 'tipoUsuario': bandera})
+	return render(request, 'resultadoEvaluaciones.html', {'materias': materias, 'tipoUsuario': bandera})
 
 @login_required(login_url='/cuenta/login/')
 def evaluacionDetalle(request):
 	user = request.user
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
 	if (Profesor.objects.filter(username= user).count()) > 0:		#Verifica si es un profesor
 		profesorId = Profesor.objects.get(username=user)
 		cuestionarios = Cuestionario.objects.filter(profesorUDA=profesorId, UA=request.POST['UAId'])
@@ -109,7 +144,7 @@ def evaluacionDetalle(request):
 		if not (path.exists("evaluaciones/static/img/graficaSEL.png")):
 			etiquetasXEmocion = [0,0,0,0,0,0]
 			noEtiquetasSEL = 0
-			sentimientos = ["Alegria","Enojo","Miedo","Repulsion","Tristesa","Sorpresa"]
+			sentimientos = ["Alegría","Enojo","Miedo","Repulsión","Tristeza","Sorpresa"]
 			etiquetasSEL = etiquetarTokens(tokensNormalizados,1)
 			for etiqueta in etiquetasSEL:
 				if etiqueta != "None":
@@ -296,20 +331,21 @@ def evaluacionDetalle(request):
 			plt.savefig('evaluaciones/static/img/grafica11.png')
 			plt.close()
 			respuestas = []
-		return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios, 'preguntas': preguntas, 'tokensNormalizados':tokensNormalizados, 'noTokens': noTokens})
+		return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios, 'preguntas': preguntas, 'tokensNormalizados':tokensNormalizados, 'noTokens': noTokens, 'tipoUsuario': bandera})
 	else:
 		mensaje = "Lo sentimos este módulo esta disponible solo para profesores"
-		return render(request, 'detalleEvaluacion.html', {'mensaje': mensaje})
-	return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios})
+		return render(request, 'detalleEvaluacion.html', {'mensaje': mensaje, 'tipoUsuario': bandera})
+	return render(request, 'detalleEvaluacion.html', {'cuestionarios': cuestionarios, 'tipoUsuario': bandera})
 
 #Esta función procesa el texto y lo normaliza para su posterior uso
 def normalizarTexto(cuestionarios):
-	#lista de stopwors a utilizar
+	#lista de stopwors a remover
 	spanish_stopwords  = stopwords.words('spanish')
-	#Para remover la puntuacion
+	#Lista con signos de puntuacion
 	non_words = list(punctuation)
 	#Agregamos puntuacion usada en el idioma español
 	non_words.extend(['¿','¡'])
+	#Agregamos los digitos del 0 al 9
 	non_words.extend(map(str,range(10)))
 	#Guardamos las opiniones
 	opiniones = ""

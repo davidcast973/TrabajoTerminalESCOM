@@ -19,7 +19,14 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/cuenta/login/')
 def bienvenida(request):
     usuario= Usuario.objects.get(username= request.user)
-    return render(request, 'bienvenida.html', {'usuario': usuario})
+    bandera = 1
+    if (Alumno.objects.filter(username= request.user).count()) > 0:
+        bandera = 1
+    elif (Profesor.objects.filter(username= request.user).count()) > 0:
+        bandera = 2
+    elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+        bandera = 3
+    return render(request, 'bienvenida.html', {'usuario': usuario, 'tipoUsuario': bandera})
 
 @login_required(login_url='/cuenta/login/')
 def crudInicio(request):
@@ -27,7 +34,14 @@ def crudInicio(request):
     formPA = PersonalAdminForm()
     formProf = ProfesorForm()
     formAlum = AlumnoForm()
-    return render(request, 'crud/crudInicio.html', {'formPA': formPA, 'formProf': formProf, 'formAlum': formAlum, 'mensaje': mensaje})
+    bandera = 1
+    if (Alumno.objects.filter(username= request.user).count()) > 0:
+        bandera = 1
+    elif (Profesor.objects.filter(username= request.user).count()) > 0:
+        bandera = 2
+    elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+        bandera = 3
+    return render(request, 'crud/crudInicio.html', {'formPA': formPA, 'formProf': formProf, 'formAlum': formAlum, 'mensaje': mensaje, 'tipoUsuario': bandera})
 
 #=======================   CRUD Personal Administrativo   =======================#
 class PAListado(ListView): 
