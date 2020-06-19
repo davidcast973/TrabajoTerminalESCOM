@@ -1,0 +1,73 @@
+{% extends 'tesis/baseInscripcionTesis.html' %}
+
+{% block btnVerTesis %}
+	<div class="col my-4">
+		<a type="button" class="btn btn-guinda" href="{% url 'inscripcionTesisInicio' %}">Volver</a>
+	</div>
+{% endblock btnVerTesis %}
+
+{% block cardBody %}
+	<div class="row justify-content-center">
+		<div class="col-7 input-group mb-4">
+			<input type="text" class="form-control" placeholder="Buscar tesis . . ." aria-label="Recipient's username" aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<button class="btn btn-guinda" type="button">Buscar</button>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+					</li>
+					{% for p in cantPag|slice:":5" %}
+						<li class="page-item"><a class="page-link" href="#">{{p}}</a></li>
+					{% endfor %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">...</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">Siguiente</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">Última</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		{% for tesis in allTesis|slice:":18" %}
+			<div class="card m-4" style="width: 18rem;">
+				<div class="card-body">
+					<h6 class="card-subtitle mb-2 text-muted">Título:</h6>
+					<p class="card-text">{{tesis.nombreTesis|title}}</p>
+					<h6 class="card-subtitle mb-2 text-muted">No. tesis: {{tesis.numeroTesis}}</h6>
+					<a href="#" class="card-link">Tomar Director(es)</a>
+					<a href="#" class="card-link">Ver detalles</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item disabled">
+				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+			</li>
+			{% for p in cantPag|slice:":5" %}
+				<li class="page-item"><a class="page-link" href="#">{{p}}</a></li>
+			{% endfor %}
+			<li class="page-item disabled">
+				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">...</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">Siguiente</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">Última</a>
+			</li>
+		</ul>
+	</nav>
+{% endblock %}

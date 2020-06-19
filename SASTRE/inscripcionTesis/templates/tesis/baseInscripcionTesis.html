@@ -1,17 +1,22 @@
 {% extends 'sastre/baseSastre.html' %}
-
 {% block title %}
-    Inscripción de Tesis
+	Inscripción de Tesis
 {% endblock %}
- 
 {% block body %}
 	<div class="row">
-		<div class="col-12 my-4">
+		<div class="col-2 my-4">
+		</div>
+		<div class="col-8 my-4">
 			<h1>Inscripción de Tesis</h1>
 		</div>
+		{% block btnVerTesis %}
+			<div class="col my-4">
+				<a type="button" class="btn btn-guinda" href="{% url 'vertesis' %}">Ver Tesis</a>
+			</div>
+		{% endblock btnVerTesis %}
 	</div>
-    <div class="card-body text-left">
-        {% block cardBody %}
-        {% endblock %}
-    </div> 
+	<div class="card-body text-left">
+		{% block cardBody %}
+		{% endblock %}
+	</div>
 {% endblock %}
