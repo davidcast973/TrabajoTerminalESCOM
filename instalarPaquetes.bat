@@ -25,6 +25,7 @@ REM Instalar las paqueterias necesarias que vienen descritas en requirements.txt
 pip list
 pip install -U setuptools
 pip install -U -r requirements.txt
+python -m spacy download es
 
 REM @ECHO OFF
 REM REM Sirve para poder usar los comando y migrar despues la BD.
