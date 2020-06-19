@@ -7,7 +7,7 @@
 {% load widget_tweaks %}
 
 {% block body %}
-    <h3 class="py-4 font-weight-bold">Creación de Personal Administrativo</h3>
+    <h3 class="py-4 font-weight-bold">Creación de Alumno</h3>
     <div class="card-body text-left">
         {% block cardBody %}
             <form method="post" enctype="multipart/form-data">
@@ -15,7 +15,7 @@
                 <!-- {{ form.as_p }} -->
                 <div class="form-row">
                     <div class="form-group col-6">
-                        <label for="username" class="font-weight-bold">No. Empleado</label>
+                        <label for="username" class="font-weight-bold">No. Matricula</label>
                         {{ form.username | add_class:"form-control" }}
                     </div>
                     <div class="form-group col-6">
