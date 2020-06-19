@@ -1,5 +1,4 @@
 from django.db import models
-from evaluaciones.models import Materia
 
 PAIS_OPCION= dict(
 	ALEMANIA= 'Alemania',
@@ -58,7 +57,7 @@ class Profesor(Usuario):
 		docstring for Profesor: 
 	"""
 
-	materias= models.ManyToManyField(Materia)
+	#materias= models.ManyToManyField(Materia)
 	#titulo= models.FileField(upload_to='uploads/', max_length=100)
 	cedula= models.CharField(max_length= 20)
 

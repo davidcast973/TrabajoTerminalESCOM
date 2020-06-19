@@ -1,0 +1,37 @@
+from django.contrib.auth.models import User
+from ofertaEducativa.models import *
+from usuario.models import *
+from evaluaciones.models import *
+import random 
+#Definimos el número de evaluaciones a generar
+n = 0
+u = User.objects.get(username="aura")
+ua = UnidadAprendizaje.objects.get(nombreUA="Diseño y análisis de algoritmos / Design and Analysis of Algorithms")
+p = Profesor.objects.get(username="oswaldo")
+b = True
+r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11 = 0
+r12 = ""
+
+for i in range(1,20):
+	archivo = "evaluaciones/static/WebScraping/opiniones" + str(i) + ".txt"
+	with open(archivo,'r') as f:
+		for linea in f:
+			if n < 20:
+				r1 = random.randint(1,5)
+				r2 = random.randint(1,5)
+				r3 = random.randint(1,5)
+				r4 = random.randint(1,5)
+				r5 = random.randint(1,5)
+				r6 = random.randint(1,5)
+				r7 = random.randint(1,5)
+				r8 = random.randint(1,5)
+				r9 = random.randint(1,5)
+				r10 = random.randint(1,5)
+				r11 = random.randint(1,5)
+				r12 = str(linea)
+				cuestionario = Cuestionario.objects.create_cuestionario(u, ua, p, b, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12)
+				cuestionario.save()
+			else:
+				break
+	if n = 19:
+		break

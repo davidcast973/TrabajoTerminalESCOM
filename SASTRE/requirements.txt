@@ -4,4 +4,6 @@ django-bootstrap4
 django-widget-tweaks
 gensim
 nltk
+matplotlib
+spacy
 scikit-learn

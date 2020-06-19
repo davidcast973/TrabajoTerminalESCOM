@@ -18,8 +18,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/cuenta/login/')
 def bienvenida(request):
-    #usuario= Usuario.objects.get(nombre= request.user)
-    return render(request, 'bienvenida.html') #, {'usuario': usuario})
+    usuario= Usuario.objects.get(username= request.user)
+    return render(request, 'bienvenida.html', {'usuario': usuario})
 
 @login_required(login_url='/cuenta/login/')
 def crudInicio(request):
