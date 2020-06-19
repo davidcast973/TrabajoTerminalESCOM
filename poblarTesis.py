@@ -4,51 +4,49 @@
 """
 
 import pickle as p # Serializar
-#from nltk.corpus import stopwords # Tokenizar
-from nltk import word_tokenize # Tokenizar
-from string import punctuation # Tokenizar
+#SWfrom nltk.corpus import stopwords # Tokenizar
+#SWfrom nltk import word_tokenize, download # Tokenizar
+#SWfrom string import punctuation # Tokenizar
 from inscripcionTesis.models import Tesis as T
 import gensim # Word2Vec
-#from sklearn.metrics.pairwise import cosine_similarity as cs # Similitud coseno
+from sklearn.metrics.pairwise import cosine_similarity as cs # Similitud coseno
 from datetime import datetime # Castear a fecha AAAA-MM-DD
+from os import system as os
 
 model = gensim.models.KeyedVectors.load_word2vec_format('sbw_vectors.bin', binary=True) # Word2Vec
+
+import pickle
 
 file= open('todasTesis.pickle','rb')
 resumenes= p.load(file)
 file.close()
 
-#nltk.download('stopwords') #Descargar elementos necesarios para el filtrado de stopwords
-#spanish_stopwords= stopwords.words('spanish')
+#SWdownload('stopwords') #Descargar elementos necesarios para el filtrado de stopwords
+#SWspanish_stopwords= stopwords.words('spanish')
 
-#Para remover la puntuacion
 non_words = list(punctuation)
-#Agregamos puntuacion usada en el idioma español
 non_words.extend(['¿','¡','\n','\r'])
 non_words.extend(map(str,range(10)))
 
-#cont= 0
 for x in resumenes:
    texto= list()
-   for c in x[4]:
+   for c in text:
       if c not in non_words:
          texto.append(c)
       elif c == '\n':
          texto.append(' ')
+
    caracteres= ''.join(texto)
-   #AQUI SE NECESITA PRIMERO LA DESCARGA
    tokens = word_tokenize(caracteres)
-   #tokens_filtrados = [token for token in tokens if token not in spanish_stopwords]
+   #SWtokens_filtrados = [token for token in tokens if token not in spanish_stopwords]
+   #SWtokens = tokens_filtrados
    if not tokens:
       w2v= ','.join([str(0) for x in range(300)])
    else:
       w2v= [0 for x in range(300)]
       for w in tokens:
-         #print(len(tokens),tokens)
-         #print(len(w2v),w2v)
          if w in model:
             w2v+= model[w]
-   print(len(w2v),w2v)
    tesis= T()
    tesis.numeroTesis= int(x[0]) if x[0]!= '' else 0
    tesis.nombreTesis= x[1] if x[1]!= '' else ""
@@ -73,7 +71,3 @@ for x in resumenes:
    #tesis.diaCreacion= x[5] if x[5]!= '' else '1920-01-01'
    tesis.valorW2V= ','.join([str(w) for w in w2v])
    tesis.save()
-#   if cont<2:
-#      cont+= 1
-#   else:
-#      break
