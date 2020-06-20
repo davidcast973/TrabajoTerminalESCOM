@@ -1,90 +1,121 @@
 {% extends 'tesis/baseInscripcionTesis.html' %}
-
 {% block cardBody %}
-    <form>
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8">
-                <label for="inlineFormInputGroup"><h5>Título de tesis</h5></label>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Título propuesto para la tesis" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-guinda" type="button">Buscar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2"></div>
-        </div>
-    </form>
-    <form class="mt-5 mx-3">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputDirector"><h5>Directores Sugeridos</h5></label>
-                <fieldset disabled>
-                    <select id="inputDirector" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </fieldset>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputDirector"><h5>Comite Tutorial</h5></label>
-                <fieldset disabled>
-                    <select id="inputComTut" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </fieldset>
-            </div>
-        </div>
-    </form>
-    <h5 class="mt-4 mx-3">Directores</h5>
-    <div class="row container ml-3">
-        <div class="input-group my-3">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">1</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Director 1" aria-label="Director 1" aria-describedby="basic-addon2">
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">2</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Director 2" aria-label="Director 2" aria-describedby="basic-addon2">
-        </div>
-    </div>
-    <h5 class="mt-4 mx-3">Comite Tutorial</h5>
-    <div class="row container mx-3">
-        <div class="input-group my-3">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">1</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Integrante 1" aria-label="Integrante 1" aria-describedby="basic-addon2">
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">2</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Integrante 2" aria-label="Integrante 2" aria-describedby="basic-addon2">
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">3</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Integrante 3" aria-label="Integrante 3" aria-describedby="basic-addon2">
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">4</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Integrante 4" aria-label="Integrante 4" aria-describedby="basic-addon2">
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">5</span>
-            </div>
-            <input type="text" class="form-control" placeholder="Integrante 5" aria-label="Integrante 5" aria-describedby="basic-addon2">
-        </div>
-    </div>
-    <a href="#" class="text-secondary">Mostrar todos los profesores</a>
+	<form method="post" action="{% url 'tesisSimilares' %}">
+		{% csrf_token %}
+		<div class="row">
+			<div class="col-2"></div>
+			<div class="col-8">
+				<label for="inlineFormInputGroup"><h5>Título de tesis</h5></label>
+				<div class="input-group mb-3">
+					<input type="text" name="tituloPropuesto" class="form-control" placeholder="{% if not tituloPropuesto %}Título propuesto para la tesis{% endif %}" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{% if tituloPropuesto %}{{tituloPropuesto}}{% endif %}">
+					<div class="input-group-append">
+						<button class="btn btn-guinda" type="submit">Buscar</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-2"></div>
+		</div>
+	</form>
+	<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarProfesor' %}">
+		{% csrf_token %}
+		<div class="form-row">
+			<div class="col"></div>
+			<div class="form-group col-md-7">
+				<label for="inputDirector"><h5>Profesores Sugeridos</h5></label>
+				{% if not tituloPropuesto %}
+					<fieldset disabled="">
+					{% endif %}
+					<select id="profesorSeleccionado" name="profesorSeleccionado" class="form-control">
+						<option value="0" selected="">Elije un profesor...</option>
+						{% for s in sugerencias %}
+							<option
+								{% for valor in s %}
+									{% if forloop.counter == 2 %}
+										value="{{valor}}"
+									{% endif %}
+									{% if forloop.counter == 3 %}
+										> {{valor}}
+									{% endif %}
+								{% endfor %}
+							</option>
+						{% endfor %}
+					</select>
+					{% if not tituloPropuesto %}
+					</fieldset>
+				{% endif %}
+			</div>
+			<div class="col"></div>
+		</div>
+		{% if tituloPropuesto %}
+			<div class="row">
+				<div class="col"></div>
+				<div class="col-2 align-self-center">
+					<div class="input-group-append">
+						<button class="btn btn-guinda" type="submit">Agregar como director</button>
+					</div>
+				</div>
+				<div class="col-2 align-self-center">
+					<div class="input-group-append">
+						<button class="btn btn-guinda" type="submit">Agregar como miebro del Comité Tutorial</button>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		{% endif %}
+		<div class="input-group input-group-sm mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+			</div>
+			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="PRUEBAINPUTDIRECTOR" value="Que perro">
+		</div>
+	</form>
+	<h5 class="mt-4 mx-3">Directores</h5>
+	<div class="row container ml-3">
+		<div class="input-group my-3">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">1</span>
+			</div>
+			<input disabled="" type="text" class="form-control" placeholder="{% if not profesor %}Director 1{% else %}{{profesor}}{% endif %}" aria-label="Director 1" aria-describedby="basic-addon2">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">2</span>
+			</div>
+			<input disabled="" type="text" class="form-control" placeholder="Director 2" aria-label="Director 2" aria-describedby="basic-addon2">
+		</div>
+	</div>
+	<h5 class="mt-4 mx-3">Comite Tutorial</h5>
+	<div class="row container mx-3">
+		<div class="input-group my-3">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">1</span>
+			</div>
+			<input type="text" class="form-control" placeholder="Integrante 1" aria-label="Integrante 1" aria-describedby="basic-addon2">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">2</span>
+			</div>
+			<input type="text" class="form-control" placeholder="Integrante 2" aria-label="Integrante 2" aria-describedby="basic-addon2">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">3</span>
+			</div>
+			<input type="text" class="form-control" placeholder="Integrante 3" aria-label="Integrante 3" aria-describedby="basic-addon2">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">4</span>
+			</div>
+			<input type="text" class="form-control" placeholder="Integrante 4" aria-label="Integrante 4" aria-describedby="basic-addon2">
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-append">
+				<span class="input-group-text" id="basic-addon2">5</span>
+			</div>
+			<input type="text" class="form-control" placeholder="Integrante 5" aria-label="Integrante 5" aria-describedby="basic-addon2">
+		</div>
+	</div>
+	<a href="#" class="text-secondary">Mostrar todos los profesores</a>
 {% endblock %}

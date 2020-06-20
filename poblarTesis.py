@@ -4,9 +4,9 @@
 """
 
 import pickle as p # Serializar
-#SWfrom nltk.corpus import stopwords # Tokenizar
-#SWfrom nltk import word_tokenize, download # Tokenizar
-#SWfrom string import punctuation # Tokenizar
+from nltk.corpus import stopwords # Tokenizar
+from nltk import word_tokenize, download # Tokenizar
+from string import punctuation # Tokenizar
 from inscripcionTesis.models import Tesis as T
 import gensim # Word2Vec
 from sklearn.metrics.pairwise import cosine_similarity as cs # Similitud coseno
@@ -15,14 +15,12 @@ from os import system as os
 
 model = gensim.models.KeyedVectors.load_word2vec_format('sbw_vectors.bin', binary=True) # Word2Vec
 
-import pickle
-
 file= open('todasTesis.pickle','rb')
 resumenes= p.load(file)
 file.close()
 
-#SWdownload('stopwords') #Descargar elementos necesarios para el filtrado de stopwords
-#SWspanish_stopwords= stopwords.words('spanish')
+#QUITARSTOPdownload('stopwords') #Descargar elementos necesarios para el filtrado de stopwords
+#QUITARSTOPspanish_stopwords= stopwords.words('spanish')
 
 non_words = list(punctuation)
 non_words.extend(['¿','¡','\n','\r'])
@@ -38,8 +36,8 @@ for x in resumenes:
 
    caracteres= ''.join(texto)
    tokens = word_tokenize(caracteres)
-   #SWtokens_filtrados = [token for token in tokens if token not in spanish_stopwords]
-   #SWtokens = tokens_filtrados
+#QUITARSTOP   tokens_filtrados = [token for token in tokens if token not in spanish_stopwords]
+#QUITARSTOP   tokens = tokens_filtrados
    if not tokens:
       w2v= ','.join([str(0) for x in range(300)])
    else:
