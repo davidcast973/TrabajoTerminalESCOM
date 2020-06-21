@@ -1,5 +1,6 @@
 {% extends 'tesis/baseInscripcionTesis.html' %}
 {% block cardBody %}
+	<h1> {{numPaso}} </h1>
 	<form method="post" action="{% url 'tesisSimilares' %}">
 		{% csrf_token %}
 		<div class="row">
@@ -16,18 +17,17 @@
 			<div class="col-2"></div>
 		</div>
 	</form>
-	<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarProfesor' %}">
-		{% csrf_token %}
-		<div class="form-row">
-			<div class="col"></div>
-			<div class="form-group col-md-7">
-				<label for="inputDirector"><h5>Profesores Sugeridos</h5></label>
-				{% if not tituloPropuesto %}
-					<fieldset disabled="">
-					{% endif %}
-					<select id="profesorSeleccionado" name="profesorSeleccionado" class="form-control">
+	{% if numPaso == 2 %}
+		<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarDirector1' %}">
+			{% csrf_token %}
+			<div class="form-row">
+				<div class="col-3"></div>
+				<div class="col-4 form-group">
+					<input hidden="" type="text" name="tituloPropuesto2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+					<label for="inputDirector"><h5>Primer Director *</h5></label>
+					<select id="director1Seleccionado" name="director1Seleccionado" class="form-control">
 						<option value="0" selected="">Elije un profesor...</option>
-						{% for s in sugerencias %}
+						{% for s in top10 %}
 							<option
 								{% for valor in s %}
 									{% if forloop.counter == 2 %}
@@ -40,35 +40,67 @@
 							</option>
 						{% endfor %}
 					</select>
-					{% if not tituloPropuesto %}
-					</fieldset>
-				{% endif %}
+				</div>
+				<div class="col-2 align-self-center">
+					<br>
+					<div class="input-group-append">
+						<button class="btn btn-guinda" type="submit">Agregar director</button>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="row">
+				<div class="col-3">
+					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+				</div>
+			</div> -->
+		</form>
+	</div>
+	{% elif numPaso == 3 %}
+	<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarDirector2' %}">
+		{% csrf_token %}
+		<div class="form-row">
+			<div class="col-3"></div>
+			<div class="col-4 form-group">
+				<input hidden="" type="text" name="tituloPropuesto3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+				<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
+				<label for="inputDirector"><h5>Segundo Director</h5></label>
+				<select id="director2Seleccionado" name="director2Seleccionado" class="form-control">
+					<option value="0" selected="">Elije un profesor...</option>
+					{% for s in top10 %}
+						<option
+							{% for valor in s %}
+								{% if forloop.counter == 2 %}
+									value="{{valor}}"
+								{% endif %}
+								{% if forloop.counter == 3 %}
+									> {{valor}}
+								{% endif %}
+							{% endfor %}
+						</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="col-2 align-self-center">
+				<br>
+				<div class="input-group-append">
+					<button class="btn btn-guinda" type="submit">Agregar director</button>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="row">
+			<div class="col-3">
+				<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
 			</div>
 			<div class="col"></div>
-		</div>
-		{% if tituloPropuesto %}
-			<div class="row">
-				<div class="col"></div>
-				<div class="col-2 align-self-center">
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar como director</button>
-					</div>
-				</div>
-				<div class="col-2 align-self-center">
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar como miebro del Comité Tutorial</button>
-					</div>
-				</div>
-				<div class="col"></div>
+			<div class="col-3">
+				<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
+					{% csrf_token %}
+					<button type="submit" class="btn btn-link">Omitir segundo director</button>
+				</form>
 			</div>
-		{% endif %}
-		<div class="input-group input-group-sm mb-3">
-			<div class="input-group-prepend">
-				<span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
-			</div>
-			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="PRUEBAINPUTDIRECTOR" value="Que perro">
-		</div>
+		</div> -->
 	</form>
+	{% elif numPaso == 4 %}
 	<h5 class="mt-4 mx-3">Directores</h5>
 	<div class="row container ml-3">
 		<div class="input-group my-3">
@@ -117,5 +149,5 @@
 			<input type="text" class="form-control" placeholder="Integrante 5" aria-label="Integrante 5" aria-describedby="basic-addon2">
 		</div>
 	</div>
-	<a href="#" class="text-secondary">Mostrar todos los profesores</a>
+{% endif %}
 {% endblock %}

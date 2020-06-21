@@ -9,5 +9,7 @@ urlpatterns = [
     path('vizualizarTesis', views.vertesis, name='vertesis'),
     path('inscripcionTesis', views.inscripcionTesisInicio, name='inscripcionTesisInicio'),
     path('tesisSimilares', views.tesisSimilares, name='tesisSimilares'),
-    path('seleccionarProfesor', views.seleccionarProfesor, name='seleccionarProfesor'),
+    path('omitirProfesor', views.omitirProfesor, name='omitirProfesor'),
+    path('seleccionarDirector1', views.seleccionarDirector1, name='seleccionarDirector1'),
+    path('seleccionarDirector2', views.seleccionarDirector2, name='seleccionarDirector2'),
 ]
