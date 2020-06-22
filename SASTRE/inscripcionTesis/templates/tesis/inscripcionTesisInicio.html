@@ -1,425 +1,437 @@
 {% extends 'tesis/baseInscripcionTesis.html' %}
 {% block cardBody %}
 	<!-- <h1> {{numPaso}} </h1> -->
-	<form method="post" action="{% url 'tesisSimilares' %}">
-		{% csrf_token %}
+	{% if tesisInscrita %}
 		<div class="row">
-			<div class="col-2"></div>
-			<div class="col-8">
-				<label for="inlineFormInputGroup"><h5>Título de tesis</h5></label>
+			<div class="col"></div>
+			<div class="col-4">
+				<h3 class="">Ya haz registrado tu tesis</h3>
+			</div>
+			<div class="col"></div>
+		</div>
+	{% else %}
+		<form method="post" action="{% url 'tesisSimilares' %}">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-2"></div>
+				<div class="col-8">
+					<label for="inlineFormInputGroup"><h5>Título de tesis</h5></label>
+					<div class="input-group mb-3">
+						<input type="text" name="tituloPropuesto" class="form-control" placeholder="{% if not tituloPropuesto %}Título propuesto para la tesis{% endif %}" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{% if tituloPropuesto %}{{tituloPropuesto}}{% endif %}">
+						<div class="input-group-append">
+							<button class="btn btn-guinda" type="submit">Buscar</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-2"></div>
+			</div>
+		</form>
+		{% if numPaso == 2 %}
+			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarDirector1' %}">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-3"></div>
+					<div class="col-4 form-group">
+						<input hidden="" type="text" name="tituloPropuesto2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+						<label for="inputDirector"><h5>Primer Director *</h5></label>
+						<select id="director1Seleccionado" name="director1Seleccionado" class="form-control">
+							<option value="0" selected="">Elije un profesor...</option>
+							{% for s in top10 %}
+								<option
+									{% for valor in s %}
+										{% if forloop.counter == 2 %}
+											value="{{valor}}"
+										{% endif %}
+										{% if forloop.counter == 3 %}
+											> {{valor}}
+										{% endif %}
+									{% endfor %}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2 align-self-center">
+						<br>
+						<div class="input-group-append">
+							<button class="btn btn-guinda" type="submit">Agregar director</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+							<div class="col-3">
+										<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+							</div>
+				</div> -->
+			</form>
+			{% elif numPaso == 3 %}
+			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarDirector2' %}">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-3"></div>
+					<div class="col-4 form-group">
+						<input hidden="" type="text" name="tituloPropuesto3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+						<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
+						<label for="inputDirector"><h5>Segundo Director</h5></label>
+						<select id="director2Seleccionado" name="director2Seleccionado" class="form-control">
+							<option value="0" selected="">Elije un profesor...</option>
+							{% for s in top10 %}
+								<option
+									{% for valor in s %}
+										{% if forloop.counter == 2 %}
+											value="{{valor}}"
+										{% endif %}
+										{% if forloop.counter == 3 %}
+											> {{valor}}
+										{% endif %}
+									{% endfor %}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2 align-self-center">
+						<br>
+						<div class="input-group-append">
+							<button class="btn btn-guinda" type="submit">Agregar director</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+							<div class="col-3">
+										<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+							</div>
+							<div class="col"></div>
+							<div class="col-3">
+										<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
+													{% csrf_token %}
+													<button type="submit" class="btn btn-link">Omitir segundo director</button>
+										</form>
+							</div>
+				</div> -->
+			</form>
+			{% elif numPaso == 4 %}
+			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT1' %}">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-3"></div>
+					<div class="col-4 form-group">
+						<input hidden="" type="text" name="tituloPropuesto4" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+						<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
+						<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
+						
+						<label for="inputDirector"><h5>Primer miembro del comité turial</h5></label>
+						<select id="comiteSeleccionado1" name="comiteSeleccionado1" class="form-control">
+							<option value="0" selected="">Elije un profesor...</option>
+							{% for s in top10 %}
+								<option
+									{% for valor in s %}
+										{% if forloop.counter == 2 %}
+											value="{{valor}}"
+										{% endif %}
+										{% if forloop.counter == 3 %}
+											> {{valor}}
+										{% endif %}
+									{% endfor %}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2 align-self-center">
+						<br>
+						<div class="input-group-append">
+							<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+							<div class="col-3">
+										<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+							</div>
+							<div class="col"></div>
+							<div class="col-3">
+										<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
+													{% csrf_token %}
+													<button type="submit" class="btn btn-link">Omitir segundo director</button>
+										</form>
+							</div>
+				</div> -->
+			</form>
+			{% elif numPaso == 5 %}
+			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT2' %}">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-3"></div>
+					<div class="col-4 form-group">
+						<input hidden="" type="text" name="tituloPropuesto5" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+						<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
+						<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
+						<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
+						<label for="inputDirector"><h5>Segundo miembro del comité turial</h5></label>
+						<select id="comiteSeleccionado2" name="comiteSeleccionado2" class="form-control">
+							<option value="0" selected="">Elije un profesor...</option>
+							{% for s in top10 %}
+								<option
+									{% for valor in s %}
+										{% if forloop.counter == 2 %}
+											value="{{valor}}"
+										{% endif %}
+										{% if forloop.counter == 3 %}
+											> {{valor}}
+										{% endif %}
+									{% endfor %}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2 align-self-center">
+						<br>
+						<div class="input-group-append">
+							<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+							<div class="col-3">
+										<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+							</div>
+							<div class="col"></div>
+							<div class="col-3">
+										<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
+													{% csrf_token %}
+													<button type="submit" class="btn btn-link">Omitir segundo director</button>
+										</form>
+							</div>
+				</div> -->
+			</form>
+			{% elif numPaso == 6 %}
+			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT3' %}">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-3"></div>
+					<div class="col-4 form-group">
+						<input hidden="" type="text" name="tituloPropuesto6" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+						<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
+						<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
+						<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
+						<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
+						<label for="inputDirector"><h5>Tercer miembro del comité turial</h5></label>
+						<select id="comiteSeleccionado3" name="comiteSeleccionado3" class="form-control">
+							<option value="0" selected="">Elije un profesor...</option>
+							{% for s in top10 %}
+								<option
+									{% for valor in s %}
+										{% if forloop.counter == 2 %}
+											value="{{valor}}"
+										{% endif %}
+										{% if forloop.counter == 3 %}
+											> {{valor}}
+										{% endif %}
+									{% endfor %}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2 align-self-center">
+						<br>
+						<div class="input-group-append">
+							<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+							<div class="col-3">
+										<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+							</div>
+							<div class="col"></div>
+							<div class="col-3">
+										<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
+													{% csrf_token %}
+													<button type="submit" class="btn btn-link">Omitir segundo director</button>
+										</form>
+							</div>
+				</div> -->
+			</form>
+			{% elif numPaso == 7 %}
+			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT4' %}">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-3"></div>
+					<div class="col-4 form-group">
+						<input hidden="" type="text" name="tituloPropuesto7" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+						<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
+						<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
+						<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
+						<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
+						<input hidden="" type="text" name="numTesCT3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT3}}">
+						<label for="inputDirector"><h5>Cuarto miembro del comité turial</h5></label>
+						<select id="comiteSeleccionado4" name="comiteSeleccionado4" class="form-control">
+							<option value="0" selected="">Elije un profesor...</option>
+							{% for s in top10 %}
+								<option
+									{% for valor in s %}
+										{% if forloop.counter == 2 %}
+											value="{{valor}}"
+										{% endif %}
+										{% if forloop.counter == 3 %}
+											> {{valor}}
+										{% endif %}
+									{% endfor %}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2 align-self-center">
+						<br>
+						<div class="input-group-append">
+							<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+							<div class="col-3">
+										<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+							</div>
+							<div class="col"></div>
+							<div class="col-3">
+										<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
+													{% csrf_token %}
+													<button type="submit" class="btn btn-link">Omitir segundo director</button>
+										</form>
+							</div>
+				</div> -->
+			</form>
+			{% elif numPaso == 8 %}
+			<form class="mt-5 mx-3" method="post" action="{% url 'registrarTesis' %}">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-3"></div>
+					<div class="col-4 form-group">
+						<input hidden="" type="text" name="tituloPropuesto8" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+						<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
+						<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
+						<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
+						<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
+						<input hidden="" type="text" name="numTesCT3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT3}}">
+						<input hidden="" type="text" name="numTesCT4" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT4}}">
+						<input hidden="" type="text" name="numTesCT4" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT4}}">
+						<label for="inputDirector"><h5>Quinto miembro del comité turial</h5></label>
+						<select id="comiteSeleccionado5" name="comiteSeleccionado5" class="form-control">
+							<option value="0" selected="">Elije un profesor...</option>
+							{% for s in top10 %}
+								<option
+									{% for valor in s %}
+										{% if forloop.counter == 2 %}
+											value="{{valor}}"
+										{% endif %}
+										{% if forloop.counter == 3 %}
+											> {{valor}}
+										{% endif %}
+									{% endfor %}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="col-2 align-self-center">
+						<br>
+						<div class="input-group-append">
+							<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+							<div class="col-3">
+										<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+							</div>
+							<div class="col"></div>
+							<div class="col-3">
+										<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
+													{% csrf_token %}
+													<button type="submit" class="btn btn-link">Omitir segundo director</button>
+										</form>
+							</div>
+				</div> -->
+			</form>
+			{% elif numPaso == 9 %}
+			<form class="mt-5 mx-3" method="post" action="{% url 'guardarTesis' %}">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="col-1 form-group">
+						<input hidden="" type="text" name="tituloPropuesto8" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
+						<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
+						<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
+						<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
+						<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
+						<input hidden="" type="text" name="numTesCT3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT3}}">
+						<input hidden="" type="text" name="numTesCT4" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT4}}">
+						<input hidden="" type="text" name="numTesCT5" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT5}}">
+					</div>
+					<div class="col align-self-center">
+						<button type="submit" class="btn btn-guinda btn-lg btn-block">Registrar tesis</button>
+					</div>
+					<div class="col-1"></div>
+				</div>
+				<!-- <div class="row">
+							<div class="col-3">
+										<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+							</div>
+							<div class="col"></div>
+							<div class="col-3">
+										<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
+													{% csrf_token %}
+													<button type="submit" class="btn btn-link">Omitir segundo director</button>
+										</form>
+							</div>
+				</div> -->
+			</form>
+		{% endif %}
+		<h5 class="mt-4 mx-3">Directores</h5>
+		<div class="row container ml-3">
+			<div class="input-group my-3">
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon2">1</span>
+				</div>
+				<input disabled="" type="text" class="form-control" placeholder="{% if nombreDirector1 %}{{nombreDirector1}}{% endif %}" aria-label="Director 1" aria-describedby="basic-addon2">
+			</div>
+			{% if nombreDirector2 %}
 				<div class="input-group mb-3">
-					<input type="text" name="tituloPropuesto" class="form-control" placeholder="{% if not tituloPropuesto %}Título propuesto para la tesis{% endif %}" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{% if tituloPropuesto %}{{tituloPropuesto}}{% endif %}">
 					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Buscar</button>
+						<span class="input-group-text" id="basic-addon2">2</span>
 					</div>
+					<input disabled="" type="text" class="form-control" placeholder="{% if nombreDirector2 %}{{nombreDirector2}}{% endif %}" aria-label="Director 2" aria-describedby="basic-addon2">
 				</div>
-			</div>
-			<div class="col-2"></div>
+			{% endif %}
 		</div>
-	</form>
-	{% if numPaso == 2 %}
-		<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarDirector1' %}">
-			{% csrf_token %}
-			<div class="form-row">
-				<div class="col-3"></div>
-				<div class="col-4 form-group">
-					<input hidden="" type="text" name="tituloPropuesto2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
-					<label for="inputDirector"><h5>Primer Director *</h5></label>
-					<select id="director1Seleccionado" name="director1Seleccionado" class="form-control">
-						<option value="0" selected="">Elije un profesor...</option>
-						{% for s in top10 %}
-							<option
-								{% for valor in s %}
-									{% if forloop.counter == 2 %}
-										value="{{valor}}"
-									{% endif %}
-									{% if forloop.counter == 3 %}
-										> {{valor}}
-									{% endif %}
-								{% endfor %}
-							</option>
-						{% endfor %}
-					</select>
+		<h5 class="mt-4 mx-3">Comite Tutorial</h5>
+		<div class="row container mx-3">
+			<div class="input-group my-3">
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon2">1</span>
 				</div>
-				<div class="col-2 align-self-center">
-					<br>
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar director</button>
-					</div>
-				</div>
+				<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro1 %}{{nombreMiembro1}}{% endif %}" aria-label="Integrante 1" aria-describedby="basic-addon2">
 			</div>
-			<!-- <div class="row">
-				<div class="col-3">
-					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-				</div>
-			</div> -->
-		</form>
-		{% elif numPaso == 3 %}
-		<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarDirector2' %}">
-			{% csrf_token %}
-			<div class="form-row">
-				<div class="col-3"></div>
-				<div class="col-4 form-group">
-					<input hidden="" type="text" name="tituloPropuesto3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
-					<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
-					<label for="inputDirector"><h5>Segundo Director</h5></label>
-					<select id="director2Seleccionado" name="director2Seleccionado" class="form-control">
-						<option value="0" selected="">Elije un profesor...</option>
-						{% for s in top10 %}
-							<option
-								{% for valor in s %}
-									{% if forloop.counter == 2 %}
-										value="{{valor}}"
-									{% endif %}
-									{% if forloop.counter == 3 %}
-										> {{valor}}
-									{% endif %}
-								{% endfor %}
-							</option>
-						{% endfor %}
-					</select>
-				</div>
-				<div class="col-2 align-self-center">
-					<br>
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar director</button>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="row">
-				<div class="col-3">
-					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-				</div>
-				<div class="col"></div>
-				<div class="col-3">
-					<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-link">Omitir segundo director</button>
-					</form>
-				</div>
-			</div> -->
-		</form>
-		{% elif numPaso == 4 %}
-		<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT1' %}">
-			{% csrf_token %}
-			<div class="form-row">
-				<div class="col-3"></div>
-				<div class="col-4 form-group">
-					<input hidden="" type="text" name="tituloPropuesto4" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
-					<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
-					<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
-					
-					<label for="inputDirector"><h5>Primer miembro del comité turial</h5></label>
-					<select id="comiteSeleccionado1" name="comiteSeleccionado1" class="form-control">
-						<option value="0" selected="">Elije un profesor...</option>
-						{% for s in top10 %}
-							<option
-								{% for valor in s %}
-									{% if forloop.counter == 2 %}
-										value="{{valor}}"
-									{% endif %}
-									{% if forloop.counter == 3 %}
-										> {{valor}}
-									{% endif %}
-								{% endfor %}
-							</option>
-						{% endfor %}
-					</select>
-				</div>
-				<div class="col-2 align-self-center">
-					<br>
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="row">
-				<div class="col-3">
-					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-				</div>
-				<div class="col"></div>
-				<div class="col-3">
-					<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-link">Omitir segundo director</button>
-					</form>
-				</div>
-			</div> -->
-		</form>
-		{% elif numPaso == 5 %}
-		<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT2' %}">
-			{% csrf_token %}
-			<div class="form-row">
-				<div class="col-3"></div>
-				<div class="col-4 form-group">
-					<input hidden="" type="text" name="tituloPropuesto5" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
-					<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
-					<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
-					<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
-					<label for="inputDirector"><h5>Segundo miembro del comité turial</h5></label>
-					<select id="comiteSeleccionado2" name="comiteSeleccionado2" class="form-control">
-						<option value="0" selected="">Elije un profesor...</option>
-						{% for s in top10 %}
-							<option
-								{% for valor in s %}
-									{% if forloop.counter == 2 %}
-										value="{{valor}}"
-									{% endif %}
-									{% if forloop.counter == 3 %}
-										> {{valor}}
-									{% endif %}
-								{% endfor %}
-							</option>
-						{% endfor %}
-					</select>
-				</div>
-				<div class="col-2 align-self-center">
-					<br>
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="row">
-				<div class="col-3">
-					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-				</div>
-				<div class="col"></div>
-				<div class="col-3">
-					<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-link">Omitir segundo director</button>
-					</form>
-				</div>
-			</div> -->
-		</form>
-		{% elif numPaso == 6 %}
-		<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT3' %}">
-			{% csrf_token %}
-			<div class="form-row">
-				<div class="col-3"></div>
-				<div class="col-4 form-group">
-					<input hidden="" type="text" name="tituloPropuesto6" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
-					<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
-					<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
-					<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
-					<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
-					<label for="inputDirector"><h5>Tercer miembro del comité turial</h5></label>
-					<select id="comiteSeleccionado3" name="comiteSeleccionado3" class="form-control">
-						<option value="0" selected="">Elije un profesor...</option>
-						{% for s in top10 %}
-							<option
-								{% for valor in s %}
-									{% if forloop.counter == 2 %}
-										value="{{valor}}"
-									{% endif %}
-									{% if forloop.counter == 3 %}
-										> {{valor}}
-									{% endif %}
-								{% endfor %}
-							</option>
-						{% endfor %}
-					</select>
-				</div>
-				<div class="col-2 align-self-center">
-					<br>
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="row">
-				<div class="col-3">
-					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-				</div>
-				<div class="col"></div>
-				<div class="col-3">
-					<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-link">Omitir segundo director</button>
-					</form>
-				</div>
-			</div> -->
-		</form>
-		{% elif numPaso == 7 %}
-		<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT4' %}">
-			{% csrf_token %}
-			<div class="form-row">
-				<div class="col-3"></div>
-				<div class="col-4 form-group">
-					<input hidden="" type="text" name="tituloPropuesto7" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
-					<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
-					<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
-					<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
-					<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
-					<input hidden="" type="text" name="numTesCT3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT3}}">
-					<label for="inputDirector"><h5>Cuarto miembro del comité turial</h5></label>
-					<select id="comiteSeleccionado4" name="comiteSeleccionado4" class="form-control">
-						<option value="0" selected="">Elije un profesor...</option>
-						{% for s in top10 %}
-							<option
-								{% for valor in s %}
-									{% if forloop.counter == 2 %}
-										value="{{valor}}"
-									{% endif %}
-									{% if forloop.counter == 3 %}
-										> {{valor}}
-									{% endif %}
-								{% endfor %}
-							</option>
-						{% endfor %}
-					</select>
-				</div>
-				<div class="col-2 align-self-center">
-					<br>
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="row">
-				<div class="col-3">
-					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-				</div>
-				<div class="col"></div>
-				<div class="col-3">
-					<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-link">Omitir segundo director</button>
-					</form>
-				</div>
-			</div> -->
-		</form>
-		{% elif numPaso == 8 %}
-		<form class="mt-5 mx-3" method="post" action="{% url 'registrarTesis' %}">
-			{% csrf_token %}
-			<div class="form-row">
-				<div class="col-3"></div>
-				<div class="col-4 form-group">
-					<input hidden="" type="text" name="tituloPropuesto8" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
-					<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
-					<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
-					<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
-					<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
-					<input hidden="" type="text" name="numTesCT3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT3}}">
-					<input hidden="" type="text" name="numTesCT4" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT4}}">
-					<label for="inputDirector"><h5>Quinto miembro del comité turial</h5></label>
-					<select id="comiteSeleccionado5" name="comiteSeleccionado5" class="form-control">
-						<option value="0" selected="">Elije un profesor...</option>
-						{% for s in top10 %}
-							<option
-								{% for valor in s %}
-									{% if forloop.counter == 2 %}
-										value="{{valor}}"
-									{% endif %}
-									{% if forloop.counter == 3 %}
-										> {{valor}}
-									{% endif %}
-								{% endfor %}
-							</option>
-						{% endfor %}
-					</select>
-				</div>
-				<div class="col-2 align-self-center">
-					<br>
-					<div class="input-group-append">
-						<button class="btn btn-guinda" type="submit">Agregar Miembro</button>
-					</div>
-				</div>
-			</div>
-			<!-- <div class="row">
-				<div class="col-3">
-					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-				</div>
-				<div class="col"></div>
-				<div class="col-3">
-					<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-link">Omitir segundo director</button>
-					</form>
-				</div>
-			</div> -->
-		</form>
-		{% elif numPaso == 9 %}
-		<form class="mt-5 mx-3" method="post" action="{% url 'registrarTesis' %}">
-			{% csrf_token %}
-			<div class="form-row">
-				<div class="col-1 form-group">
-					<input hidden="" type="text" name="tituloPropuesto8" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
-					<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
-					<input hidden="" type="text" name="numTesDir2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector2}}">
-					<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
-					<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
-					<input hidden="" type="text" name="numTesCT3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT3}}">
-					<input hidden="" type="text" name="numTesCT4" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT4}}">
-				</div>
-				<div class="col align-self-center">
-					<button type="submit" class="btn btn-guinda btn-lg btn-block">Registrar tesis</button>
-				</div>
-				<div class="col-1"></div>
-			</div>
-			<!-- <div class="row">
-				<div class="col-3">
-					<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-				</div>
-				<div class="col"></div>
-				<div class="col-3">
-					<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-link">Omitir segundo director</button>
-					</form>
-				</div>
-			</div> -->
-		</form>
-	{% endif %}
-	<h5 class="mt-4 mx-3">Directores</h5>
-	<div class="row container ml-3">
-		<div class="input-group my-3">
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">1</span>
-			</div>
-			<input disabled="" type="text" class="form-control" placeholder="{% if nombreDirector1 %}{{nombreDirector1}}{% endif %}" aria-label="Director 1" aria-describedby="basic-addon2">
-		</div>
-		{% if nombreDirector2 %}
 			<div class="input-group mb-3">
 				<div class="input-group-append">
 					<span class="input-group-text" id="basic-addon2">2</span>
 				</div>
-				<input disabled="" type="text" class="form-control" placeholder="{% if nombreDirector2 %}{{nombreDirector2}}{% endif %}" aria-label="Director 2" aria-describedby="basic-addon2">
+				<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro2 %}{{nombreMiembro2}}{% endif %}" aria-label="Integrante 2" aria-describedby="basic-addon2">
 			</div>
-		{% endif %}
-	</div>
-	<h5 class="mt-4 mx-3">Comite Tutorial</h5>
-	<div class="row container mx-3">
-		<div class="input-group my-3">
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">1</span>
+			<div class="input-group mb-3">
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon2">3</span>
+				</div>
+				<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro3 %}{{nombreMiembro3}}{% endif %}" aria-label="Integrante 3" aria-describedby="basic-addon2">
 			</div>
-			<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro1 %}{{nombreMiembro1}}{% endif %}" aria-label="Integrante 1" aria-describedby="basic-addon2">
+			<div class="input-group mb-3">
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon2">4</span>
+				</div>
+				<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro4 %}{{nombreMiembro4}}{% endif %}" aria-label="Integrante 4" aria-describedby="basic-addon2">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-append">
+					<span class="input-group-text" id="basic-addon2">5</span>
+				</div>
+				<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro5 %}{{nombreMiembro5}}{% endif %}" aria-label="Integrante 5" aria-describedby="basic-addon2">
+			</div>
 		</div>
-		<div class="input-group mb-3">
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">2</span>
-			</div>
-			<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro2 %}{{nombreMiembro2}}{% endif %}" aria-label="Integrante 2" aria-describedby="basic-addon2">
-		</div>
-		<div class="input-group mb-3">
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">3</span>
-			</div>
-			<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro3 %}{{nombreMiembro3}}{% endif %}" aria-label="Integrante 3" aria-describedby="basic-addon2">
-		</div>
-		<div class="input-group mb-3">
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">4</span>
-			</div>
-			<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro4 %}{{nombreMiembro4}}{% endif %}" aria-label="Integrante 4" aria-describedby="basic-addon2">
-		</div>
-		<div class="input-group mb-3">
-			<div class="input-group-append">
-				<span class="input-group-text" id="basic-addon2">5</span>
-			</div>
-			<input disabled="" type="text" class="form-control" placeholder="{% if nombreMiembro5 %}{{nombreMiembro5}}{% endif %}" aria-label="Integrante 5" aria-describedby="basic-addon2">
-		</div>
-	</div>
+	{% endif %}
 {% endblock %}

@@ -17,4 +17,5 @@ urlpatterns = [
     path('seleccionarCT3', views.seleccionarCT3, name='seleccionarCT3'),
     path('seleccionarCT4', views.seleccionarCT4, name='seleccionarCT4'),
     path('registrarTesis', views.registrarTesis, name='registrarTesis'),
+    path('guardarTesis', views.guardarTesis, name='guardarTesis'),
 ]
