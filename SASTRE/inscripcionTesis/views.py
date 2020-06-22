@@ -12,6 +12,7 @@ import gensim # Word2Vec
 from sklearn.metrics.pairwise import cosine_similarity as CS # Similitud coseno
 from nltk import word_tokenize
 from string import punctuation
+from datetime import datetime # Castear a fecha AAAA-MM-DD
 
 #TESTmodel = gensim.models.KeyedVectors.load_word2vec_format('sbw_vectors.bin', binary=True) # Word2Vec
 
@@ -19,7 +20,7 @@ non_words = list(punctuation)
 non_words.extend(['¿','¡','\n','\r'])
 non_words.extend(map(str,range(10)))
 
-todasLasTesis= T.objects.all()
+todasLasTesis= T.objects.order_by('-numeroTesis')
 
 def vertesis(request):
 	allTesis= todasLasTesis.order_by('-numeroTesis')
@@ -144,12 +145,12 @@ def seleccionarDirector2(request):
 	tituloPropuesto= request.POST['tituloPropuesto3']
 	numTesisDirector1= int(request.POST['numTesDir1'])
 	director1= T.objects.get(numeroTesis= numTesisDirector1)
-	nombreDirector1= 'Dr. '+director1.director1+director1.director1Aps
-	numTesisSeleccionada= request.POST['director2Seleccionado']
+	nombreDirector1= 'Dr. '+director1.director1+' '+director1.director1Aps
+	numTesisSeleccionada= int(request.POST['director2Seleccionado'])
 
 	if numTesisSeleccionada != 0:
 		buscar= T.objects.get(numeroTesis= numTesisSeleccionada)
-		nombreDirector2= 'Dr. '+buscar.director2+' '+buscar.director2Aps
+		nombreDirector2= 'Dr. '+buscar.director1+' '+buscar.director1Aps
 	else:
 		nombreDirector2= 'Dr. '+'Nadie Desconocido Misterio'
 		print('No se seleccionó un segundo director')
@@ -157,6 +158,7 @@ def seleccionarDirector2(request):
 	sugerencias= obtenerProfesoresSugeridos(tituloPropuesto)
 	filtrarProfesores= [nombreDirector1,nombreDirector2]
 	mostrar10= mostrarNProfesores(sugerencias,filtrarProfesores)
+	print(filtrarProfesores)
 
 	bandera = 1
 	if (Alumno.objects.filter(username= request.user).count()) > 0:
@@ -168,8 +170,9 @@ def seleccionarDirector2(request):
 	return render(request, "tesis/inscripcionTesisInicio.html",
 		{
 			'tipoUsuario': bandera,
-			'sugerencias':mostrar10,
 			'tituloPropuesto':tituloPropuesto,
+			'top10':mostrar10,
+			'sugerencias': sugerencias,
 			'nombreDirector1':nombreDirector1,
 			'numTesisDirector1':numTesisDirector1 ,
 			'nombreDirector2':nombreDirector2,
@@ -186,3 +189,308 @@ def omitirProfesor(request):
 	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
 		bandera = 3
 	return render(request, "tesis/inscripcionTesisInicio.html",  {'tipoUsuario': bandera, 'numPaso': 4})
+
+def seleccionarCT1(request):
+	tituloPropuesto= request.POST['tituloPropuesto4']
+	numTesisDirector1= int(request.POST['numTesDir1'])
+	director1= T.objects.get(numeroTesis= numTesisDirector1)
+	nombreDirector1= 'Dr. '+director1.director1+' '+director1.director1Aps
+	numTesisDirector2= int(request.POST['numTesDir2'])
+	director2= T.objects.get(numeroTesis= numTesisDirector2)
+	nombreDirector2= 'Dr. '+director2.director1+' '+director2.director1Aps
+	numTesisSeleccionada= int(request.POST['comiteSeleccionado1'])
+
+	if numTesisSeleccionada != 0:
+		buscar= T.objects.get(numeroTesis= numTesisSeleccionada)
+		nombreMiembro1= 'Dr. '+buscar.director1+' '+buscar.director1Aps
+	else:
+		nombreMiembro1= 'Dr. '+'Nadie Desconocido Misterio'
+		print('No se seleccionó un segundo director')
+
+	sugerencias= obtenerProfesoresSugeridos(tituloPropuesto)
+	filtrarProfesores= [nombreDirector1,nombreDirector2,nombreMiembro1]
+	mostrar10= mostrarNProfesores(sugerencias,filtrarProfesores)
+	print(str(len(sugerencias)),filtrarProfesores)
+
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
+	return render(request, "tesis/inscripcionTesisInicio.html",
+		{
+			'tipoUsuario': bandera,
+			'tituloPropuesto':tituloPropuesto,
+			'top10':mostrar10,
+			'sugerencias': sugerencias,
+			'nombreDirector1':nombreDirector1,
+			'numTesisDirector1':numTesisDirector1 ,
+			'nombreDirector2':nombreDirector2,
+			'numTesisDirector2':numTesisDirector2,
+			'nombreMiembro1':nombreMiembro1,
+			'numTesisCT1':numTesisSeleccionada,
+			'numPaso': 5,
+		})
+
+def seleccionarCT2(request):
+	tituloPropuesto= request.POST['tituloPropuesto5']
+	numTesisDirector1= int(request.POST['numTesDir1'])
+	director1= T.objects.get(numeroTesis= numTesisDirector1)
+	nombreDirector1= 'Dr. '+director1.director1+' '+director1.director1Aps
+	numTesisDirector2= int(request.POST['numTesDir2'])
+	director2= T.objects.get(numeroTesis= numTesisDirector2)
+	nombreDirector2= 'Dr. '+director2.director1+' '+director2.director1Aps
+	numTesisComite1= int(request.POST['numTesCT1'])
+	miembroCT1= T.objects.get(numeroTesis= numTesisComite1)
+	nombreMiembroCT1= 'Dr. '+miembroCT1.director1+' '+miembroCT1.director1Aps
+	numTesisSeleccionada= int(request.POST['comiteSeleccionado2'])
+
+	if numTesisSeleccionada != 0:
+		buscar= T.objects.get(numeroTesis= numTesisSeleccionada)
+		nombreMiembroCT2= 'Dr. '+buscar.director1+' '+buscar.director1Aps
+	else:
+		nombreMiembroCT2= 'Dr. '+'Nadie Desconocido Misterio'
+		print('No se seleccionó un segundo director')
+
+	sugerencias= obtenerProfesoresSugeridos(tituloPropuesto)
+	filtrarProfesores= [
+		nombreDirector1,
+		nombreDirector2,
+		nombreMiembroCT1,
+		nombreMiembroCT2,
+		]
+	mostrar10= mostrarNProfesores(sugerencias,filtrarProfesores)
+
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
+	return render(request, "tesis/inscripcionTesisInicio.html", {
+			'tipoUsuario': bandera,
+			'tituloPropuesto':tituloPropuesto,
+			'top10':mostrar10,
+			'sugerencias': sugerencias,
+			'nombreDirector1':nombreDirector1,
+			'numTesisDirector1':numTesisDirector1 ,
+			'nombreDirector2':nombreDirector2,
+			'numTesisDirector2':numTesisDirector2,
+			'nombreMiembro1':nombreMiembroCT1,
+			'numTesisCT1':numTesisComite1,
+			'nombreMiembro2':nombreMiembroCT2,
+			'numTesisCT2':numTesisSeleccionada,
+			'numPaso': 6,
+			})
+
+def seleccionarCT3(request):
+	tituloPropuesto= request.POST['tituloPropuesto6']
+	numTesisDirector1= int(request.POST['numTesDir1'])
+	director1= T.objects.get(numeroTesis= numTesisDirector1)
+	nombreDirector1= 'Dr. '+director1.director1+' '+director1.director1Aps
+	numTesisDirector2= int(request.POST['numTesDir2'])
+	director2= T.objects.get(numeroTesis= numTesisDirector2)
+	nombreDirector2= 'Dr. '+director2.director1+' '+director2.director1Aps
+	numTesisComite1= int(request.POST['numTesCT1'])
+	miembroCT1= T.objects.get(numeroTesis= numTesisComite1)
+	nombreMiembroCT1= 'Dr. '+miembroCT1.director1+' '+miembroCT1.director1Aps
+	numTesisComite2= int(request.POST['numTesCT2'])
+	miembroCT2= T.objects.get(numeroTesis= numTesisComite2)
+	nombreMiembroCT2= 'Dr. '+miembroCT2.director1+' '+miembroCT2.director1Aps
+	numTesisSeleccionada= int(request.POST['comiteSeleccionado3'])
+
+	if numTesisSeleccionada != 0:
+		buscar= T.objects.get(numeroTesis= numTesisSeleccionada)
+		nombreMiembroCT3= 'Dr. '+buscar.director1+' '+buscar.director1Aps
+	else:
+		nombreMiembroCT3= 'Dr. '+'Nadie Desconocido Misterio'
+		print('No se seleccionó un segundo director')
+
+	sugerencias= obtenerProfesoresSugeridos(tituloPropuesto)
+	filtrarProfesores= [
+		nombreDirector1,
+		nombreDirector2,
+		nombreMiembroCT1,
+		nombreMiembroCT2,
+		nombreMiembroCT3,
+		]
+	mostrar10= mostrarNProfesores(sugerencias,filtrarProfesores)
+
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
+	return render(request, "tesis/inscripcionTesisInicio.html",
+		{
+			'tipoUsuario': bandera,
+			'tituloPropuesto':tituloPropuesto,
+			'top10':mostrar10,
+			'sugerencias': sugerencias,
+			'nombreDirector1':nombreDirector1,
+			'numTesisDirector1':numTesisDirector1 ,
+			'nombreDirector2':nombreDirector2,
+			'numTesisDirector2':numTesisDirector2,
+			'nombreMiembro1':nombreMiembroCT1,
+			'numTesisCT1':numTesisComite1,
+			'nombreMiembro2':nombreMiembroCT2,
+			'numTesisCT2':numTesisComite2,
+			'nombreMiembro3':nombreMiembroCT3,
+			'numTesisCT3':numTesisSeleccionada,
+			'numPaso': 7,
+		})
+
+def seleccionarCT4(request):
+	tituloPropuesto= request.POST['tituloPropuesto7']
+	numTesisDirector1= int(request.POST['numTesDir1'])
+	director1= T.objects.get(numeroTesis= numTesisDirector1)
+	nombreDirector1= 'Dr. '+director1.director1+' '+director1.director1Aps
+	numTesisDirector2= int(request.POST['numTesDir2'])
+	director2= T.objects.get(numeroTesis= numTesisDirector2)
+	nombreDirector2= 'Dr. '+director2.director1+' '+director2.director1Aps
+	numTesisComite1= int(request.POST['numTesCT1'])
+	miembroCT1= T.objects.get(numeroTesis= numTesisComite1)
+	nombreMiembroCT1= 'Dr. '+miembroCT1.director1+' '+miembroCT1.director1Aps
+	numTesisComite2= int(request.POST['numTesCT2'])
+	miembroCT2= T.objects.get(numeroTesis= numTesisComite2)
+	nombreMiembroCT2= 'Dr. '+miembroCT2.director1+' '+miembroCT2.director1Aps
+	numTesisComite3= int(request.POST['numTesCT3'])
+	miembroCT3= T.objects.get(numeroTesis= numTesisComite3)
+	nombreMiembroCT3= 'Dr. '+miembroCT3.director1+' '+miembroCT3.director1Aps
+	numTesisSeleccionada= int(request.POST['comiteSeleccionado4'])
+
+	if numTesisSeleccionada != 0:
+		buscar= T.objects.get(numeroTesis= numTesisSeleccionada)
+		nombreMiembroCT4= 'Dr. '+buscar.director1+' '+buscar.director1Aps
+	else:
+		nombreMiembroCT4= 'Dr. '+'Nadie Desconocido Misterio'
+		print('No se seleccionó un segundo director')
+
+	sugerencias= obtenerProfesoresSugeridos(tituloPropuesto)
+	filtrarProfesores= [
+		nombreDirector1,
+		nombreDirector2,
+		nombreMiembroCT1,
+		nombreMiembroCT2,
+		nombreMiembroCT3,
+		nombreMiembroCT4,
+		]
+	mostrar10= mostrarNProfesores(sugerencias,filtrarProfesores)
+
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
+	return render(request, "tesis/inscripcionTesisInicio.html",{
+			'tipoUsuario': bandera,
+			'tituloPropuesto':tituloPropuesto,
+			'top10':mostrar10,
+			'sugerencias': sugerencias,
+			'nombreDirector1':nombreDirector1,
+			'numTesisDirector1':numTesisDirector1 ,
+			'nombreDirector2':nombreDirector2,
+			'numTesisDirector2':numTesisDirector2,
+			'nombreMiembro1':nombreMiembroCT1,
+			'numTesisCT1':numTesisComite1,
+			'nombreMiembro2':nombreMiembroCT2,
+			'numTesisCT2':numTesisComite2,
+			'nombreMiembro3':nombreMiembroCT3,
+			'numTesisCT3':numTesisComite3,
+			'nombreMiembro4':nombreMiembroCT4,
+			'numTesisCT4':numTesisSeleccionada,
+			'numPaso': 8,
+		})
+
+def registrarTesis(request):
+	numTesisDirector1= int(request.POST['numTesDir1'])
+	director1= T.objects.get(numeroTesis= numTesisDirector1)
+	nombreDirector1= 'Dr. '+director1.director1+' '+director1.director1Aps
+	numTesisDirector2= int(request.POST['numTesDir2'])
+	director2= T.objects.get(numeroTesis= numTesisDirector2)
+	nombreDirector2= 'Dr. '+director2.director1+' '+director2.director1Aps
+	numTesisComite1= int(request.POST['numTesCT1'])
+	miembroCT1= T.objects.get(numeroTesis= numTesisComite1)
+	nombreMiembroCT1= 'Dr. '+miembroCT1.director1+' '+miembroCT1.director1Aps
+	numTesisComite2= int(request.POST['numTesCT2'])
+	miembroCT2= T.objects.get(numeroTesis= numTesisComite2)
+	nombreMiembroCT2= 'Dr. '+miembroCT2.director1+' '+miembroCT2.director1Aps
+	numTesisComite3= int(request.POST['numTesCT3'])
+	miembroCT3= T.objects.get(numeroTesis= numTesisComite3)
+	nombreMiembroCT3= 'Dr. '+miembroCT3.director1+' '+miembroCT3.director1Aps
+	numTesisComite4= int(request.POST['numTesCT4'])
+	miembroCT4= T.objects.get(numeroTesis= numTesisComite4)
+	nombreMiembroCT4= 'Dr. '+miembroCT4.director1+' '+miembroCT4.director1Aps
+	numTesisSeleccionada= int(request.POST['comiteSeleccionado5'])
+
+	nuevaTesis= T()
+	nuevaTesis.numeroTesis= todasLasTesis[0].numeroTesis+1
+	nuevaTesis.nombreTesis= request.POST['tituloPropuesto8']
+	nuevaTesis.director1Aps= director1.director1Aps
+	nuevaTesis.director1= director1.director1
+	try:
+		if request.POST['numTesDir2']: 
+			numTesisDirector2= int(request.POST['numTesDir2'])
+			director2= T.objects.get(numeroTesis= numTesisDirector2)
+	except:
+		print('No tiene segundo director.')
+	nuevaTesis.director2Aps= director2.director1Aps
+	nuevaTesis.director2= director2.director1
+	nuevaTesis.diaCreacion= datetime.now().strftime("%Y-%m-%d")
+	nuevaTesis.alumnoAps= 'Castellanos Castro'
+	nuevaTesis.alumno= 'David'
+
+	if numTesisSeleccionada != 0:
+		buscar= T.objects.get(numeroTesis= numTesisSeleccionada)
+		nombreMiembroCT5= 'Dr. '+buscar.director1+' '+buscar.director1Aps
+	else:
+		nombreMiembroCT5= 'Dr. '+'Nadie Desconocido Misterio'
+		print('No se seleccionó un segundo director')
+
+	sugerencias= obtenerProfesoresSugeridos(nuevaTesis.nombreTesis)
+	filtrarProfesores= [
+		nombreDirector1,
+		nombreDirector2,
+		nombreMiembroCT1,
+		nombreMiembroCT2,
+		nombreMiembroCT3,
+		nombreMiembroCT4,
+		nombreMiembroCT5,
+		]
+	mostrar10= mostrarNProfesores(sugerencias,filtrarProfesores)
+
+	bandera = 1
+	if (Alumno.objects.filter(username= request.user).count()) > 0:
+		bandera = 1
+	elif (Profesor.objects.filter(username= request.user).count()) > 0:
+		bandera = 2
+	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
+		bandera = 3
+	return render(request, "tesis/inscripcionTesisInicio.html",{
+			'tipoUsuario': bandera,
+			'tituloPropuesto':nuevaTesis.nombreTesis,
+			'top10':mostrar10,
+			'sugerencias': sugerencias,
+			'nombreDirector1':nuevaTesis.director1,
+			'numTesisDirector1':numTesisDirector1 ,
+			'nombreDirector2':nombreDirector2,
+			'numTesisDirector2':nuevaTesis.director2,
+			'nombreMiembro1':nombreMiembroCT1,
+			'numTesisCT1':numTesisComite1,
+			'nombreMiembro2':nombreMiembroCT2,
+			'numTesisCT2':numTesisComite2,
+			'nombreMiembro3':nombreMiembroCT3,
+			'numTesisCT3':numTesisComite3,
+			'nombreMiembro4':nombreMiembroCT4,
+			'numTesisCT4':numTesisComite4,
+			'nombreMiembro5':nombreMiembroCT5,
+			'numTesisCT4':numTesisSeleccionada,
+			'numPaso': 9,
+		})

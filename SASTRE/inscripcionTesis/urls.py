@@ -12,4 +12,9 @@ urlpatterns = [
     path('omitirProfesor', views.omitirProfesor, name='omitirProfesor'),
     path('seleccionarDirector1', views.seleccionarDirector1, name='seleccionarDirector1'),
     path('seleccionarDirector2', views.seleccionarDirector2, name='seleccionarDirector2'),
+    path('seleccionarCT1', views.seleccionarCT1, name='seleccionarCT1'),
+    path('seleccionarCT2', views.seleccionarCT2, name='seleccionarCT2'),
+    path('seleccionarCT3', views.seleccionarCT3, name='seleccionarCT3'),
+    path('seleccionarCT4', views.seleccionarCT4, name='seleccionarCT4'),
+    path('registrarTesis', views.registrarTesis, name='registrarTesis'),
 ]
