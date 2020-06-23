@@ -6,7 +6,7 @@ from django.contrib import admin
 from inscripcionTesis.views import *
 
 urlpatterns = [
-    path('vizualizarTesis', views.vertesis, name='vertesis'),
+    path('verTodasLasTesis', views.vertesis, name='vertesis'),
     path('inscripcionTesis', views.inscripcionTesisInicio, name='inscripcionTesisInicio'),
     path('tesisSimilares', views.tesisSimilares, name='tesisSimilares'),
     path('omitirProfesor', views.omitirProfesor, name='omitirProfesor'),

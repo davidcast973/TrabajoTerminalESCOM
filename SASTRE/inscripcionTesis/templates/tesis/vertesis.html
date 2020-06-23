@@ -1,11 +1,9 @@
 {% extends 'tesis/baseInscripcionTesis.html' %}
-
 {% block btnVerTesis %}
-	<div class="col my-4">
+	<div class="col-2 my-4">
 		<a type="button" class="btn btn-guinda" href="{% url 'inscripcionTesisInicio' %}">Volver</a>
 	</div>
 {% endblock btnVerTesis %}
-
 {% block cardBody %}
 	<div class="row justify-content-center">
 		<div class="col-7 input-group mb-4">
@@ -45,8 +43,62 @@
 					<h6 class="card-subtitle mb-2 text-muted">Título:</h6>
 					<p class="card-text">{{tesis.nombreTesis|title}}</p>
 					<h6 class="card-subtitle mb-2 text-muted">No. tesis: {{tesis.numeroTesis}}</h6>
-					<a href="#" class="card-link">Tomar Director(es)</a>
-					<a href="#" class="card-link">Ver detalles</a>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-guinda" data-toggle="modal" data-target="#exampleModal">Mirar detalles</button>
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">{{tesis.nombreTesis}}</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col"></div>
+										<div class="col-10">
+											<div class="row">
+												{% if tesis.diaCreacion %}
+													<div class="col">
+														<p class="lead">Fecha de creación:</p>
+														<p>{{tesis.diaCreacion}}</p>
+													</div>
+												{% endif %}
+												<div class="col">
+													<p class="lead">Número de tesis:</p>
+													<p>{{tesis.numeroTesis}}</p>
+												</div>
+											</div>
+											<br>
+											<div class="row">
+												<div class="col">
+													<p class="lead">Alumno autor:</p>
+													<p>Ing. {{tesis.alumno}} {{tesis.alumnoAps}}</p>
+												</div>
+												<div class="col">
+													<p class="lead">Director{% if tesis.director2 %}es{% endif %}:</p>
+													<p>Dr. {{tesis.director1}} {{tesis.director1Aps}}</p>
+												</div>
+											</div>
+											<br>
+											<div class="row">
+												<div class="col">
+													<p class="lead">Resumen de tesis:</p>
+													<p class="text-justify">{{ tesis.abstrac|linebreaksbr }}</p>
+												</div>
+											</div>
+										</div>
+										<div class="col"></div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar detalle</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		{% endfor %}
