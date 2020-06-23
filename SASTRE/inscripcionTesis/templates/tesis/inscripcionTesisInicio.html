@@ -4,11 +4,72 @@
 	{% if tesisInscrita %}
 		<div class="row">
 			<div class="col"></div>
-			<div class="col-4">
-				<h3 class="">Ya haz registrado tu tesis</h3>
+			<div class="col-10">
+				<div class="row">
+					{% if tesisInscrita.diaCreacion %}
+						<div class="col">
+							<p class="lead">Fecha de creación:</p>
+							<p>{{tesisInscrita.diaCreacion}}</p>
+						</div>
+					{% endif %}
+					<div class="col">
+						<p class="lead">Número de tesis:</p>
+						<p>{{tesisInscrita.numeroTesis}}</p>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col">
+						<p class="lead">Alumno autor:</p>
+						<p>Ing. {{tesisInscrita.alumno}} {{tesisInscrita.alumnoAps}}</p>
+					</div>
+					<div class="col">
+						<p class="lead">Director{% if tesisInscrita.director2 %}es{% endif %}:</p>
+						<p>Dr. {{tesisInscrita.director1}} {{tesisInscrita.director1Aps}}</p>
+					</div>
+				</div>
 			</div>
 			<div class="col"></div>
 		</div>
+		{% elif tesisInscritas %}
+		{% for tesis in tesisInscritas %}
+			<div class="row">
+				<div class="col"></div>
+				<div class="col-10">
+					<div class="row">
+						{% if tesis.diaCreacion %}
+							<div class="col">
+								<p class="lead">Fecha de creación:</p>
+								<p>{{tesis.diaCreacion}}</p>
+							</div>
+						{% endif %}
+						<div class="col">
+							<p class="lead">Número de tesis:</p>
+							<p>{{tesis.numeroTesis}}</p>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col">
+							<p class="lead">Alumno autor:</p>
+							<p>Ing. {{tesis.alumno}} {{tesis.alumnoAps}}</p>
+						</div>
+						<div class="col">
+							<p class="lead">Director{% if tesis.director2 %}es{% endif %}:</p>
+							<p>Dr. {{tesis.director1}} {{tesis.director1Aps}}</p>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col">
+							<p class="lead">Resumen de tesis:</p>
+							<p class="text-justify">{{ tesis.abstrac|linebreaksbr }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		{% endfor %}
 	{% else %}
 		<h1>Inscripción de Tesis</h1>
 		<form method="post" action="{% url 'tesisSimilares' %}">
@@ -59,9 +120,9 @@
 					</div>
 				</div>
 				<!-- <div class="row">
-								<div class="col-3">
-												<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-								</div>
+														<div class="col-3">
+																								<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
+														</div>
 				</div> -->
 			</form>
 			{% elif numPaso == 3 %}
@@ -96,18 +157,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="row">
-								<div class="col-3">
-												<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-								</div>
-								<div class="col"></div>
-								<div class="col-3">
-												<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-																{% csrf_token %}
-																<button type="submit" class="btn btn-link">Omitir segundo director</button>
-												</form>
-								</div>
-				</div> -->
 			</form>
 			{% elif numPaso == 4 %}
 			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT1' %}">
@@ -143,18 +192,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="row">
-								<div class="col-3">
-												<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-								</div>
-								<div class="col"></div>
-								<div class="col-3">
-												<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-																{% csrf_token %}
-																<button type="submit" class="btn btn-link">Omitir segundo director</button>
-												</form>
-								</div>
-				</div> -->
 			</form>
 			{% elif numPaso == 5 %}
 			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT2' %}">
@@ -190,18 +227,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="row">
-								<div class="col-3">
-												<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-								</div>
-								<div class="col"></div>
-								<div class="col-3">
-												<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-																{% csrf_token %}
-																<button type="submit" class="btn btn-link">Omitir segundo director</button>
-												</form>
-								</div>
-				</div> -->
 			</form>
 			{% elif numPaso == 6 %}
 			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT3' %}">
@@ -238,18 +263,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="row">
-								<div class="col-3">
-												<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-								</div>
-								<div class="col"></div>
-								<div class="col-3">
-												<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-																{% csrf_token %}
-																<button type="submit" class="btn btn-link">Omitir segundo director</button>
-												</form>
-								</div>
-				</div> -->
 			</form>
 			{% elif numPaso == 7 %}
 			<form class="mt-5 mx-3" method="post" action="{% url 'seleccionarCT4' %}">
@@ -287,18 +300,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="row">
-								<div class="col-3">
-												<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-								</div>
-								<div class="col"></div>
-								<div class="col-3">
-												<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-																{% csrf_token %}
-																<button type="submit" class="btn btn-link">Omitir segundo director</button>
-												</form>
-								</div>
-				</div> -->
 			</form>
 			{% elif numPaso == 8 %}
 			<form class="mt-5 mx-3" method="post" action="{% url 'registrarTesis' %}">
@@ -338,18 +339,6 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="row">
-								<div class="col-3">
-												<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-								</div>
-								<div class="col"></div>
-								<div class="col-3">
-												<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-																{% csrf_token %}
-																<button type="submit" class="btn btn-link">Omitir segundo director</button>
-												</form>
-								</div>
-				</div> -->
 			</form>
 			{% elif numPaso == 9 %}
 			<form class="mt-5 mx-3" method="post" action="{% url 'guardarTesis' %}">
@@ -370,18 +359,6 @@
 					</div>
 					<div class="col-1"></div>
 				</div>
-				<!-- <div class="row">
-								<div class="col-3">
-												<a class="btn btn-link" href="#" role="button">Mostrar todos los profesores</a>
-								</div>
-								<div class="col"></div>
-								<div class="col-3">
-												<form class="mt-5 mx-3" method="post" action="{% url 'omitirProfesor' %}">
-																{% csrf_token %}
-																<button type="submit" class="btn btn-link">Omitir segundo director</button>
-												</form>
-								</div>
-				</div> -->
 			</form>
 		{% endif %}
 		<h5 class="mt-4 mx-3">Directores</h5>

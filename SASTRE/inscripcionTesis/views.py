@@ -24,7 +24,7 @@ non_words.extend(map(str,range(10)))
 todasLasTesis= T.objects.order_by('-numeroTesis')
 
 def vertesis(request):
-	allTesis= todasLasTesis
+	allTesis= T.objects.order_by('-numeroTesis')
 	numAllTesis= len(allTesis)
 	cantPag= list(range(1,(numAllTesis//18)+1))
 	modPag= list(range(1,(numAllTesis%18)+1))
@@ -42,7 +42,7 @@ def vertesis(request):
 @login_required(login_url='/cuenta/login/')
 def inscripcionTesisInicio(request):
 	alumnoActual= A.objects.get(username= request.user)
-	tesisInscrita= T.objects.filter(alumno= alumnoActual.nombre, alumnoAps= alumnoActual.apellido)
+	tesisInscritas= T.objects.filter(alumno= alumnoActual.nombre, alumnoAps= alumnoActual.apellido)
 
 	bandera = 1
 	if (Alumno.objects.filter(username= request.user).count()) > 0:
@@ -51,7 +51,11 @@ def inscripcionTesisInicio(request):
 		bandera = 2
 	elif (PersonalAdministrativo.objects.filter(username= request.user).count()) > 0:
 		bandera = 3
-	return render(request, "tesis/inscripcionTesisInicio.html", {'tipoUsuario': bandera, 'numPaso': 1, 'tesisInscrita':tesisInscrita})
+	return render(request, "tesis/inscripcionTesisInicio.html",{
+		'tipoUsuario': bandera,
+		'numPaso': 1,
+		'tesisInscritas':tesisInscritas,
+		})
 
 # Regresa sugerencias[n][[CS()],[numeroTesis],[nombre director]]
 def obtenerProfesoresSugeridos(texto):
@@ -528,5 +532,5 @@ def guardarTesis(request):
 		bandera = 3
 	return render(request, "tesis/inscripcionTesisInicio.html",{
 			'tipoUsuario': bandera,
-			'tesisInscrita':1,
+			'tesisInscrita': nuevaTesis,
 		})
