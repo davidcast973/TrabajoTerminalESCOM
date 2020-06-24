@@ -59,13 +59,6 @@
 							<p>Dr. {{tesis.director1}} {{tesis.director1Aps}}</p>
 						</div>
 					</div>
-					<br>
-					<div class="row">
-						<div class="col">
-							<p class="lead">Resumen de tesis:</p>
-							<p class="text-justify">{{ tesis.abstrac|linebreaksbr }}</p>
-						</div>
-					</div>
 				</div>
 				<div class="col"></div>
 			</div>
@@ -97,7 +90,7 @@
 						<input hidden="" type="text" name="tituloPropuesto2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{tituloPropuesto}}">
 						<label for="inputDirector"><h5>Primer Director *</h5></label>
 						<select id="director1Seleccionado" name="director1Seleccionado" class="form-control">
-							<option value="0" selected="">Elije un profesor...</option>
+							<option value="0" selected="">Elige un profesor...</option>
 							{% for s in top10 %}
 								<option
 									{% for valor in s %}
@@ -135,7 +128,7 @@
 						<input hidden="" type="text" name="numTesDir1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisDirector1}}">
 						<label for="inputDirector"><h5>Segundo Director</h5></label>
 						<select id="director2Seleccionado" name="director2Seleccionado" class="form-control">
-							<option value="0" selected="">Elije un profesor...</option>
+							<option value="0" selected="">Elige un profesor...</option>
 							{% for s in top10 %}
 								<option
 									{% for valor in s %}
@@ -170,7 +163,7 @@
 						
 						<label for="inputDirector"><h5>Primer miembro del comité turial</h5></label>
 						<select id="comiteSeleccionado1" name="comiteSeleccionado1" class="form-control">
-							<option value="0" selected="">Elije un profesor...</option>
+							<option value="0" selected="">Elige un profesor...</option>
 							{% for s in top10 %}
 								<option
 									{% for valor in s %}
@@ -205,7 +198,7 @@
 						<input hidden="" type="text" name="numTesCT1" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT1}}">
 						<label for="inputDirector"><h5>Segundo miembro del comité turial</h5></label>
 						<select id="comiteSeleccionado2" name="comiteSeleccionado2" class="form-control">
-							<option value="0" selected="">Elije un profesor...</option>
+							<option value="0" selected="">Elige un profesor...</option>
 							{% for s in top10 %}
 								<option
 									{% for valor in s %}
@@ -241,7 +234,7 @@
 						<input hidden="" type="text" name="numTesCT2" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT2}}">
 						<label for="inputDirector"><h5>Tercer miembro del comité turial</h5></label>
 						<select id="comiteSeleccionado3" name="comiteSeleccionado3" class="form-control">
-							<option value="0" selected="">Elije un profesor...</option>
+							<option value="0" selected="">Elige un profesor...</option>
 							{% for s in top10 %}
 								<option
 									{% for valor in s %}
@@ -278,7 +271,7 @@
 						<input hidden="" type="text" name="numTesCT3" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT3}}">
 						<label for="inputDirector"><h5>Cuarto miembro del comité turial</h5></label>
 						<select id="comiteSeleccionado4" name="comiteSeleccionado4" class="form-control">
-							<option value="0" selected="">Elije un profesor...</option>
+							<option value="0" selected="">Elige un profesor...</option>
 							{% for s in top10 %}
 								<option
 									{% for valor in s %}
@@ -317,7 +310,7 @@
 						<input hidden="" type="text" name="numTesCT4" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" value="{{numTesisCT4}}">
 						<label for="inputDirector"><h5>Quinto miembro del comité turial</h5></label>
 						<select id="comiteSeleccionado5" name="comiteSeleccionado5" class="form-control">
-							<option value="0" selected="">Elije un profesor...</option>
+							<option value="0" selected="">Elige un profesor...</option>
 							{% for s in top10 %}
 								<option
 									{% for valor in s %}
