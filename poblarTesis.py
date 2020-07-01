@@ -28,7 +28,7 @@ non_words.extend(map(str,range(10)))
 
 for x in resumenes:
    texto= list()
-   for c in text:
+   for c in tex:
       if c not in non_words:
          texto.append(c)
       elif c == '\n':
@@ -36,8 +36,6 @@ for x in resumenes:
 
    caracteres= ''.join(texto)
    tokens = word_tokenize(caracteres)
-#QUITARSTOP   tokens_filtrados = [token for token in tokens if token not in spanish_stopwords]
-#QUITARSTOP   tokens = tokens_filtrados
    if not tokens:
       w2v= ','.join([str(0) for x in range(300)])
    else:
