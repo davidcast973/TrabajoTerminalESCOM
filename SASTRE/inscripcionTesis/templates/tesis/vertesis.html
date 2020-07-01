@@ -1,0 +1,125 @@
+{% extends 'tesis/baseInscripcionTesis.html' %}
+{% block btnVerTesis %}
+	<div class="col-2 my-4">
+		<a type="button" class="btn btn-guinda" href="{% url 'inscripcionTesisInicio' %}">Volver</a>
+	</div>
+{% endblock btnVerTesis %}
+{% block cardBody %}
+	<div class="row justify-content-center">
+		<div class="col-7 input-group mb-4">
+			<input type="text" class="form-control" placeholder="Buscar tesis . . ." aria-label="Recipient's username" aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<button class="btn btn-guinda" type="button">Buscar</button>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+					</li>
+					{% for p in cantPag|slice:":5" %}
+						<li class="page-item"><a class="page-link" href="#">{{p}}</a></li>
+					{% endfor %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true">...</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">Siguiente</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">Última</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		{% for tesis in allTesis|slice:":18" %}
+			<div class="card m-4" style="width: 18rem;">
+				<div class="card-body">
+					<h6 class="card-subtitle mb-2 text-muted">Título:</h6>
+					<p class="card-text">{{tesis.nombreTesis|title}}</p>
+					<h6 class="card-subtitle mb-2 text-muted">No. tesis: {{tesis.numeroTesis}}</h6>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-guinda" data-toggle="modal" data-target="#exampleModal">Mirar detalles</button>
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">{{tesis.nombreTesis}}</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col"></div>
+										<div class="col-10">
+											<div class="row">
+												{% if tesis.diaCreacion %}
+													<div class="col">
+														<p class="lead">Fecha de creación:</p>
+														<p>{{tesis.diaCreacion}}</p>
+													</div>
+												{% endif %}
+												<div class="col">
+													<p class="lead">Número de tesis:</p>
+													<p>{{tesis.numeroTesis}}</p>
+												</div>
+											</div>
+											<br>
+											<div class="row">
+												<div class="col">
+													<p class="lead">Alumno autor:</p>
+													<p>Ing. {{tesis.alumno}} {{tesis.alumnoAps}}</p>
+												</div>
+												<div class="col">
+													<p class="lead">Director{% if tesis.director2 %}es{% endif %}:</p>
+													<p>Dr. {{tesis.director1}} {{tesis.director1Aps}}</p>
+												</div>
+											</div>
+											<br>
+											<div class="row">
+												<div class="col">
+													<p class="lead">Resumen de tesis:</p>
+													<p class="text-justify">{{ tesis.abstrac|linebreaksbr }}</p>
+												</div>
+											</div>
+										</div>
+										<div class="col"></div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar detalle</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item disabled">
+				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+			</li>
+			{% for p in cantPag|slice:":5" %}
+				<li class="page-item"><a class="page-link" href="#">{{p}}</a></li>
+			{% endfor %}
+			<li class="page-item disabled">
+				<a class="page-link" href="#" tabindex="-1" aria-disabled="true">...</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">Siguiente</a>
+			</li>
+			<li class="page-item">
+				<a class="page-link" href="#">Última</a>
+			</li>
+		</ul>
+	</nav>
+{% endblock %}

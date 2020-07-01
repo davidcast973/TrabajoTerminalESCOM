@@ -1,0 +1,107 @@
+html {
+	height: 100%;
+}
+
+body {
+	background: #dee1db;
+} 
+ 
+.contentBody {
+	margin: auto;
+}
+ 
+.content {
+	background: #FFF;
+	width: 85%;
+	margin: auto;
+}
+
+.bordecito {
+	border-color: red;
+}
+ 
+.padding20 { 
+	padding-top: 20px; 
+} 
+ 
+.margin10 { 
+	margin: 10px; 
+}
+
+.whiteText{
+	color:#ffffff;
+}
+
+.btn-outline-success{
+	border-color: #FFF;
+	color: #FFF;
+}
+.margin20down { 
+	margin: auto auto 20px auto; 
+}
+
+.navbarGuinda{
+	color: black; !important;
+	background-color: #682444;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.form-control:focus,
+.uneditable-input:focus {   
+  border-color: rgba(104, 36, 68, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(104, 36, 68, 0.6);
+  outline: 0 none;
+}
+
+/* ======================= Botón propio ======================= */
+
+/* Redefine los estilos de .btn */
+/* Modificar el texto y el color de fondo en los tres estados
+   principales del botón: default, hover y active. */
+.btn-guinda {
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #682444;
+}
+
+/* Estilos del estado :hover del botón */
+/* Uno de los estilos más sencillos y eficaces para el estado :hover
+   consiste en subir hacia arriba ligeramente la imagen de fondo del
+   botón, pero puedes definir otros estilos adicionales si quieres. */
+.btn-guinda:hover {
+  color: 682444;
+  background-color: #fff;
+  border-color: #682444;
+  background-position: 0 -15px;
+}
+
+/* ============================================================ */
+
+/* ======================= Fuentes ======================= */
+
+@font-face {
+	font-family: 'Audiowide';
+	font-style: normal;
+	src: local('Audiowide-Regular'),
+		url(../fonts/Audiowide-Regular.ttf) format('truetype');
+}
+
+.fontAudiowide {
+	font-family: "Audiowide";
+}
+
+/* ======================================================= */

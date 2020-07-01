@@ -1,0 +1,72 @@
+{% extends 'baseEvaluaciones.html' %}
+{% block bodyEvaluaciones %}
+	<div class="card">
+		<div class="card-body">
+			{% if mensaje %}
+				<h4>{{mensaje}}</h4>
+			{% else %}
+			<form method="post" action="{% url 'guardarEvaluacion' %}">
+				{% for materiaInscrita in situacionEscolar %}
+					<input type="hidden" id="UA" name="UA" value="{{materiaInscrita.UA.id}}">
+					<input type="hidden" id="profesorUDA" name="profesorUDA" value="{{materiaInscrita.profesorUDA.id}}">
+					<input type="hidden" id="materiaInscritaId" name="materiaInscritaId" value="{{materiaInscrita.id}}">
+				{% endfor %}
+
+				{% if preguntas %}
+	                {% csrf_token %}
+					<h5>Contesta cuidadosamente el siguiente cuestionario</h5><br>
+					{% for pregunta in preguntas %}
+						<div class="row">
+							{{forloop.counter}}.	{{pregunta}}
+						</div><br>
+						{% if forloop.counter == 12%}
+							<div class="form-group">
+								<textarea class="form-control" id="textArea12" name="{{forloop.counter}}" rows="3"></textarea>
+							</div>
+						{% else %}
+							<div class="row">
+								<div class="col-sm">
+									<input type="radio" id="opcion1Preg{{forloop.counter}}" name="{{forloop.counter}}" value="1" required>
+								</div>
+								<div class="col-sm">
+									<input type="radio" id="opcion2Preg{{forloop.counter}}" name="{{forloop.counter}}" value="2" required>
+								</div>
+								<div class="col-sm">
+									<input type="radio" id="opcion3Preg{{forloop.counter}}" name="{{forloop.counter}}" value="3" required>
+								</div>
+								<div class="col-sm">
+									<input type="radio" id="opcion4Preg{{forloop.counter}}" name="{{forloop.counter}}" value="4" required>
+								</div>
+								<div class="col-sm">
+									<input type="radio" id="opcion5Preg{{forloop.counter}}" name="{{forloop.counter}}" value="5" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm">
+									<p>Totalmente en desacuerdo</p>
+								</div>
+								<div class="col-sm">
+									<p>En desacuerdo</p>
+								</div>
+								<div class="col-sm">
+									<p>Más o menos de acuerdo</p>
+								</div>
+								<div class="col-sm">
+									<p>De acuerdo</p>
+								</div>
+								<div class="col-sm">
+									<p>Totalmente de acuerdo</p>
+								</div>
+							</div><br>
+						{% endif %}
+					{% endfor %}
+					<div>
+						<br>
+						<button type="submit" class="btn btn-guinda">Terminar evaluación</button><br><br>
+					</div>
+				{% endif %}
+			</form>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

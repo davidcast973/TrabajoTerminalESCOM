@@ -1,0 +1,10 @@
+{% extends 'usuario/baseUsuario.html' %}
+
+{% block Body %}
+    <div class="post">
+        <!--<a class="btn btn-default" href="{#% url 'usuario_edit' pk=usuario.pk %#}"><span class="glyphicon glyphicon-pencil"></span></a>-->
+        <h2>{{ usuario.nombreUsuario.email }}</h2>
+        <!--<h2>{{ usuario.edad }}</h2>
+        <p>{{ usuario.telefono}}</p>-->
+    </div>
+{% endblock %}

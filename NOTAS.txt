@@ -10,7 +10,7 @@ Comandos:
 		- python manage.py migrate: Para crear una base de datos para nuestro blog.
 		- python manage.py runserver: Iniciar el servidor.
 		- python manage.py startapp miblog: Crear una aplicacion.
-		- python manage.py makemigrations miblog: Indicar cambios en nuestro modelo.
+		- python manage.py makemigrations miblog: Crear las tablas de nuestros modelos en la BD. Indicar cambios en nuestro modelo.
 		- python manage.py migrate miblog: Aplicar archivo de migración a nuestra base de datos.
 	WINDOWS:
 		- python -m venv myvenv: Crear un entorino virtual.
@@ -18,8 +18,13 @@ Comandos:
 		- python -m pip install --upgrade pip: Actualizar pip.
 		- pip install -r requirements.txt: Instalar Django. En el documento "requirements.txt" viene escrito "Django~=2.2.4", que indica que instale Django 2.2.4 o una versión más reciente.
 		- django-admin.exe startproject mysite .: Iniciar un proyecto en Django. El punto "." significa que se creará el proyecto en el directorio actual.
+		- python manage.py migrate: Para crear una base de datos para nuestro blog.
+		- python manage.py startapp blog: Crear una aplicacion.
+		- python manage.py runserver: Iniciar el servidor.
 
-Vincular con Postgresql:
+---------- Vincular con Postgresql:
+
+pip install psycopg2 -> (pip install -r requirements.txt)
 
 Se modifica el settings.py para dar la opcion en Base de datos.
 
@@ -34,8 +39,54 @@ DATABASES = {
     }
 }
 
+---------- Instalar Bootsrap 4
+pip install django-bootstrap4 -> (pip install -r requirements.txt)
+
+Poner en Settings.py:
+	TEMPLATES -> DIRS esto: os.path.join(BASE_DIR, 'templates')
+	INSTALLED_APPS -> esto: 'bootstrap4',
+
 Documentación:
 	- manage.py es un script que ayuda con la administración del sitio. Con él podremos iniciar un servidor web en nuestro ordenador sin necesidad de instalar nada más, entre otras cosas.
 	- El archivo settings.py contiene la configuración de tu sitio web.
 
+---------- Migrar proyecto a un nuevo PC
+
+- Poner "alias.bat" en Home para adecuar los comandos sencillos para el proyecto.
+- Actualizar pip.
+- Instalar la paqueteria necesaria que viene en el "requirements.txt".
+- Crear entorno virtual "sastreenv"
+- Hacer usuario ssastre y base de datos ttsastre para conectar y migrar los datos.
+
+---------- Utilizar Word2Vec
+
+import gensim
+model = gensim.models.KeyedVectors.load_word2vec_format('sbw_vectors.bin', binary=True)
+	Ej.	model['persona']
+
+---------- Utilizar similitud coseno
+
+from sklearn.metrics.pairwise import cosine_similarity as cs
+
+	Ej.	cs([model['videjuego'],model['juego']+model['video']])[0][1]
+
 **************************************************  OSCAR  **************************************************
+
+Comandos
+
+COMANDO												DESCRIPCIÓN
+$python -m django --version							Ver si Django está instalado, así como su versión
+$django-admin startproject miSitio					Crear arbol de directorios para un proyecto
+$python manage.py runserver							Inicia el servidor de desarrollo de Django
+$python manage.py startapp miApp					Crea una nueva aplicación
+$python manage.py migrate							Ejecuta migraciones para aplicaciones en INSTALLED_APPS
+$python manage.py makemigrations miApp				Indica a Django cambios en los modelos y que los guarde como una migración
+$python mange.py sqlmigrate miApp 0001				Devuelve el sql a ejecutar en una migración
+$python manage.py shell								Ejecuta el shell interactivo de Python
+$python manage.py test myApp						Ejecuta las pruebas en test.py para una aplicación
+
+
+Definiciones
+
+TERMINO										DESCRIPCIÓN
+Migraciones 								Son como Django guarda cambios en nuestros modelos (archivos en disco)

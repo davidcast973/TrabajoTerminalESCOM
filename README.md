@@ -31,7 +31,7 @@ Generación del reporte técnico   |  Oscar y David  |   Mayo 2020
 - [X] Análisis de algoritmos de etiquetado de polaridad de frases y textos.
 - [X] Diseño del módulo de búsqueda temática de laboratorios y tesis afines.
 - [X] Diseño del módulo de evaluación a docentes.
-- [ ] Implementación.
-- [ ] Lista Pruebas.
-- [ ] Generación del manual técnico.
-- [ ] Generación del reporte técnico.
+- [X] Implementación.
+- [X] Lista Pruebas.
+- [X] Generación del manual técnico.
+- [X] Generación del reporte técnico.

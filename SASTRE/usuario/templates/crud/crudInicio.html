@@ -1,0 +1,33 @@
+{% extends 'crud/baseCrud.html' %}
+
+{% block cardBody %}
+    <div class="card-deck mb-3">
+        <div class="card pt-5">
+            <div class="row align-items-center justify-content-center">
+                <img class="card-img-top" src="../../static/icons/user-tie-solid.svg" height="150" width="150">
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title text-center"><b>Personal Administrativo</b></h5>
+                <a href="{% url 'crudPA' %}" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="card pt-5">
+            <div class="row align-items-center justify-content-center">
+                <img class="card-img-top" src="../../static/icons/book-reader-solid.svg" height="150" width="150">
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title text-center"><b>Profesor</b></h5>
+                <a href="{% url 'crudProfesor' %}" class="stretched-link"></a>
+            </div>
+        </div>
+        <div class="card pt-5">
+            <div class="row align-items-center justify-content-center">
+                <img class="card-img-top" src="../../static/icons/user-graduate-solid.svg" height="150" width="150">
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title text-center"><b>Alumno</b></h5>
+                <a href="{% url 'crudAlumno' %}" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

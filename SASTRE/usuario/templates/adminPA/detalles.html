@@ -1,0 +1,67 @@
+{% extends 'sastre/baseSastre.html' %}
+
+{% block title %}
+    Administrar Personal Administrativo
+{% endblock %}
+ 
+{% block body %}
+	<h3 class="pt-4 font-weight-bold">Detalles</h3>
+    <div class="card-body text-left mx-5">
+        {% block cardBody %}
+        	<div class="row">
+                <div class="col-8">
+                    <p><span class="font-weight-bold">No. Empleado:</span> {{object.username}}</p>
+                </div>
+                <div class="col-4">
+                    <p><span class="font-weight-bold">Correo Electrónico:</span> {{object.email}}</p>
+                </div>
+            </div>
+            <div class="row">
+        		<div class="col-8">
+        			<p><span class="font-weight-bold">Nombre:</span> {{object.nombre}} {{object.apellido}}</p>
+        		</div>
+        		<div class="col-4">
+        			<p><span class="font-weight-bold">Edad:</span> {{object.edad}}</p>
+        		</div>
+        	</div>
+        	<div class="row">
+        		<div class="col-8">
+					<p><span class="font-weight-bold">Direccion:</span> {{object.direccion}}</p>
+        		</div>
+        		<div class="col-4">
+					<p><span class="font-weight-bold">Pais de Nacimiento:</span> {{object.paisNacimiento}}</p>
+        		</div>
+        	</div>
+        	<div class="row">
+        		<div class="col-12">
+					<p><span class="font-weight-bold">Telefono:</span> {{object.lada}} {{object.telefono}}</p>
+        		</div>
+        	</div>
+        	<div class="row">
+        		<div class="col-5">
+					<p><span class="font-weight-bold">Fecha de Nacimiento:</span> {{object.fechaNacimiento}}</p>
+        		</div>
+        		<div class="col-3">
+					<p><span class="font-weight-bold">Genero:</span> {{object.genero}}</p>
+        		</div>
+        		<div class="col-4">
+					<p><span class="font-weight-bold">Curp:</span> {{object.curp}}</p>
+        		</div>
+        	</div>
+        	<div class="row">
+        		<div class="col-6">
+					<p><span class="font-weight-bold">Identificador:</span> {{object.identificador}}</p>
+        		</div>
+        		<div class="col-2"></div>
+        		<div class="col-4">
+					<p><span class="font-weight-bold">Departamento:</span> {{object.departamento}}</p>
+        		</div>
+        	</div>
+			 
+			<!-- Botón para volver a la vista principal (Home) -->
+			<div align="center" class="mt-5">
+				<a href="../" type="submit" class="btn btn-guinda">Volver</a>
+			</div>
+        {% endblock %}
+	</div>
+{% endblock %}

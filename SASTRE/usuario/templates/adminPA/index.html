@@ -1,0 +1,82 @@
+{% extends 'sastre/baseSastre.html' %}
+
+{% block title %}
+    Administrar Personal Administrativo
+{% endblock %}
+ 
+{% block body %}
+    <div class="card-body">
+        {% block cardBody %}
+        	<h1>Personal Administrativo</h1>
+        	<br>
+        	<br>
+        	<div class="row mb-3 mr-4 justify-content-end">
+        		<div class="col-5 text-right align-self-end">
+        			<p>Crear Personal Administrativo</p>
+        		</div>
+        		<div class="col-1">
+        			<a href="crear" title="Crear">
+						<img src="../../static/icons/plus-circle-solid.svg" height="40" width="40">
+					</a>
+				</div>
+			</div>
+        	<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Identificador</th>
+						<th>Departamento</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'PersonalAdministrativo' y los listamos -->
+				{% for PerAdm in object_list %}
+				<tr>
+					<td>{{ PerAdm.nombre }} {{ PerAdm.apellido }}</td>
+					<td>{{ PerAdm.identificador }}</td>
+					<td>{{ PerAdm.departamento }}</td>
+					<td>
+			 			<!-- Usaremos un formulario que realizará la tarea de eliminar un registro desde la misma tabla HTML -->
+						<form method="POST" action="eliminar/{{PerAdm.id}}" id="accionesForm">
+							{% csrf_token %}
+							<div>
+								<!-- Creamos 3 botones que son Crear, Ver, Editar y Eliminar, nos sirven para gestionar nuestros registros -->
+								<a href="detalle/{{PerAdm.id}}" title="Ver" class="mr-3">
+									<img src="../../static/icons/eye-solid.svg" height="35" width="35">
+								</a>
+								<a href="editar/{{PerAdm.id}}" title="Editar" class="mr-3">
+									<img src="../../static/icons/edit-solid.svg" height="30" width="30">
+								</a>
+								<a onclick="return eliminar();" type="submit" id="eliminarLink">
+									<img src="../../static/icons/trash-alt-solid.svg" height="25" width="25">
+								</a>
+							</div>
+						</form>
+					</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{% if user.is_authenticated %} {% url 'crudInicio' %} {% else %} {% url 'login' %} {% endif %}" class="btn btn-guinda">Volver</a>
+
+			<script type="text/javascript">
+				document.getElementById("eliminarLink").onclick = function() {
+					var x = confirm("Eliminar Personal Administrativo ?");
+					if (x)
+						document.getElementById("accionesForm").submit();
+					else
+						return false;
+				}
+				function eliminar() {
+					var x = confirm("Eliminar Personal Administrativo ?");
+					if (x)
+						return true;
+					else
+						return false;
+				}
+			</script>
+		{% endblock %}
+	</div>
+{% endblock %}

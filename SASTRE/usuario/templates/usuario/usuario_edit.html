@@ -1,0 +1,22 @@
+{% extends 'usuario/baseUsuario.html' %}
+
+{% block title %}
+    Usuario Edit
+{% endblock %}
+	
+{% block body %}
+    <h2>Nuevo Usuario</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Guardar</button>
+    </form>
+
+    {# Logout #}
+	{% if user.is_authenticated %}
+		<a href="#" onClick="document.getElementById('logoutform').submit()"><button type="button" class="btn btn-outline-primary">Logout</button></a>
+	{% endif %}
+	<form id="logoutform" method="POST" action="{% url 'logout' %}">
+		{% csrf_token %}
+		<input type="hidden">
+	</form>
+{% endblock %}
