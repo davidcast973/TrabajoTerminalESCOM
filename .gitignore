@@ -5,3 +5,6 @@ sastreenv
 db.sqlite3
 /static
 .DS_Store
+SASTRE/sbw_vectors.bin
+
+SASTRE/embeddings-l-model.bin
